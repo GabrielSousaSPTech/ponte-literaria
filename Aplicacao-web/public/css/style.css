@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --azulFundo: #003366;
+    --corFonte: #fff;
+    --corHover: gold;
+    --corTitulo: #6C3C0C
+}
+
+.header {
+    background-color: var(--azulFundo);
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    position: fixed;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    width: 80vw;
+    margin: auto;
+}
+
+.header .container {
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+
+  .header a {
+    text-decoration: none;
+    color: var(--corFonte);
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .header a:hover {
+    color: var(--corHover);
+    text-decoration: underline;
+  }
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    width: 30vw;
+}
+
+.navbar li {
+    list-style: none;
+}
+
+.boxLogin {
+    display: flex;
+    width: 10vw;
+    justify-content: space-between;
+    color: var(--corFonte);
+    font-weight: bold;
+}
+
+.logotipo{
+    
+    height: 7rem;
+}
+
+.banner {
+    background: url('../assets/imgs/fundoInicio.png');
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.banner .slogan .container {
+    height: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    
+}
+
+.slogan .logotipo{
+    height: 17rem;
+}
+
+.slogan p {
+    font-size: 2.7rem;
+    color: var(--corFonte);
+}
+
+.slogan p span {
+    font-weight:550;
+    text-decoration: underline;
+}
+
+.social .container {
+    
+    flex-direction: column;
+}
+
+.social  h1 {
+    margin: 3.5rem;
+    text-align: center;
+    color: var(--corTitulo);
+}
+
+.social .container section {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.social section p {
+    display: flex;
+    width: 30vw;
+    font-size: 30px;
+    
+    text-align: justify;
+}
+
+.sobreMim {
+    background-color: var(--azulFundo);
+}
+.sobreMim section {
+    flex-direction: column;
+    padding: 3rem;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+.sobreMim section p {
+    width: 100%;
+    color: var(--corFonte);
+    
+}
