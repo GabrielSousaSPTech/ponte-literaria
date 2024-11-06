@@ -7,11 +7,12 @@
     --azulFundo: #003366;
     --corFonte: #fff;
     --corHover: gold;
-    --corTitulo: #6C3C0C
+    --corTitulo: #6C3C0C;
+    --marromFundo: #2a1907;
 }
 
-.header {
-    background-color: var(--azulFundo);
+header {
+    background: var(--azulFundo);
     border-bottom-left-radius: 35px;
     border-bottom-right-radius: 35px;
     position: fixed;
@@ -24,20 +25,20 @@
     margin: auto;
 }
 
-.header .container {
+header .container {
     justify-content: space-between;
     align-items: center;
     height: 100%;
   }
 
-  .header a {
+  header a, footer a {
     text-decoration: none;
     color: var(--corFonte);
     font-weight: bold;
     cursor: pointer;
   }
 
-  .header a:hover {
+  header a:hover, footer a:hover {
     color: var(--corHover);
     text-decoration: underline;
   }
@@ -62,7 +63,7 @@
 
 .logotipo{
     
-    height: 7rem;
+    height: 8rem;
 }
 
 .banner {
@@ -124,7 +125,7 @@
 }
 
 .sobreMim {
-    background-color: var(--azulFundo);
+    background: var(--azulFundo);
 }
 .sobreMim section {
     flex-direction: column;
@@ -137,4 +138,32 @@
     width: 100%;
     color: var(--corFonte);
     
+}
+
+footer {
+    margin-top: 5rem;
+    display: flex;
+    background: var(--marromFundo);
+    color: var(--corFonte);
+    padding-inline: 6rem;
+    padding: 1.5rem;
+}
+
+footer .container {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    gap: 2.8rem;
+}
+
+
+.box {
+    display: flex;
+    flex-direction: column;
+}
+
+.icon {
+    height: 4rem;
 }
