@@ -1,0 +1,118 @@
+@import url('./cores.css');
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: inherit !important;
+    background: var(--azulFundo) !important;
+    border-bottom-left-radius: 35px !important;
+    border-bottom-right-radius: 35px !important;
+    width: 100% !important;
+   height: 20rem !important;
+}
+
+header .container {
+    display: flex !important;
+    flex-direction: row !important;
+    height: 13rem !important;
+    justify-content: space-around !important;
+    align-items: flex-end !important;
+}
+
+header .container span {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    color: var(--corFonte) !important;
+}
+
+.imgPerfil {
+    
+    height: 10rem;
+    border: 6px solid black;
+    border-radius: 50%;
+}
+
+.sessaoInformacaoUsuario {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: absolute;
+    top: 05%;
+    left: 50%;
+    transform: translate(-50%, -05%);
+    align-self: center;
+}
+
+.nickname {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.nickname #username {
+    font-size: 0.8rem !important;
+    color: rgb(169, 167, 167) !important;
+}
+
+.botaoSeguir {
+    height: 2rem;
+    width: 5rem;
+    border-radius: 2rem;
+    margin-right: 13rem;
+    border-color: var(--bordaBotaoSeguir);
+    color: var(--corFonte);
+    background-color: var(--corBotaoSeguir);
+}
+
+.containerAvaliação {
+    display: flex;
+    flex-direction: column;
+}
+
+.grupoEstrela {
+    display: flex;
+    gap: 0.2rem;
+    align-self: center;
+}
+
+.estrelaAvaliacao {
+    height: 1rem;
+}
+
+.containerInformacoesPerfil {
+    display: flex;
+    gap: 2rem;
+}
+
+.logotipo {
+    align-self: center;
+    height: 10rem !important;
+    width: 10rem !important;
+    margin-bottom: 8rem;
+}
+
+@media (max-width: 1800px){
+    .logtipo {
+        margin-bottom: 0;
+
+ }   
+}
+
+.sideBar {
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start !important;
+    position: absolute fixed !important;
+    top: 0 !important;
+    padding-top: 0rem !important;
+    height: 100vh !important;
+    width: 10rem !important;
+}
+
+.sessaoFeed {
+    padding-top: 0rem !important;
+   
+    
+}

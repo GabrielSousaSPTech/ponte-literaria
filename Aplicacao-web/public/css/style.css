@@ -3,63 +3,13 @@
     margin: 0;
     padding: 0;
 }
-
-
-header {
-    background: var(--azulFundo);
-    border-bottom-left-radius: 35px;
-    border-bottom-right-radius: 35px;
-    position: fixed;
-    width: 100%;
-   
-}
-
 .container {
     display: flex;
     width: 80vw;
     margin: auto;
 }
 
-header .container {
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-  }
 
-  header a, footer a {
-    text-decoration: none;
-    color: var(--corFonte);
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  header a:hover, footer a:hover {
-    color: var(--corHover);
-    text-decoration: underline;
-  }
-
-.navbar{
-    display: flex;
-    justify-content: space-between;
-    width: 30vw;
-}
-
-.navbar li {
-    list-style: none;
-}
-
-.boxLogin {
-    display: flex;
-    width: 10vw;
-    justify-content: space-between;
-    color: var(--corFonte);
-    font-weight: bold;
-}
-
-.logotipo{
-    
-    height: 8rem;
-}
 
 .banner {
     background: url('../assets/imgs/fundoInicio.png');

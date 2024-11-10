@@ -1,85 +1,21 @@
 @import url('./cores.css');
 
 .sessaoFeed {
-    padding-top: 30rem;
-    padding-bottom: 15rem;
+    padding-top: 18vh;
+    padding-bottom: 35vh;
     z-index: -2;
     
 }
 
 .sessaoFeed .container {
-    width: 60rem;
+    width: 60vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     flex: wrap;
+    margin-left:25%;
 }
 
-.postagem {
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid black;
-    height: 27rem;
-    width: 50rem;
-    color: var(--fontePostagem);
-    gap: 2.5rem;
-    padding: 1rem;
-}
 
-.dadosCabecalhoPostagem {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    
-    color: var(--fontePostagem);
-}
-.cabecalhoPostagem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-}
-.cabecalhoPostagem button {
-    height: 2rem;
-    width: 5rem;
-    border-radius: 2rem;
-    border-color: var(--bordaBotaoSeguir);
-    color: var(--corFonte);
-    background-color: var(--corBotaoSeguir);
-}
-.dadosCabecalhoPostagem img{
-    height:4rem;
-    border: 4px solid black;
-    border-radius: 50%;
-}
 
-.postagem h3 {
-    
-    font-size: 2.4rem;
-    font-weight: 400;
-}
-
-.corpoPost {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-}
-
-.interacaoPost {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.engajamento {
-    display: flex;
-    gap: 2rem;
-}
-
-.boxEngajamento {
-    display: flex;
-    gap: 0.3rem;
-    align-items: center;
-}

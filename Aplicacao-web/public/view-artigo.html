@@ -11,6 +11,7 @@
     <script src="./js/sessao.js"></script>
 
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/postagem.css">
     <link rel="stylesheet" href="./css/viewArtigo.css">
     <link rel="stylesheet" href="./css/navbar.css">
     <link rel="icon" href="./assets/icon/favicon2.ico">
@@ -42,42 +43,29 @@
             <div class="topico-pagina">
                 <img src="./assets/icon/home.png" alt="">
                 <span>
-                    <a href="./index.html">
+                    <a href="./feed.html">
                         Página Inicial 
+                    </a>
+                </span>
+                
+            </div>
+            <div class="topico-pagina">
+                <img src="./assets/icon/projeto.png" alt="">
+                <span>
+                    <a href="./index.html">
+                        Projeto
                     </a>
                 </span>
             </div>
             <div class="topico-pagina">
-                
-                <span id="assunto">
-                    Assunto
+                <img src="./assets/icon/usuario.png" alt="">
+                <span>
+                    <a href="./perfil.html">
+                        Perfil
+                    </a>
                 </span>
             </div>
-
-            <li>
-                <input type="checkbox">
-                <span>Comédia</span>
-            </li>
-            <li>
-                <input type="checkbox">
-                <span>Distopia</span>
-            </li>
-            <li>
-                <input type="checkbox">
-                <span>Fantasia</span>
-            </li>
-            <li>
-                <input type="checkbox">
-                <span>Poesia</span>
-            </li>
-            <li>
-                <input type="checkbox">
-                <span>Romance</span>
-            </li>
-            <li>
-                <input type="checkbox">
-                <span>Terror</span>
-            </li>
+                       
 
             <div class="topico-pagina">
                 <img src="./assets/icon/ajuda.png" alt="">
@@ -101,7 +89,10 @@
     <!-- corpo do feed -->
 
     <section class="sessaoArtigo">
-        <div class="container" >
+        <a onclick="voltarPagina()" style="position: fixed; left: 15rem; top: 8rem; padding: 1rem;">
+            <img src="./assets/icon/voltar.png" style="height: 2.5rem;" alt="">
+        </a>
+        <div class="container">
             <h3>Meu primeiro artigo</h3>
 
             <div class="corpoArtigo">
@@ -156,50 +147,43 @@
                             <img src="./assets/icon/like.png" alt="">
                             <span>01</span>
                         </div>
-                        <div class="boxEngajamento">
+                        <!-- <div class="boxEngajamento" onclick="abrirResposta(this)">
                             <img src="./assets/icon/comentario.png" alt="">
                             <span>01</span>
-                        </div>
+                        </div> -->
+                        <!-- <div class="containerParaResponder"></div> -->
                     </div>
                 </div>
-            <div class="postagem">
-                <div class="cabecalhoPostagem">
-                    <div class="dadosCabecalhoPostagem">
-                        <img src="./assets/imgs/usuarioTeste.jpg" alt="">
-                        <span>Gabriel Sousa</span>
-                        <span>-</span>
-                        <span>Há 12h</span>
-                    </div>
-                    <button>Seguir</button>
-                </div>
-
-                <div class="corpoPost">
-                    
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem, facere in tempora omnis iste, accusamus, expedita quo velit et quam doloribus doloremque maiores distinctio. Aut voluptas animi facilis quasi cum rerum ipsam repudiandae, architecto sunt, cumque ipsa maiores, sint error numquam nostrum sequi beatae temporibus officia iure veritatis voluptates! Sunt?
-
-
-                    </p>
-                </div>
-
-                <div class="interacaoPost">
-                    <div class="engajamento">
-                        <div class="boxEngajamento">
-                            <img src="./assets/icon/like.png" alt="">
-                            <span>01</span>
-                        </div>
-                        <div class="boxEngajamento">
-                            <img src="./assets/icon/comentario.png" alt="">
-                            <span>01</span>
-                        </div>
-                    </div>
-                </div>
-
                 
             </div>
+                
+            
             </div>
     </section>
     
   </body>
 
+<script>
+    function abrirResposta(elementoClicado){
+        var elementoPai =  elementoClicado.parentNode
+
+        var container =  elementoPai.querySelector('.containerParaRespnder')
+
+        container.innerHTML = `<div id="respostaComentario">
+                    <input type="text" placeholder="Responda o comentario">
+                    <div>
+                        <button onclick="fecharResposta()" class="btnRespostaComentario">Cancelar</button>
+                        <button>Responder</button>
+                    </div>
+                </div>`
+
+        
+        // respostaComentario.style.display = 'flex'
+    }
+    function fecharResposta() {
+        respostaComentario.style.display = 'none'
+
+    }
+</script>
+<script src="./js/navegacaoPagina.js"></script>
 </html>

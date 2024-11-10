@@ -1,21 +1,54 @@
 @import url('./cores.css');
-.sessaoArtigo {
+.sessaoArtigo, .sessaoCriacaoArtigo {
     /* background-color: red; */
     height: 100%;
     padding-top: 30vh;
     color: var(--fontePostagem);
 }
-
-.sessaoArtigo .container {
+.sessaoCriacaoArtigo {
+    padding-top: 10rem !important;
+}
+.sessaoArtigo .container, .sessaoCriacaoArtigo .container {
     display: flex;
     /* align-items: center; */
     flex-direction: column;
     gap: 10vh;
     justify-content: center;
     width: 60vw;
-    padding-bottom: 18vh;
-    margin-left: 26vw;
+    padding-bottom: 18rem;
+    margin-left: 30rem;
     height: 100%;
+}
+
+.sessaoCriacaoArtigo input {
+    height: 5vh;
+    border: none;
+    font-size: 2.2rem;
+    font-weight: 700;
+    border-bottom: 1px solid black;
+}
+
+.sessaoCriacaoArtigo textarea {
+    height: 60vh;
+    resize: none;
+    /* border: none !important; */
+    border: 1px solid black;
+}
+
+.formularioCriacaoArtigo {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.formularioCriacaoArtigo button {
+    align-self: flex-start;
+    width: 10rem;
+    font-size: 1.5rem;
+    border-radius: 2rem;
+    border-color: var(--bordaBotaoSeguir);
+    color: var(--corFonte);
+    background-color: var(--corBotaoSeguir);
 }
 
 .sessaoArtigo .container textarea {
@@ -48,27 +81,22 @@
     font-size: 3rem;
     text-align: center;
 }
-.sessaoArtigo .container p {
+.sessaoArtigo .container .corpoArtigo p {
     font-size: 1.6rem;
     text-align: center;
 }
+
+.sessaoArtigo .container .corpoPost p {
+    font-size: 1rem;
+    text-align: center;
+}
 .sessaoArtigo .corpoArtigo {
-
     padding-inline: 3vw;
-
     border-inline: 1px solid black;
-    
 }
 
 .postagem {
-    display: flex;
-    flex-direction: column;
-    /* border-bottom: 1px solid black; */
-    height: 27rem;
-    width: 50rem;
-    color: var(--fontePostagem);
-    gap: 2.5rem;
-    padding: 1rem;
+    height: 15rem !important;
 }
 
 .sessaoArtigo .cabecalhoPostagem button {
@@ -80,52 +108,54 @@
     background-color: var(--corBotaoSeguir);
 }
 
-.dadosCabecalhoPostagem {
-    display: flex;
-    align-items: center;
-    gap: 1rem;    
-    color: var(--fontePostagem);
-}
-.cabecalhoPostagem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-}
 
-.dadosCabecalhoPostagem img{
-    height:4rem;
-    border: 4px solid black;
-    border-radius: 50%;
-}
 
-.postagem h3 {
-    
-    font-size: 2.4rem;
-    font-weight: 400;
-}
-
-.corpoPost {
+.formularioCriacaoArtigo {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    height: 100%;
 }
 
-
-.interacaoPost {
-    display: flex;
-    justify-content: space-around;
+.formularioCriacaoArtigo input {
+    width: 100%;
+    text-align: center;
     align-items: center;
+}
+
+.visualizacaoComentario p {
+    font-size: 0.2rem;
+}
+
+#respostaComentario {
+    display: none;
+    flex-direction: column;
+}
+
+.grupoBotaoComentario {
+    align-self: flex-end;
+}
+
+.btnRespostaComentario {
+    border: 1px solid black;
+    /* background-color: red */
+}
+#respostaComentario input {
+    border: none;
     border-bottom: 1px solid black;
+    width: 100%;
+    height: 100%;
+    font-size: 1rem;
 }
 
-.engajamento {
-    display: flex;
-    gap: 2rem;
+#respostaComentario input:focus {
+    /* border: none; */
+    outline: none;
 }
 
-.boxEngajamento {
-    display: flex;
-    gap: 0.3rem;
-    align-items: center;
+#respostaComentario button{
+    border: 1px solid !important;
+    margin-top: 1rem;
+    height: 2rem;
+    border-radius: 20px;
+    width: 6rem;
 }
