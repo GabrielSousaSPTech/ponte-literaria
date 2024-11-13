@@ -2,7 +2,7 @@
 .sessaoArtigo, .sessaoCriacaoArtigo {
     /* background-color: red; */
     height: 100%;
-    padding-top: 30vh;
+    padding-top: 15%;
     color: var(--fontePostagem);
 }
 .sessaoCriacaoArtigo {
@@ -16,7 +16,7 @@
     justify-content: center;
     width: 60vw;
     padding-bottom: 18rem;
-    margin-left: 30rem;
+    margin-left: 25%;
     height: 100%;
 }
 

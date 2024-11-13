@@ -18,11 +18,31 @@
             background: var(--fundoModal);
             padding: 1rem;
             border-radius: 8px;
-            width: 40rem;
-            height:40rem;
-            max-width: 90%;
+            width: 40vw;
+            height:85%;
+            
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
+        }
+
+        @media (max-width: 1300px){
+            .modal-overlay {
+                align-items: flex-start;
+            }
+            .modal {
+                height: 90%;
+            }
+
+            .fotoUsuarioResposta {
+                /* width: 2rem; */
+                height: 1rem !important;
+            }
+
+            .modal .postagem {
+                font-size: 0.8rem;
+                height: 100%;
+                gap: 0;
+            }
         }
 
         /* Botão de fechar */
@@ -38,19 +58,26 @@
         }
 
 
+
 .modal .postagem {
-    font-size: 1rem;
-    height: 25rem;
+    gap: 10%;
+    height: 100%;
 }
 .modal .postagem h3{
     font-size: 1.4rem;
 }
+
+.corpoPost {
+    gap: 0.2rem !important
+}
+
 
 .boxComentario {
     display: flex;
     width: 100%;
     flex-direction: column;
 }
+
 
 
 .boxComentario button{
@@ -61,6 +88,7 @@
 }
 
 .boxComentario textarea{
+    height: 40%;
     border: none;
     resize: none;
 }

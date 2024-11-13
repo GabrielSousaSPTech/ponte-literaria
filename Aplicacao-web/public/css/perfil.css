@@ -17,7 +17,7 @@ header .container {
     display: flex !important;
     flex-direction: row !important;
     height: 13rem !important;
-    justify-content: space-around !important;
+    justify-content: space-evenly !important;
     align-items: flex-end !important;
 }
 
@@ -60,7 +60,7 @@ header .container span {
     height: 2rem;
     width: 5rem;
     border-radius: 2rem;
-    margin-right: 13rem;
+   
     border-color: var(--bordaBotaoSeguir);
     color: var(--corFonte);
     background-color: var(--corBotaoSeguir);

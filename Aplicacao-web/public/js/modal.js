@@ -28,7 +28,7 @@ function visualizarComentario () {
                     <div class="postagem" onclick="abrirPostagem()">
                       <div class="cabecalhoPostagem">
                           <div class="dadosCabecalhoPostagem">
-                              <img src="./assets/imgs/usuarioTeste.jpg" alt="">
+                              <img src="./assets/imgs/usuarioTeste.jpg" alt="" class = "fotoUsuarioResposta">
                               <span>Gabriel Sousa</span>
                               <span>-</span>
                               <span>Há 12h</span>
