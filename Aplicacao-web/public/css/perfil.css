@@ -94,9 +94,10 @@ header .container span {
 }
 
 @media (max-width: 1800px){
-    .logtipo {
+    .logotipo {
         margin-bottom: 0;
-
+        height: 8rem !important;
+        width: 8rem !important;
  }   
 }
 
@@ -107,8 +108,9 @@ header .container span {
     position: absolute fixed !important;
     top: 0 !important;
     padding-top: 0rem !important;
-    height: 100vh !important;
+    height: 100% !important;
     width: 10rem !important;
+   
 }
 
 .sessaoFeed {
