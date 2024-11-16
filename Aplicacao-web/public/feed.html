@@ -18,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body>
+<body onload="validarSessao()">
     <a href="./criacao-artigo.html" style="position: fixed; right: 0; bottom: 0; padding: 1rem;">
         <img src="./assets/icon/adicionar.png" style="height: 3.5rem;" alt="">
     </a>
@@ -73,7 +73,7 @@
             <div class="topico-pagina">
                 <img src="./assets/icon/logout.png" alt="">
                 
-                    <a href="./index.html">
+                    <a onclick="limparSessao()">
                         Sair
                     </a>
                 
@@ -214,5 +214,5 @@
         window.location = './view-artigo.html'
     }
 </script>
-
+<script src="./js/sessao.js"></script>
 </html>

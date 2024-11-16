@@ -21,7 +21,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body>
+<body onload="validarSessao(), obterPostagemPerfil(sessionStorage.ID_USUARIO)">
     <!-- <a href="./criacao-artigo.html" style="position: fixed; right: 0; bottom: 0; padding: 1rem;">
         <img src="./assets/icon/adicionar.png" style="height: 3.5rem;" alt="">
     </a> -->
@@ -40,7 +40,7 @@
         <div class="sessaoInformacaoUsuario">
           <img class="imgPerfil" src="./assets/imgs/usuarioTeste.jpg" alt="">
           <div class="nickname">
-            <span >Gabriel da Silva Sousa</span>
+            <span id="nomeUsuario">Gabriel da Silva Sousa</span>
             <span id="username">@gabrielSousa</span>
           </div>
         </div>
@@ -48,9 +48,9 @@
             <button class="botaoSeguir">Seguir</button>
         
         <div class="containerInformacoesPerfil">
-            <span>1000 Curtidas</span>
+            <span id="quantidadeCurtidas"></span>
             
-              <span>2 Publicações</span>
+              <span id="quantidadePublicacoes"></span>
            
           
         </div>
@@ -89,53 +89,16 @@
         <div class="topico-pagina">
             <img src="./assets/icon/logout.png" alt="">
             
-                <a href="./index.html">
-                    Sair
-                </a>
+            <a onclick="limparSessao()">
+                Sair
+            </a>
             
         </div>
     </ul>
     </div>
     <section class="sessaoFeed">
-      <div class="container" >
-          <div class="postagem" onclick="abrirPostagem()">
-              <div class="cabecalhoPostagem">
-                  <div class="dadosCabecalhoPostagem">
-                      <img src="./assets/imgs/usuarioTeste.jpg" alt="" onclick="event.stopPropagation()">
-                      <span onclick="event.stopPropagation()">Gabriel Sousa</span>
-                      <span>-</span>
-                      <span>Há 12h</span>
-                  </div>
-                 
-              </div>
-
-              <div class="corpoPost">
-
-                  <h3>Minha Primeira Postagem</h3>
-                  
-                  <p>
-                      Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evoluçãoNeste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução
-
-                  </p>
-              </div>
-
-              <div class="interacaoPost">
-                  <div class="engajamento">
-                      <div class="boxEngajamento" onclick="event.stopPropagation()">
-                          <img src="./assets/icon/like.png" alt="">
-                          <span>01</span>
-                      </div>
-                      <div class="boxEngajamento" onclick="event.stopPropagation(); visualizarComentario()">
-                          <img src="./assets/icon/comentario.png" alt="">
-                          <span>01</span>
-                      </div>
-                  </div>
-                  <div class="boxEngajamento" onclick="event.stopPropagation()">
-                      <img src="./assets/icon/compartilhar.png" alt="">
-                      <span>Compartilhar</span>
-                  </div>
-              </div> 
-          </div>
+      <div class="container" id="postagemPerfil" >
+          
           
       </div>
   </section>
@@ -146,12 +109,13 @@
 
   </body>
 <script>
-    function abrirPostagem (){
-        window.location = './view-artigo.html'
-    }
+    
 
 
 </script>
 <script src="./js/modal.js"></script>
-
+<script src="./js/sessao.js"></script>
+<script src="./js/postagem.js"></script>
+<script src="./js/artigo.js"></script>
+<script src="./js/interacao.js"></script>
 </html>
