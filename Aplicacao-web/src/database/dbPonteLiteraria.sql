@@ -17,16 +17,79 @@ CREATE TABLE Seguidores (
     CONSTRAINT pkSeguidores PRIMARY KEY (fkUsuarioSeguido, fkUsuarioSeguidor),
     CONSTRAINT fkUsuarioSeguido FOREIGN KEY (fkUsuarioSeguido) REFERENCES Usuario(idUsuario),
     CONSTRAINT fkUsuarioSeguidor FOREIGN KEY (fkUsuarioSeguidor) REFERENCES Usuario(idUsuario),
-    dataFollow DATE NOT NULL
+    dataFollow DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+INSERT INTO Seguidores (fkUsuarioSeguido, fkUsuarioSeguidor) VALUES (1,5);
 
 
 INSERT INTO Postagem (fkusuario, tituloPostagem, conteudoPostagem) 
 VALUES 
-	(5, 'Meu Segundo Post', 'Este é o conteúdo da minha segundo postagem.'),
-    (5, 'Meu Terceiro Post', 'Este é o conteúdo da minha terceiro postagem.'),
-    (5, 'Meu Quarto Post', 'Este é o conteúdo da minha quarto postagem.');
+	(6, 'Meu Segundo Post', 'Este é o conteúdo da minha segundo postagem.'),
+    (6, 'Meu Terceiro Post', 'Este é o conteúdo da minha terceiro postagem.'),
+    (6, 'Meu Quarto Post', 'Este é o conteúdo da minha quarto postagem.');
+
+
+ 
+ 
+ CREATE TABLE Postagem (
+	idPostagem INT AUTO_INCREMENT,
+    fkusuario INT NOT NULL,
+    CONSTRAINT pkPostagem PRIMARY KEY (idPostagem, fkUsuario),
+    CONSTRAINT fkUsuarioPostagem FOREIGN KEY (fkusuario) REFERENCES Usuario(idUsuario),
+    tituloPostagem VARCHAR(45) NOT NULL,
+    conteudoPostagem VARCHAR(1000) NOT NULL,
+    dataHoraPostagem DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+ 
+CREATE TABLE Curtida (
+	FkUsuarioCurtiu INT,
+    fkPostagemCurtida INT,
+    CONSTRAINT pkCurtida PRIMARY KEY (fkUsuarioCurtiu, fkPostagemCurtida),
+    CONSTRAINT  fkUsuarioCurtida FOREIGN KEY (fkUsuarioCurtiu) REFERENCES Usuario(idUsuario),
+    CONSTRAINT fkPostagemCurtida FOREIGN KEY (fkPostagemCurtida) REFERENCES Postagem (idPostagem),
+    dataHoraCurtida DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+
+ 
+ INSERT INTO Curtida (fkUsuarioCurtiu, fkPostagemCurtida) VALUES(1, 5);
+
+CREATE TABLE Comentario (
+	idComentario INT AUTO_INCREMENT,
+    fkPostagemComentada INT,
+    fkUsuarioComentario INT,
+    CONSTRAINT pkComentario PRIMARY KEY (idComentario,fkPostagemComentada, fkUsuarioComentario),
+    ConteudoComentario VARCHAR (100),
+    tipoComentario VARCHAR(10),
+    CONSTRAINT chk_tipoComentario CHECK (tipoComentario IN('Geral', 'Resposta')),
+    CONSTRAINT fkPostagemComentada FOREIGN KEY (fkPostagemComentada) REFERENCES Postagem (idPostagem),
+    CONSTRAINT fkUsuarioComentario FOREIGN KEY (fkUsuarioComentario) REFERENCES Usuario(idUsuario)
+);
+
+SELECT * FROM Usuario;
+SELECT * FROM Postagem;
+SELECT * FROM Curtida;
+SELECT * FROM Seguidores;
+
+SELECT fkUsuarioSeguido, fkUsuarioSeguidor FROM Seguidores WHERE fkUsuarioSeguido = 6
+                         AND fkUsuarioSeguidor = 5;
+SELECT count(fkUsuarioSeguido) AS Seguidor,
+	(SELECT count(fkUsuarioSeguidor) FROM Seguidores WHERE fkUsuarioSeguidor = 5) AS Seguindo
+ FROM Seguidores WHERE fkUsuarioSeguido = 5;
+
+
+ SELECT count(fkPostagemCurtida) FROM Curtida GROUP BY fkPostagemCurtida;
+ 
+ SELECT idPostagem, Usuario.nome, tituloPostagem, conteudoPostagem, dataHoraPostagem, count(Curtida.fkPostagemCurtida) as qtdCurtida 
+ FROM Postagem
+ LEFT JOIN Usuario ON fkusuario = idUsuario
+ LEFT JOIN Curtida ON idPostagem = fkPostagemCurtida
+ WHERE fkUsuario = 5
+ GROUP BY (Curtida.fkPostagemCurtida) ;
+ 
+SELECT * FROM Usuario WHERE (email = 'GBSi' OR username = 'GBSi') AND senha = '1234';
+
 
 SELECT Usuario.nome, tituloPostagem, conteudoPostagem, dataHoraPostagem FROM Postagem JOIN Usuario ON fkusuario = idUsuario WHERE fkUsuario = 5;
 SELECT Usuario.nome, tituloPostagem, conteudoPostagem, dataHoraPostagem FROM Postagem JOIN Usuario ON fkusuario = idUsuario WHERE idPostagem = 5;
@@ -61,47 +124,9 @@ LEFT JOIN
     Curtida ON Postagem.idPostagem = Curtida.fkPostagemCurtida
 WHERE 
     Postagem.fkUsuario = 5;
- 
- 
- CREATE TABLE Postagem (
-	idPostagem INT AUTO_INCREMENT,
-    fkusuario INT NOT NULL,
-    CONSTRAINT pkPostagem PRIMARY KEY (idPostagem, fkUsuario),
-    CONSTRAINT fkUsuarioPostagem FOREIGN KEY (fkusuario) REFERENCES Usuario(idUsuario),
-    tituloPostagem VARCHAR(45) NOT NULL,
-    conteudoPostagem VARCHAR(1000) NOT NULL,
-    dataHoraPostagem DATETIME DEFAULT CURRENT_TIMESTAMP
-);
- 
-CREATE TABLE Curtida (
-	FkUsuarioCurtiu INT,
-    fkPostagemCurtida INT,
-    CONSTRAINT pkCurtida PRIMARY KEY (fkUsuarioCurtiu, fkPostagemCurtida),
-    CONSTRAINT  fkUsuarioCurtida FOREIGN KEY (fkUsuarioCurtiu) REFERENCES Usuario(idUsuario),
-    CONSTRAINT fkPostagemCurtida FOREIGN KEY (fkPostagemCurtida) REFERENCES Postagem (idPostagem),
-    dataHoraCurtida DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-
- SELECT count(fkPostagemCurtida) FROM Curtida GROUP BY fkPostagemCurtida;
- 
- SELECT idPostagem, Usuario.nome, tituloPostagem, conteudoPostagem, dataHoraPostagem, count(Curtida.fkPostagemCurtida) as qtdCurtida FROM Postagem LEFT JOIN Usuario ON fkusuario = idUsuario LEFT JOIN Curtida ON idPostagem = fkPostagemCurtida WHERE fkUsuario = 5 GROUP BY (Curtida.fkPostagemCurtida) ;
- 
- INSERT INTO Curtida (fkUsuarioCurtiu, fkPostagemCurtida) VALUES(1, 5);
-
-CREATE TABLE Comentario (
-	idComentario INT AUTO_INCREMENT,
-    fkPostagemComentada INT,
-    fkUsuarioComentario INT,
-    CONSTRAINT pkComentario PRIMARY KEY (idComentario,fkPostagemComentada, fkUsuarioComentario),
-    ConteudoComentario VARCHAR (100),
-    tipoComentario VARCHAR(10),
-    CONSTRAINT chk_tipoComentario CHECK (tipoComentario IN('Geral', 'Resposta')),
-    CONSTRAINT fkPostagemComentada FOREIGN KEY (fkPostagemComentada) REFERENCES Postagem (idPostagem),
-    CONSTRAINT fkUsuarioComentario FOREIGN KEY (fkUsuarioComentario) REFERENCES Usuario(idUsuario)
-);
-
-SELECT * FROM Usuario WHERE (email = 'GBSi' OR username = 'GBSi') AND senha = '1234';
-SELECT * FROM Usuario;
-SELECT * FROM Postagem;
-SELECT * FROM Curtida;
 SHOW TABLES;
+
+SELECT * FROM Usuario
+    JOIN Postagem as post ON idUsuario = fkusuario
+    WHERE
+      username LIKE '%Meu segundo Post%' OR  post.tituloPostagem LIKE '%Meu segundo Post%' OR  post.conteudoPostagem LIKE '%Meu segundo Post%';

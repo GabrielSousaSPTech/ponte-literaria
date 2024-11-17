@@ -25,11 +25,15 @@
     <header style="z-index: 3;">
       <div class="container">
         <img class="logotipo" src="./assets/imgs/logotipo-pl.png" alt="">
+        <div style="display: flex; flex-direction: column;">
         <div  class="barra-pesquisa">
             <span>
                 <img src="./assets/icon/lupa.png" alt="">
             </span>
-            <input type="text" placeholder="Pesquise Aqui...">
+
+                <input id="input_pesquisa" type="text" placeholder="Pesquise Aqui..." onkeyup="search()">
+            </div>
+            <div id="containerResultadopesquisa"></div>
           </div>
         <div class="boxLogin">
           <a>Entrar</a>
@@ -39,7 +43,6 @@
       </div>
     </header>
     
-
     <div class="sideBar" style="z-index: 2;">
         <ul>
             <div class="topico-pagina">
@@ -61,35 +64,36 @@
             </div>
             <div class="topico-pagina">
                 <img src="./assets/icon/usuario.png" alt="">
-                <span>
-                    <a href="./perfil.html">
+                <span onclick="abrirPerfil(sessionStorage.ID_USUARIO)">
+                    <a>
                         Perfil
                     </a>
                 </span>
             </div>
             
             
-          
+            
             <div class="topico-pagina">
                 <img src="./assets/icon/logout.png" alt="">
                 
-                    <a onclick="limparSessao()">
-                        Sair
-                    </a>
+                <a onclick="limparSessao()">
+                    Sair
+                </a>
                 
             </div>
         </ul>
     </div>
-
+    
     <!-- corpo do feed -->
-
+    
+    
     <section class="sessaoFeed">
         <div class="container" >
             <div class="postagem" onclick="abrirPostagem()">
                 <div class="cabecalhoPostagem">
                     <div class="dadosCabecalhoPostagem">
                         <img src="./assets/imgs/usuarioTeste.jpg" alt="">
-                        <span>Gabriel Sousa</span>
+                        <span onclick="event.stopPropagation(); abrirPerfil(6)">Gabriel Sousa</span>
                         <span>-</span>
                         <span>Há 12h</span>
                     </div>
@@ -210,9 +214,17 @@
     
   </body>
 <script>
+    console.log(sessionStorage.ID_USUARIO)
     function abrirPostagem (){
         window.location = './view-artigo.html'
     }
+
+    function abrirPerfil (idUsuario){
+    window.location = `./perfil.html?id=${idUsuario}`
+}
 </script>
 <script src="./js/sessao.js"></script>
+<script src="./js/search.js"></script>
+<script src="./js/modal.js"></script>
+
 </html>

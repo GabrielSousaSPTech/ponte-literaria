@@ -13,16 +13,51 @@
         }
 
         
-        .modal {
+        .modal, .modalDelete {
             display: flex;
             background: var(--fundoModal);
             padding: 1rem;
             border-radius: 8px;
             width: 40vw;
             height:85%;
-            
+
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
+        }
+
+        .modalDelete {
+            align-self: center;
+            width: 30vw;
+            
+            max-height: fit-content;
+            height: 15vh;
+        }
+
+        .modalDelete h2 {
+            margin: 0;
+            padding: 0;
+        }
+
+        .corpoModal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            height: 100%;
+            width: 100%;
+        }
+        .groupButton {
+            display: flex;
+            padding: 5px;
+            justify-content: space-evenly;
+            /* flex-direction: row; */
+            width: 100%;
+        }
+
+        .btnDelete {
+            width: 6rem;
+            height: 2rem;
         }
 
         @media (max-width: 1300px){

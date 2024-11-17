@@ -14,9 +14,14 @@ function darLike (idPostagem, idUsuario) {
                  console.log(res.acao)
                 if(res.acao == 'Insert'){
                     document.getElementById(`iconCurtida-${idPostagem}`).src = './assets/icon/likeFeito.png'
+                    var qtdCurtida = document.getElementById(`quantidadeCurtidas`)
+                    
+                    qtdCurtida.innerText = Number(qtdCurtida.innerText)+1
                 }else {
                     document.getElementById(`iconCurtida-${idPostagem}`).src = './assets/icon/like.png'
-
+                    var qtdCurtida = document.getElementById(`quantidadeCurtidas`)
+                    
+                    qtdCurtida.innerText = Number(qtdCurtida.innerText)-1
                 }
             })
 
@@ -56,3 +61,4 @@ function verificarLike(idPostagem, idUsuario) {
         }
     })
 }
+

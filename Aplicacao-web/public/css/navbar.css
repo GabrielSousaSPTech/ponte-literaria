@@ -70,6 +70,10 @@ header .container {
     border-radius: 2rem;
 }
 
+.barra-pesquisa input:focus {
+    outline: none;
+}
+
 .barra-pesquisa img {
     margin: 8px;
 }
@@ -127,4 +131,46 @@ header .container {
 .sideBar ul .topico-pagina  a{
     color: var(--corFonte);
     text-decoration: none;
+}
+
+#containerResultadopesquisa {
+    z-index: 5000;
+    position: absolute;
+    display: none; 
+    flex-direction: column; 
+    padding-top: 2vh; 
+    background-color: #fff; 
+    top:8.5vh; 
+    width: 30vw; 
+    max-height: fit-content; 
+    min-height: 10vh;
+    border-radius: 10px;
+    box-shadow: 0px 15px 15px rgba(0,0,0,0.300);
+}
+
+/* #containerResultadopesquisa .dadosCabecalhoPostagem img{
+    height:2rem;
+    border: 2px solid black;
+    border-radius: 50%;
+} */
+
+#containerResultadopesquisa .cabecalhoPostagem{
+    padding: 20px;
+}
+
+
+ .campoUsername {
+    font-size: 1rem !important; 
+    color: #b6b6b6 !important;
+
+}
+ .campoNome {
+    font-size: 1.5rem !important; 
+
+}
+
+#containerResultadopesquisa .cabecalhoPostagem:hover{
+    background-color: #c6c6c6;
+    cursor:pointer
+    
 }

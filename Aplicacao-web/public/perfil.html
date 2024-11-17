@@ -21,10 +21,29 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body onload="validarSessao(), obterPostagemPerfil(sessionStorage.ID_USUARIO)">
-    <!-- <a href="./criacao-artigo.html" style="position: fixed; right: 0; bottom: 0; padding: 1rem;">
-        <img src="./assets/icon/adicionar.png" style="height: 3.5rem;" alt="">
-    </a> -->
+<script defer>
+  function capturarIdPostagem(){
+        const params = new URLSearchParams(window.location.search);
+        
+        return params.get('id')
+    }
+
+    function myPerfil(id){
+      sessionStorage.ID_USUARIO == id ?
+      document.getElementById(`getSeguir`).style.display = 'none':
+      document.getElementById(`getAnalytics`).style.display = 'none'
+    }
+
+    const idUsuario = capturarIdPostagem()
+    
+</script>
+
+<body onload="validarSessao(); getUsuario(sessionStorage.ID_USUARIO == idUsuario ? sessionStorage.ID_USUARIO : idUsuario); obterPostagemPerfil(sessionStorage.ID_USUARIO == idUsuario ? sessionStorage.ID_USUARIO : idUsuario);
+      obterSeguidores(sessionStorage.ID_USUARIO == idUsuario ? sessionStorage.ID_USUARIO : idUsuario);
+      verificarSeguidor(idUsuario, sessionStorage.ID_USUARIO);myPerfil(idUsuario)">
+    <a href="./criacao-artigo.html" style="position: fixed; right: 0; bottom: 0; padding: 1rem;">
+      <img src="./assets/icon/adicionar.png" style="height: 3.5rem;" alt="">
+  </a>
     <header style="z-index: 1;">
       <a href="./feed.html">
         <img src="./assets/icon/home.png" style="height: 2.5rem; margin: 2rem;" alt="">
@@ -32,10 +51,8 @@
       <div class="container">
         <div class="containerInformacoesPerfil">
           
-          <span>
-           10 Seguidores
-          </span>
-          <span> 100 Seguindo</span>
+          <span id="quantidadeSeguidores"></span><span> Seguidor</span>
+          <span id="quantidadeSeguindo"></span><span> Seguindo</span>
         </div>
         <div class="sessaoInformacaoUsuario">
           <img class="imgPerfil" src="./assets/imgs/usuarioTeste.jpg" alt="">
@@ -45,12 +62,13 @@
           </div>
         </div>
         
-            <button class="botaoSeguir">Seguir</button>
+            <button id="getSeguir" class="botaoSeguir " onclick="seguirUsuario(idUsuario, sessionStorage.ID_USUARIO)">Seguir</button>
+            <button id="getAnalytics" class="botaoSeguir ">Analytics</button>
         
         <div class="containerInformacoesPerfil">
-            <span id="quantidadeCurtidas"></span>
+            <span id="quantidadeCurtidas"></span><span> Curtida</span>
             
-              <span id="quantidadePublicacoes"></span>
+              <span id="quantidadePublicacoes"></span><span> Publicação</span>
            
           
         </div>
@@ -96,7 +114,7 @@
         </div>
     </ul>
     </div>
-    <section class="sessaoFeed">
+    <section class="sessaoFeed" id="sessaoPerfil">
       <div class="container" id="postagemPerfil" >
           
           
@@ -118,4 +136,6 @@
 <script src="./js/postagem.js"></script>
 <script src="./js/artigo.js"></script>
 <script src="./js/interacao.js"></script>
+<script src="./js/seguidor.js"></script>
+<script src="./js/usuario.js"></script>
 </html>

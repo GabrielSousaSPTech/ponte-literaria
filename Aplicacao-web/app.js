@@ -17,10 +17,12 @@ var app = express();
 
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuario");
-var curtidaRouter = require("./src/routes/curtida")
+var curtidaRouter = require("./src/routes/curtida");
+var seguidorRouter = require("./src/routes/seguidor");
+var postRouter = require("./src/routes/post");
+var searchRouter = require("./src/routes/search");
 // var avisosRouter = require("./src/routes/avisos");
 // var medidasRouter = require("./src/routes/medidas");
-var postRouter = require("./src/routes/post");
 // var empresasRouter = require("./src/routes/empresas");
 
 app.use(express.json());
@@ -30,7 +32,9 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuario", usuarioRouter);
 app.use("/post", postRouter);
-app.use("/like", curtidaRouter)
+app.use("/like", curtidaRouter);
+app.use("/seguidor", seguidorRouter);
+app.use("/search", searchRouter);
 // app.use("/avisos", avisosRouter);
 // app.use("/medidas", medidasRouter);
 // app.use("/empresas", empresasRouter);

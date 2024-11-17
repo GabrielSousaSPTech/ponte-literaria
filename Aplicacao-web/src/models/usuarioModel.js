@@ -14,4 +14,17 @@ function checarCredenciais (email, senha) {
     return database.executar(instrucaoSql);
 }
 
-module.exports = {cadastrar, checarCredenciais}
+function getUsuario (idUsuario) {
+    var instrucaoSql = `SELECT nome, username FROM Usuario WHERE idUsuario = ${idUsuario}`
+
+    return database.executar (instrucaoSql)
+}
+
+
+
+module.exports = {
+    cadastrar,
+    checarCredenciais,
+    getUsuario
+
+}

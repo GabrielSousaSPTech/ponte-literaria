@@ -10,6 +10,29 @@ function createModal() {
     `
 }
 
+function modalDelete(idPostagem, idUsuario){
+    document.querySelector('.espacoModal').innerHTML =`
+        <div class="modal-overlay" style="display: flex;">
+            <div class="modalDelete">
+            <div class="headerModal">
+                <button class="modal-close" onclick="closeModal()">
+                    <img src="./assets/icon/close.png" alt="">
+                </button>
+            </div>
+            <div class = "corpoModal">
+                <h2>Excluir publicação</h2>
+                <p>tem certeza que deseja excluir essa publicação?</p>
+                <div class = "groupButton">
+                    <button class="btnDelete" onclick="closeModal()">Cancelar</button>
+                    <button class="btnDelete" onclick="deletarPost(${idPostagem}, ${idUsuario}), closeModal()">Excluir</button>
+                </div>
+            </div> 
+            </div
+        </div>
+    `
+    
+}
+
 function closeModal() {
     document.querySelector('.modal-overlay').style.display = 'none';
 }

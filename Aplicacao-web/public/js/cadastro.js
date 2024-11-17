@@ -41,6 +41,3 @@ function limparFormulario() {
     input_senha.value = "";
 }
 
-function entrar(){
-
-}

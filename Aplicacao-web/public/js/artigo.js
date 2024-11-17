@@ -27,10 +27,10 @@ function plotarArtigoCompleto(resposta) {
             </div>
             <div class="interacaoPost">
                 <div class="engajamento">
-                    <div class="boxEngajamento">
-                        <img src="./assets/icon/like.png" alt="">
-                        <span>${item.qtdCurtida}</span>
-                    </div>
+                    <div class="boxEngajamento" onclick="darLike(${item.idPostagem}, ${sessionStorage.ID_USUARIO})">
+            <img id="iconCurtida-${item.idPostagem}" src="./assets/icon/like.png" alt="">
+            <span id="qtdCurtida-${item.idPostagem}">${item.qtdCurtida}</span>
+        </div>
                     
                 </div>
                 <div class="boxEngajamento">
@@ -39,5 +39,7 @@ function plotarArtigoCompleto(resposta) {
                 </div>
             </div>
         `
+
+        verificarLike(item.idPostagem, sessionStorage.ID_USUARIO); 
     })
 }

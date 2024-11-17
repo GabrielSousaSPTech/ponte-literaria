@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body>
+<body onload="acao()">
 
     <header style="z-index: 3;">
       <div class="container">
@@ -119,8 +119,8 @@
         <div class="container" >
             <form action="" class="formularioCriacaoArtigo">
                 <input type="text" placeholder="Digite um Titulo" id="tituloCriacaoArtigo" required>
-                <textarea name="" id="criacaoArtigo"></textarea>
-                <button type="button">
+                <textarea name="" id="criacaoArtigo" required></textarea>
+                <button id="botaoArtigo" type="button" onclick="acaoPostagem()">
                     Publicar
                 </button>
             </form>
@@ -129,4 +129,43 @@
     
   </body>
 <script src="./js/navegacaoPagina.js"></script>
+<script src="./js/postagem.js"></script>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const idPostagem = params.get('id')
+    function acao (){
+        
+        if( params.get('acao') == 'edit'){
+            fetch(`post/view/${idPostagem}`, {cache: 'no-store'}).then(function (resposta) {
+                if(resposta.ok) {
+                    console.log(resposta)
+                    resposta.json().then(function (res){
+                        console.log(res)
+                        document.getElementById('tituloCriacaoArtigo').value = res[0].tituloPostagem
+                        document.getElementById('criacaoArtigo').value = res[0].conteudoPostagem
+                        
+                    })
+                    document.getElementById('botaoArtigo').innerText = 'Editar'
+            }else {
+                    document.getElementById("visualizacaoArtigo").innerHTML =`<p style="text-align:center; margin: auto;">Erro ao mostrar artigo</p>`
+                }
+            })
+
+        }
+    }
+
+    function acaoPostagem(){
+        
+        
+        if(params.get('acao') == 'edit'){
+            
+            editarPostagem(sessionStorage.ID_USUARIO, idPostagem)
+        }else{
+            
+            criarPostagem(sessionStorage.ID_USUARIO)
+        }
+    }
+
+
+</script>
 </html>

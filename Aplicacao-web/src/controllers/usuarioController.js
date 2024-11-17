@@ -39,9 +39,26 @@ function checarCredenciais(req, res) {
     });
 }
 
+function getUsuario (req, res) {
+    var idUsuario = req.params.idUsuario;
+
+    usuarioModel.getUsuario(idUsuario).then(function(resposta) {
+        if(resposta.length>0){
+            res.json({
+                id: resposta[0].idUsuario,
+                nome: resposta[0].nome,
+                username: resposta[0].username,
+            });
+        }else {
+            res.status(403).send("Usúario não existe");
+        }
+    })
+}
+
 module.exports = {
     cadastrar,
-    checarCredenciais
+    checarCredenciais,
+    getUsuario
 }
 
 

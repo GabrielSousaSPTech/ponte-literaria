@@ -1,22 +1,53 @@
 var database = require("../database/config")
 
+function createPublicacao (idUsuario, tituloPublicacao, conteudoPublicacao){
+    var  instrucaoSql = `
+        INSERT INTO Postagem (fkusuario, tituloPostagem, conteudoPostagem, statusPostagem) 
+VALUES 
+	(${idUsuario}, '${tituloPublicacao}', '${conteudoPublicacao}', 'ativo')
+    `
+
+    return database.executar(instrucaoSql)
+}
+
+function editarPublicacao (idUsuario, idPostagem, titulo, conteudo) {
+    var instrucaoSql = `
+        UPDATE Postagem SET tituloPostagem = '${titulo}', conteudoPostagem = '${conteudo}'
+        WHERE fkusuario = ${idUsuario} AND idPostagem = ${idPostagem};
+    `
+
+    return database.executar(instrucaoSql)
+
+}
+
+function deletarPublicacao (idPostagem) {
+    var instrucaoSql = `
+        UPDATE Postagem SET statusPostagem = 'inativo' WHERE idPostagem = ${idPostagem}
+    `
+
+    return database.executar(instrucaoSql)
+}
+
+
 function getPost(id){
     var instrucaoSql = `
         SELECT 
     Postagem.idPostagem,
-    Usuario.nome,
+    Usuario.nome AS nomeUsuario,
+    Usuario.username AS usernameUsuario,
+    Usuario.idUsuario AS idUsuario,
     Postagem.tituloPostagem,
     Postagem.conteudoPostagem,
     Postagem.dataHoraPostagem,
     COUNT(Curtida.fkPostagemCurtida) AS qtdCurtida
 FROM 
     Postagem
-LEFT JOIN 
+RIGHT JOIN 
     Usuario ON Postagem.fkUsuario = Usuario.idUsuario
 LEFT JOIN 
     Curtida ON Postagem.idPostagem = Curtida.fkPostagemCurtida
 WHERE 
-    Postagem.fkUsuario = ${id}
+    Postagem.fkUsuario = ${id} AND statusPostagem = 'ativo'
 GROUP BY 
     Postagem.idPostagem;
  
@@ -39,6 +70,7 @@ LEFT JOIN
     Curtida ON Postagem.idPostagem = Curtida.fkPostagemCurtida
 WHERE 
     Postagem.fkUsuario = ${id}
+    AND statusPostagem = 'ativo'
     `
     return database.executar(instrucaoSql)
 }
@@ -60,6 +92,7 @@ LEFT JOIN
     Curtida ON Postagem.idPostagem = Curtida.fkPostagemCurtida
 WHERE 
     Postagem.idPostagem = ${idPostagem}
+    AND statusPostagem = 'ativo'
 GROUP BY 
     Postagem.idPostagem, 
     Usuario.nome, 
@@ -75,5 +108,8 @@ GROUP BY
 module.exports = {
     getPost,
     getCount,
-    viewPost
+    viewPost,
+    createPublicacao,
+    editarPublicacao,
+    deletarPublicacao
 }

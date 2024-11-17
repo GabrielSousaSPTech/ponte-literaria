@@ -56,7 +56,7 @@ header .container span {
     color: rgb(169, 167, 167) !important;
 }
 
-.botaoSeguir {
+.botaoSeguindo {
     height: 2rem;
     width: 5rem;
     border-radius: 2rem;
@@ -64,6 +64,17 @@ header .container span {
     border-color: var(--bordaBotaoSeguir);
     color: var(--corFonte);
     background-color: var(--corBotaoSeguir);
+}
+
+.botaoSeguir {
+    height: 2rem;
+    width: 5rem;
+    border-radius: 2rem;
+   
+    /* border-color: var(--bordaBotaoSeguir); */
+    font-weight: 750;
+    color: var(--corBotaoSeguir);
+    background-color: var(--corFonte);
 }
 
 .containerAvaliação {

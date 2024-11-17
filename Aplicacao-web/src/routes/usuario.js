@@ -11,4 +11,8 @@ router.post ("/login", function (req, res){
     usuarioController.checarCredenciais(req, res);
 })
 
+router.get ("/:idUsuario", function (req, res) {
+    usuarioController.getUsuario(req, res)
+})
+
 module.exports = router;

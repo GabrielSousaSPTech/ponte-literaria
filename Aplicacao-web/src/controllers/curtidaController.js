@@ -4,7 +4,7 @@ function obterCurtidaPost (req, res) {
   console.log("TO SENDO CHAMADO")   
    var id = req.params.idPostagem
 
-    curtidaModel.obterCurtidaPost(id).then((resposta) =>{
+    curtidaModel.obterCurtidaPost(id).then(function (resposta) {
         if (resposta.length > 0) {
             res.status(200).send(resposta);
           } else {
