@@ -59,7 +59,7 @@ GROUP BY
 function getCount (id){
     var instrucaoSql = `
         SELECT 
-    (SELECT COUNT(*) FROM Postagem WHERE fkUsuario = ${id}) AS contagemPublicacao,
+    (SELECT COUNT(*) FROM Postagem WHERE fkUsuario = ${id} AND statusPostagem = 'ativo') AS contagemPublicacao,
     
     COUNT(Curtida.fkPostagemCurtida) AS qtdCurtida
 FROM 

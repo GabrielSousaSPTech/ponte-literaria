@@ -11,6 +11,7 @@
     <script src="./js/sessao.js"></script>
 
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/modal.css">
     <link rel="stylesheet" href="./css/postagem.css">
     <link rel="stylesheet" href="./css/viewArtigo.css">
     <link rel="stylesheet" href="./css/navbar.css">
@@ -18,7 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body onload="obterPostagem(capturarIdPostagem())">
+<body onload="obterPostagem(capturarIdPostagem()), obterComentarioGeral(capturarIdPostagem())">
 
     <header style="z-index: 3;">
       <div class="container">
@@ -89,42 +90,21 @@
             <div id="visualizacaoArtigo"></div>
             <form action="" class="boxComentario">
 
-                <textarea name="comentario" id="comentario" placeholder="Digite um Comentario..." rows="8" cols="5"></textarea>
-                <button type="button">
+                <textarea name="comentario" id="textarea_comentario" placeholder="Digite um Comentario..." rows="8" cols="5"></textarea>
+                <button type="button" onclick="criarComentario(capturarIdPostagem(), sessionStorage.ID_USUARIO)">
                     <img src="./assets/icon/enviarMsg.png" alt="">
                 </button>
             </form>
 
-            <div class="postagem">
-                <div class="cabecalhoPostagem">
-                    <div class="dadosCabecalhoPostagem">
-                        <img src="./assets/imgs/usuarioTeste.jpg" alt="">
-                        <span>Gabriel Sousa</span>
-                        <span>-</span>
-                        <span>Há 12h</span>
-                    </div>
-                    <button>Seguir</button>
-                </div>
+            <div id="containerComentario">
 
-                <div class="corpoPost">
-                    
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem, facere in tempora omnis iste, accusamus, expedita quo velit et quam doloribus doloremque maiores distinctio. Aut voluptas animi facilis quasi cum rerum ipsam repudiandae, architecto sunt, cumque ipsa maiores, sint error numquam nostrum sequi beatae temporibus officia iure veritatis voluptates! Sunt?
-                    </p>
-                </div>
-
-                <div class="interacaoPost">
-                    <div class="engajamento">
-                        <div class="boxEngajamento">
-                            <img src="./assets/icon/like.png" alt="">
-                            <span>01</span>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             </div>
-    </section>
-    
+        </section>
+        <div class="espacoModal">
+
+        </div>
   </body>
 
 <script>
@@ -161,4 +141,6 @@
 <script src="./js/artigo.js"></script>
 <script src="./js/navegacaoPagina.js"></script>
 <script src="./js/interacao.js"></script>
+<script src="./js/navegacaoPagina.js"></script>
+<script src="./js/modal.js"></script>
 </html>

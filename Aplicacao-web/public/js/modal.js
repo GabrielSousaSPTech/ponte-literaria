@@ -10,7 +10,7 @@ function createModal() {
     `
 }
 
-function modalDelete(idPostagem, idUsuario){
+function modalDelete(idDelete, idGerador, tipoDelete){
     document.querySelector('.espacoModal').innerHTML =`
         <div class="modal-overlay" style="display: flex;">
             <div class="modalDelete">
@@ -24,7 +24,8 @@ function modalDelete(idPostagem, idUsuario){
                 <p>tem certeza que deseja excluir essa publicação?</p>
                 <div class = "groupButton">
                     <button class="btnDelete" onclick="closeModal()">Cancelar</button>
-                    <button class="btnDelete" onclick="deletarPost(${idPostagem}, ${idUsuario}), closeModal()">Excluir</button>
+
+                    <button class="btnDelete" onclick="${tipoDelete == 'Comentario'? `deletarComentario(${idDelete}, ${idGerador})`: `deletarPost(${idDelete}, ${idGerador})`}, closeModal()">Excluir</button>
                 </div>
             </div> 
             </div
@@ -93,4 +94,24 @@ function visualizarComentario (resposta) {
                           </div>
                           `
     });
+}
+
+function dropDown(idPostagem){
+    const dropdown = document.getElementById(`dropDownPost-${idPostagem}`)
+
+    if(dropdown.style.display == 'flex'){
+        dropdown.style.display = 'none'
+    }else {
+        dropdown.style.display = 'flex'
+    }
+}
+
+function dropDownComentario(idComentario){
+    const dropdown = document.getElementById(`dropDownComentario-${idComentario}`)
+
+    if(dropdown.style.display == 'flex'){
+        dropdown.style.display = 'none'
+    }else {
+        dropdown.style.display = 'flex'
+    }
 }

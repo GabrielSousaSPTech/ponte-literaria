@@ -39,8 +39,16 @@ VALUES
     CONSTRAINT fkUsuarioPostagem FOREIGN KEY (fkusuario) REFERENCES Usuario(idUsuario),
     tituloPostagem VARCHAR(45) NOT NULL,
     conteudoPostagem VARCHAR(1000) NOT NULL,
+    statusPostagem VARCHAR(45),
+    CONSTRAINT chk_status CHECK(statusPostagem IN('ativo', 'inativo')),
     dataHoraPostagem DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+UPDATE Postagem SET statusPostagem = 'ativo' WHERE idPostagem >0;
+
+ALTER TABLE Postagem 
+
+ADD CONSTRAINT chk_status CHECK(statusPostagem IN('ativo', 'inativo'));
  
 CREATE TABLE Curtida (
 	FkUsuarioCurtiu INT,
@@ -62,15 +70,37 @@ CREATE TABLE Comentario (
     CONSTRAINT pkComentario PRIMARY KEY (idComentario,fkPostagemComentada, fkUsuarioComentario),
     ConteudoComentario VARCHAR (100),
     tipoComentario VARCHAR(10),
+    statusComentario VARCHAR(45),
+    fkComentarioRespondido INT,
+    dataHoraComentario DATETIME DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fkComentarioResposta FOREIGN KEY (fkComentarioRespondido) REFERENCES Comentario(idComentario),
     CONSTRAINT chk_tipoComentario CHECK (tipoComentario IN('Geral', 'Resposta')),
+    CONSTRAINT chk_statusComentario CHECK (statusComentario IN('ativo', 'inativo')),
     CONSTRAINT fkPostagemComentada FOREIGN KEY (fkPostagemComentada) REFERENCES Postagem (idPostagem),
     CONSTRAINT fkUsuarioComentario FOREIGN KEY (fkUsuarioComentario) REFERENCES Usuario(idUsuario)
 );
+
+ALTER TABLE Comentario ADD COLUMN dataHoraComentario DATETIME DEFAULT CURRENT_TIMESTAMP;
+
+
+
+
+
+INSERT INTO Comentario (fkPostagemComentada, fkUsuarioComentario, ConteudoComentario, tipoComentario, fkComentarioRespondido) VALUES  (35, 8, 'artigo muito bom', 'Geral', null);
+INSERT INTO Comentario (fkPostagemComentada, fkUsuarioComentario, ConteudoComentario, tipoComentario, fkComentarioRespondido) VALUES (35, 5, 'Valeu mano!', 'Resposta', 1);
 
 SELECT * FROM Usuario;
 SELECT * FROM Postagem;
 SELECT * FROM Curtida;
 SELECT * FROM Seguidores;
+SELECT * FROM Comentario;
+
+SELECT
+ConteudoComentario AS comentario,
+Usuario.nome AS Usuario
+FROM Comentario
+JOIN Usuario ON fkusuarioComentario = idUsuario
+ WHERE fkPostagemComentada = 35 AND tipoComentario = 'Geral';
 
 SELECT fkUsuarioSeguido, fkUsuarioSeguidor FROM Seguidores WHERE fkUsuarioSeguido = 6
                          AND fkUsuarioSeguidor = 5;
@@ -130,3 +160,27 @@ SELECT * FROM Usuario
     JOIN Postagem as post ON idUsuario = fkusuario
     WHERE
       username LIKE '%Meu segundo Post%' OR  post.tituloPostagem LIKE '%Meu segundo Post%' OR  post.conteudoPostagem LIKE '%Meu segundo Post%';
+
+       SELECT 
+    Postagem.idPostagem,
+    Usuario.nome AS nomeUsuario,
+    Usuario.username AS usernameUsuario,
+    Usuario.idUsuario AS idUsuario,
+    Postagem.tituloPostagem,
+    Postagem.conteudoPostagem,
+    Postagem.dataHoraPostagem,
+    COUNT(Curtida.fkPostagemCurtida) AS qtdCurtida
+FROM 
+    Postagem
+RIGHT JOIN 
+    Usuario ON Postagem.fkUsuario = Usuario.idUsuario
+RIGHT JOIN 
+    Curtida ON Postagem.idPostagem = Curtida.fkPostagemCurtida
+WHERE 
+    Postagem.fkUsuario = 7
+GROUP BY 
+    Postagem.idPostagem,
+    Usuario.nome,
+    Usuario.username,
+    Usuario.idUsuario 
+    ;

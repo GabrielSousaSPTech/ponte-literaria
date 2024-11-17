@@ -21,6 +21,7 @@ var curtidaRouter = require("./src/routes/curtida");
 var seguidorRouter = require("./src/routes/seguidor");
 var postRouter = require("./src/routes/post");
 var searchRouter = require("./src/routes/search");
+var comentarioRouter = require("./src/routes/comentario")
 // var avisosRouter = require("./src/routes/avisos");
 // var medidasRouter = require("./src/routes/medidas");
 // var empresasRouter = require("./src/routes/empresas");
@@ -35,6 +36,7 @@ app.use("/post", postRouter);
 app.use("/like", curtidaRouter);
 app.use("/seguidor", seguidorRouter);
 app.use("/search", searchRouter);
+app.use("/comentario", comentarioRouter);
 // app.use("/avisos", avisosRouter);
 // app.use("/medidas", medidasRouter);
 // app.use("/empresas", empresasRouter);

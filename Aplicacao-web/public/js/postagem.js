@@ -61,6 +61,7 @@ function deletarPost(idPostagem, idUsuario){
         })
     }).then(function (resposta){
         if(resposta.ok){
+            document.getElementById("postagemPerfil").innerHTML = ''
             obterPostagemPerfil(idUsuario)
         }
 
@@ -128,11 +129,11 @@ function plotarPostagemPerfil (resposta) {
         <span>-</span>
         <span>${item.dataHoraPostagem}</span>
         </div>
-        <div  class = "containerDropDown" id="aparecerDropDown-${item.idPostagem}">
+        <div class = "containerDropDown" id="aparecerDropDown-${item.idPostagem}">
             <img src = "./assets/icon/more.png" onclick="event.stopPropagation(), dropDown(${item.idPostagem})">
             <div class="dropDownPost" id="dropDownPost-${item.idPostagem}">
                 <a href = "./criacao-artigo.html?acao=edit&id=${item.idPostagem}">Editar</a>
-                <span onclick=" event.stopPropagation(), modalDelete(${item.idPostagem}, ${item.idUsuario})">Excluir</span>
+                <span onclick=" event.stopPropagation(), modalDelete(${item.idPostagem}, ${item.idUsuario}, 'Postagem')">Excluir</span>
             </div>
         </div>
         </div>
@@ -168,15 +169,7 @@ function plotarPostagemPerfil (resposta) {
     })
 }
 
-function dropDown(idPostagem){
-    const dropdown = document.getElementById(`dropDownPost-${idPostagem}`)
 
-    if(dropdown.style.display == 'flex'){
-        dropdown.style.display = 'none'
-    }else {
-        dropdown.style.display = 'flex'
-    }
-}
 
 function contagemPublicacao(resposta) {
     resposta.forEach(item =>{
