@@ -12,4 +12,7 @@ router.post("/criar", function (req, res){
 router.get('/deletar/:idComentario', function (req, res){
     comentarioController.deletarComentario(req, res)
 })
+router.post('/editar', function (req, res){
+    comentarioController.editarComentarioGeral(req, res);
+})
 module.exports = router

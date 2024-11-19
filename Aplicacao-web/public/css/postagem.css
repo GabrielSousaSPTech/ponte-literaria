@@ -89,3 +89,12 @@
     padding: 0;
     text-decoration: none;
 }
+
+.textAreaComentario[disabled]{
+    border: none;
+    text-align: start;
+    overflow: hidden;
+    padding: 0; 
+    margin: 0;
+    height: fit-content;
+}

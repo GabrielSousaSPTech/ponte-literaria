@@ -72,6 +72,7 @@ CREATE TABLE Comentario (
     tipoComentario VARCHAR(10),
     statusComentario VARCHAR(45),
     fkComentarioRespondido INT,
+    comentarioEditado BOOLEAN,
     dataHoraComentario DATETIME DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fkComentarioResposta FOREIGN KEY (fkComentarioRespondido) REFERENCES Comentario(idComentario),
     CONSTRAINT chk_tipoComentario CHECK (tipoComentario IN('Geral', 'Resposta')),
@@ -80,8 +81,10 @@ CREATE TABLE Comentario (
     CONSTRAINT fkUsuarioComentario FOREIGN KEY (fkUsuarioComentario) REFERENCES Usuario(idUsuario)
 );
 
-ALTER TABLE Comentario ADD COLUMN dataHoraComentario DATETIME DEFAULT CURRENT_TIMESTAMP;
+UPDATE Comentario SET comentarioEditado = false WHERE idComentario >0;
 
+ALTER TABLE Comentario ADD COLUMN dataHoraComentario DATETIME DEFAULT CURRENT_TIMESTAMP;
+UPDATE Comentario SET statusComentario = 'ativo' WHERE idComentario>0;
 
 
 
@@ -184,3 +187,26 @@ GROUP BY
     Usuario.username,
     Usuario.idUsuario 
     ;
+    
+    
+    SELECT 
+       Postagem.idPostagem,
+        Usuario.nome AS nomeUsuario,
+        Usuario.username AS usernameUsuario,
+        Usuario.idUsuario AS idUsuario,
+        Postagem.tituloPostagem,
+        Postagem.conteudoPostagem,
+        Postagem.dataHoraPostagem,
+        COUNT(Curtida.fkPostagemCurtida) AS qtdCurtida,
+        (SELECT COUNT(Comentario.fkPostagemComentada)  FROM Comentario WHERE Postagem.fkUsuario = 5 AND  statusComentario = 'ativo') AS qtdComentario
+    FROM 
+        Postagem
+    RIGHT JOIN 
+       Usuario ON Postagem.fkUsuario = Usuario.idUsuario
+	LEFT JOIN 
+        Curtida ON Postagem.idPostagem = Curtida.fkPostagemCurtida
+    JOIN Comentario ON Postagem.idPostagem = Comentario.fkPostagemComentada
+    WHERE 
+        Postagem.fkUsuario = 5 AND statusPostagem = 'ativo'
+    GROUP BY 
+        Postagem.idPostagem;

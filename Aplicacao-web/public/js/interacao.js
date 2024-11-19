@@ -72,7 +72,7 @@ function obterComentarioGeral(idPostagem){
         }
     })
 }
-
+var comentarioOrigi = ''
 function plotarComentarioGeral(res){
     res.forEach(item => {
         document.getElementById('containerComentario').innerHTML += `
@@ -88,7 +88,7 @@ function plotarComentarioGeral(res){
                         <div  class = "containerDropDown" id="aparecerDropDown-${item.idComentario}">
                             <img src = "./assets/icon/more.png" onclick="event.stopPropagation(), dropDownComentario(${item.idComentario})">
                             <div class="dropDownPost" id="dropDownComentario-${item.idComentario}">
-                                <a onclick="editarComentario(${item.idComentario}, 'editar')">Editar</a>
+                                <a onclick="editarComentario(${item.idComentario}, 'editar', '', '${item.comentario}')">Editar</a>
                                 <span onclick=" event.stopPropagation(), modalDelete(${item.idComentario}, ${item.idPostagem}, 'Comentario')">Excluir</span>
                             </div>
                         </div>
@@ -96,9 +96,7 @@ function plotarComentarioGeral(res){
                     
                     <div class="corpoPost">
                         
-                        <textarea disabled id ="conteudoComentario">
-                        ${item.comentario}
-                        </textarea>
+                        <textarea disabled class="textAreaComentario" id ="conteudoComentario-${item.idComentario}">${item.comentario}</textarea>
                     </div>
                     
                     <div class="interacaoPost">
@@ -108,25 +106,55 @@ function plotarComentarioGeral(res){
                                 <span>01</span>
                             </div>
                         </div>
+                        <div class="engajamento">
+                            ${item.comentarioEditado == 1? '<p>Editado</p>': ''}
+                        </div>
                         <div class="groupButton" id="containerEditar-${item.idComentario}" style="display:none">
-                        <button onclick = "editarComentario(${item.idComentario}, 'cancel')">Cancelar</button>
-                        <button>Editar</button>
+                        <button onclick = "editarComentario(${item.idComentario}, 'cancel', '' , '${item.comentario}')">Cancelar</button>
+                        <button onclick = "editarComentario(${item.idComentario}, 'editar', 'executar', '${item.comentario}')">Editar</button>
                         </div>
                     </div>
                 </div>
         `
+
+        
     });
 }
 
-function editarComentario(idComentario, acao){
+function editarComentario(idComentario, acao, instrucaoSql, comentarioOriginal){
 
-    var conteudo = document.getElementById('conteudoComentario')
+    comentarioOrigi = comentarioOriginal
+
+    console.log(comentarioOrigi)
+    var conteudo = document.getElementById(`conteudoComentario-${idComentario}`)
     if(acao == 'editar'){
 
         conteudo.removeAttribute("disabled")
         document.getElementById(`containerEditar-${idComentario}`).style.display = 'flex'
+
+        if(comentarioOrigi != conteudo.value && instrucaoSql == 'executar'){
+            fetch("/comentario/editar", {
+                method : "POST",
+                headers : {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify( {
+                    idComentarioServer : idComentario,
+                    comentarioServer : conteudo.value
+
+                })
+            }).then(function (resposta){
+                if(resposta.ok){
+                    console.log("Comentario editado com sucesso!")
+                    conteudo.setAttribute("disabled", true)
+                    document.getElementById(`containerEditar-${idComentario}`).style.display = 'none'
+                }
+            })
+        }
+
         
     }else {
+        conteudo.value = comentarioOrigi
         conteudo.setAttribute("disabled", true)
         document.getElementById(`containerEditar-${idComentario}`).style.display = 'none'
 

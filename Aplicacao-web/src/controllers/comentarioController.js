@@ -46,8 +46,25 @@
         );   
     }
 
+    function editarComentarioGeral(req, res){
+        var idComentario = req.body.idComentarioServer
+        var comentario = req.body.comentarioServer
+
+        comentarioModel.editarComentarioGeral(idComentario, comentario).then(function (resposta){
+            res.status(201).json(resposta);
+        }).catch(function (erro){
+            console.log(erro);
+                console.log(
+                    "\nHouve um erro ao editar o comentario! Erro: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+        })
+    }
+
 module.exports = {
     obterComentarioGeral,
     criarComentario,
-    deletarComentario
+    deletarComentario,
+    editarComentarioGeral
 }

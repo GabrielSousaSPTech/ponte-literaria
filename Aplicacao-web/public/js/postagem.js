@@ -153,7 +153,7 @@ function plotarPostagemPerfil (resposta) {
         </div>
         <div class="boxEngajamento" onclick="event.stopPropagation(); realizarComentario(${item.idPostagem})">
         <img src="./assets/icon/comentario.png" alt="">
-        <span></span>
+        <span id="qtdComentario-${item.idPostagem}">${item.qtdComentario}</span>
         </div>
         </div>
         <div class="boxEngajamento" onclick="event.stopPropagation()">

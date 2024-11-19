@@ -8,7 +8,8 @@ function obterComentarioGeral(idPostagem) {
             Usuario.nome AS Usuario,
             Usuario.idUsuario AS idUsuario,
             Usuario.username as username,
-            Postagem.idPostagem as idPostagem
+            Postagem.idPostagem as idPostagem,
+            comentarioEditado
         FROM Comentario
         JOIN Usuario ON fkusuarioComentario = idUsuario
         JOIN Postagem ON fkPostagemComentada = idPostagem
@@ -20,8 +21,8 @@ function obterComentarioGeral(idPostagem) {
 
 function criarComentarioGeral(idPostagem, idUsuario, comentario){
     var instrucaoSql = `
-        INSERT INTO Comentario (fkPostagemComentada, fkUsuarioComentario, ConteudoComentario, tipoComentario, statusComentario, fkComentarioRespondido) 
-            VALUES (${idPostagem}, ${idUsuario}, '${comentario}', 'Geral','ativo', null)
+        INSERT INTO Comentario (fkPostagemComentada, fkUsuarioComentario, ConteudoComentario, tipoComentario, statusComentario,comentarioEditado, fkComentarioRespondido) 
+            VALUES (${idPostagem}, ${idUsuario}, '${comentario}', 'Geral','ativo', false, null)
     `
     return database.executar(instrucaoSql)
     
@@ -35,8 +36,18 @@ function deletarComentarioGeral(idComentario) {
     return database.executar(instrucaoSql)
 }
 
+function editarComentarioGeral(idComentario, conteudo) {
+    var instrucaoSql = `
+        UPDATE Comentario SET ConteudoComentario = '${conteudo}' , comentarioEditado = true
+        WHERE idComentario = ${idComentario}
+    `
+
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     obterComentarioGeral,
     criarComentarioGeral,
-    deletarComentarioGeral
+    deletarComentarioGeral,
+    editarComentarioGeral
 }
