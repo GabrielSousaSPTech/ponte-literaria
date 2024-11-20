@@ -77,13 +77,15 @@ WHERE
 
 function viewPost (idPostagem) {
     var instrucaoSql = `
-            SELECT 
+           SELECT 
     Postagem.idPostagem,
+    Usuario.idUsuario,
     Usuario.nome,
     Postagem.tituloPostagem,
     Postagem.conteudoPostagem,
     Postagem.dataHoraPostagem,
-    COUNT(Curtida.fkPostagemCurtida) AS qtdCurtida
+    COUNT(Curtida.fkPostagemCurtida) AS qtdCurtida,
+    (SELECT COUNT(Comentario.idComentario) FROM Comentario WHERE fkPostagemComentada = ${idPostagem} AND statusComentario = 'ativo' AND tipoComentario = 'Geral') as qtdComentario
 FROM 
     Postagem
 LEFT JOIN 
@@ -95,7 +97,8 @@ WHERE
     AND statusPostagem = 'ativo'
 GROUP BY 
     Postagem.idPostagem, 
-    Usuario.nome, 
+    Usuario.idUsuario,
+    Usuario.nome,
     Postagem.tituloPostagem, 
     Postagem.conteudoPostagem, 
     Postagem.dataHoraPostagem;

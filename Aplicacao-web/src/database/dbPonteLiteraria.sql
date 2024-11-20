@@ -2,6 +2,8 @@ CREATE DATABASE ponteLiteraria;
 
 USE ponteLiteraria;
 
+
+
 CREATE TABLE  Usuario(
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
@@ -44,11 +46,7 @@ VALUES
     dataHoraPostagem DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-UPDATE Postagem SET statusPostagem = 'ativo' WHERE idPostagem >0;
 
-ALTER TABLE Postagem 
-
-ADD CONSTRAINT chk_status CHECK(statusPostagem IN('ativo', 'inativo'));
  
 CREATE TABLE Curtida (
 	FkUsuarioCurtiu INT,
@@ -61,7 +59,7 @@ CREATE TABLE Curtida (
 
 
  
- INSERT INTO Curtida (fkUsuarioCurtiu, fkPostagemCurtida) VALUES(1, 5);
+
 
 CREATE TABLE Comentario (
 	idComentario INT AUTO_INCREMENT,
@@ -96,7 +94,31 @@ SELECT * FROM Usuario;
 SELECT * FROM Postagem;
 SELECT * FROM Curtida;
 SELECT * FROM Seguidores;
-SELECT * FROM Comentario;
+SELECT * FROM Comentario WHERE fkPostagemComentada = 35;
+
+SELECT 
+    Postagem.idPostagem,
+    Usuario.nome,
+    Postagem.tituloPostagem,
+    Postagem.conteudoPostagem,
+    Postagem.dataHoraPostagem,
+    COUNT(Curtida.fkPostagemCurtida) AS qtdCurtida,
+    (SELECT COUNT(Comentario.idComentario) FROM Comentario WHERE fkPostagemComentada = 35 AND statusComentario = 'ativo' AND tipoComentario = 'Geral') as qtdComentario
+FROM 
+    Postagem
+LEFT JOIN 
+    Usuario ON Postagem.fkUsuario = Usuario.idUsuario
+LEFT JOIN 
+    Curtida ON Postagem.idPostagem = Curtida.fkPostagemCurtida
+WHERE 
+    Postagem.idPostagem = 35
+    AND statusPostagem = 'ativo'
+GROUP BY 
+    Postagem.idPostagem, 
+    Usuario.nome, 
+    Postagem.tituloPostagem, 
+    Postagem.conteudoPostagem, 
+    Postagem.dataHoraPostagem;
 
 SELECT
 ConteudoComentario AS comentario,
@@ -188,7 +210,8 @@ GROUP BY
     Usuario.idUsuario 
     ;
     
-    
+    SELECT * FROM Curtida;
+    SELECT * FROM Comentario;
     SELECT 
        Postagem.idPostagem,
         Usuario.nome AS nomeUsuario,
@@ -198,7 +221,7 @@ GROUP BY
         Postagem.conteudoPostagem,
         Postagem.dataHoraPostagem,
         COUNT(Curtida.fkPostagemCurtida) AS qtdCurtida,
-        (SELECT COUNT(Comentario.fkPostagemComentada)  FROM Comentario WHERE Postagem.fkUsuario = 5 AND  statusComentario = 'ativo') AS qtdComentario
+        (SELECT COUNT(Comentario.fkPostagemComentada)  FROM Comentario WHERE Postagem.idPostagem  = 3 AND  statusComentario = 'ativo' AND tipoComentario = 'Geral') AS qtdComentario
     FROM 
         Postagem
     RIGHT JOIN 

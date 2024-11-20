@@ -14,11 +14,13 @@ function darLike (idPostagem, idUsuario) {
                  console.log(res.acao)
                 if(res.acao == 'Insert'){
                     document.getElementById(`iconCurtida-${idPostagem}`).src = './assets/icon/likeFeito.png'
+                    document.getElementById(`iconCurtidaModal-${idPostagem}`).src = './assets/icon/likeFeito.png'
                     var qtdCurtida = document.getElementById(`quantidadeCurtidas`)
                     
                     qtdCurtida.innerText = Number(qtdCurtida.innerText)+1
                 }else {
                     document.getElementById(`iconCurtida-${idPostagem}`).src = './assets/icon/like.png'
+                    document.getElementById(`iconCurtidaModal-${idPostagem}`).src = './assets/icon/like.png'
                     var qtdCurtida = document.getElementById(`quantidadeCurtidas`)
                     
                     qtdCurtida.innerText = Number(qtdCurtida.innerText)-1
@@ -29,6 +31,7 @@ function darLike (idPostagem, idUsuario) {
                 if(respostaAtualizacaoLike.ok) {
                     respostaAtualizacaoLike.json().then(function (res){
                         document.getElementById(`qtdCurtida-${idPostagem}`).innerHTML = res[0].qtdCurtida
+                        document.getElementById(`qtdCurtidaModal-${idPostagem}`).innerHTML = res[0].qtdCurtida
                     })
                 }
             })
@@ -52,8 +55,10 @@ function verificarLike(idPostagem, idUsuario) {
                 
                 if(res.length> 0){
                     document.getElementById(`iconCurtida-${idPostagem}`).src = './assets/icon/likeFeito.png'
+                    document.getElementById(`iconCurtidaModal-${idPostagem}`).src = './assets/icon/likeFeito.png'
                 }else {
                     document.getElementById(`iconCurtida-${idPostagem}`).src = './assets/icon/like.png'
+                    document.getElementById(`iconCurtidaModal-${idPostagem}`).src = './assets/icon/like.png'
                     
                 }
             })
@@ -67,7 +72,9 @@ function obterComentarioGeral(idPostagem){
         if(resposta.ok) {
             resposta.json().then(function (res){
                 res.reverse()
-                plotarComentarioGeral(res)
+                if(document.getElementById('containerComentario')){
+                    plotarComentarioGeral(res)
+                }
             })
         }
     })
@@ -75,8 +82,8 @@ function obterComentarioGeral(idPostagem){
 var comentarioOrigi = ''
 function plotarComentarioGeral(res){
     res.forEach(item => {
+        console.log(item)
         document.getElementById('containerComentario').innerHTML += `
-        
         <div class="postagem" >
                     <div class="cabecalhoPostagem">
                         <div class="dadosCabecalhoPostagem">
@@ -85,7 +92,7 @@ function plotarComentarioGeral(res){
                             <span>-</span>
                             <span>Há 12h</span>
                         </div>
-                        <div  class = "containerDropDown" id="aparecerDropDown-${item.idComentario}">
+                        <div  class = "containerDropDown" id="aparecerDropDownComentario-${item.idComentario}">
                             <img src = "./assets/icon/more.png" onclick="event.stopPropagation(), dropDownComentario(${item.idComentario})">
                             <div class="dropDownPost" id="dropDownComentario-${item.idComentario}">
                                 <a onclick="editarComentario(${item.idComentario}, 'editar', '', '${item.comentario}')">Editar</a>
@@ -116,7 +123,7 @@ function plotarComentarioGeral(res){
                     </div>
                 </div>
         `
-
+        item.idUsuario != sessionStorage.ID_USUARIO? document.getElementById(`aparecerDropDownComentario-${item.idComentario}`).style.display = 'none': console.log(item.idUsuario, sessionStorage.ID_USUARIO)
         
     });
 }
@@ -183,8 +190,13 @@ function criarComentario (idPostagem, idUsuario) {
     }).then(function (resposta){
         if(resposta.ok){
             textarea_comentario.value = ''
-            document.getElementById('containerComentario').innerHTML = ''
+            if(document.getElementById('containerComentario')){
+                document.getElementById('containerComentario').innerHTML = ''
+            }
             obterComentarioGeral(idPostagem)
+            var qtdComentario = document.getElementById(`qtdComentario-${idPostagem}`)
+                    console.log(qtdComentario.value)
+                    qtdComentario.innerText = Number(qtdComentario.innerText)+1
 
         } else {
             console.log('Erro ao comentar')
@@ -201,6 +213,19 @@ function deletarComentario(idComentario, idPostagem){
             console.log('Erro ao deletar o usuário')
         }
         
+    })
+}
+
+function contarComentarioPost(idPostagem){
+    fetch(`/comentario/count/${idPostagem}`, {cache: 'no-store'}).then(function (resposta){
+        if(resposta.ok){
+            resposta.json().then(function (res) {
+                
+                if(res.length> 0){
+                    document.getElementById(`qtdComentario-${idPostagem}`).innerText = res[0].qtdComentario
+                }
+            })
+        }
     })
 }
 

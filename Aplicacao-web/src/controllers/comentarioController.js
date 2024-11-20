@@ -62,9 +62,25 @@
         })
     }
 
+    function countComentarioGeral(req, res){
+        var idPostagem = req.params.idPostagem;
+
+        comentarioModel.getCountComentarioGeral(idPostagem).then(function (resposta){
+            res.status(201).json(resposta);
+        }).catch(function (erro){
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao contar os comentarios! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        })
+    }
+
 module.exports = {
     obterComentarioGeral,
     criarComentario,
     deletarComentario,
-    editarComentarioGeral
+    editarComentarioGeral,
+    countComentarioGeral
 }

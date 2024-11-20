@@ -104,6 +104,17 @@ header .container span {
     margin-bottom: 8rem;
 }
 
+.containerIconCamera {
+    border-radius: 50%; 
+    background-color: var(--azulFundoMaisClaro); 
+    padding: 5px;
+    width: fit-content; 
+    height: fit-content; 
+    position: absolute; 
+    top: 7.5rem;
+    right: 0.5rem;
+}
+
 @media (max-width: 1800px){
     .logotipo {
         margin-bottom: 0;

@@ -45,9 +45,19 @@ function editarComentarioGeral(idComentario, conteudo) {
     return database.executar(instrucaoSql)
 }
 
+function getCountComentarioGeral(idPostagem){
+    var instrucaoSql = `
+        SELECT COUNT(idComentario) as qtdComentario FROM Comentario WHERE fkPostagemComentada = ${idPostagem} AND statusComentario = 'ativo' AND tipoComentario = 'Geral';
+
+    `
+
+    return database.executar(instrucaoSql)
+}
+
 module.exports = {
     obterComentarioGeral,
     criarComentarioGeral,
     deletarComentarioGeral,
-    editarComentarioGeral
+    editarComentarioGeral,
+    getCountComentarioGeral
 }

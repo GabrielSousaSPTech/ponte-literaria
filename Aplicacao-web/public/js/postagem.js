@@ -130,7 +130,7 @@ function plotarPostagemPerfil (resposta) {
         <span>${item.dataHoraPostagem}</span>
         </div>
         <div class = "containerDropDown" id="aparecerDropDown-${item.idPostagem}">
-            <img src = "./assets/icon/more.png" onclick="event.stopPropagation(), dropDown(${item.idPostagem})">
+        <img src = "./assets/icon/more.png" onclick="event.stopPropagation(), dropDown(${item.idPostagem},'Post')">
             <div class="dropDownPost" id="dropDownPost-${item.idPostagem}">
                 <a href = "./criacao-artigo.html?acao=edit&id=${item.idPostagem}">Editar</a>
                 <span onclick=" event.stopPropagation(), modalDelete(${item.idPostagem}, ${item.idUsuario}, 'Postagem')">Excluir</span>
@@ -153,7 +153,7 @@ function plotarPostagemPerfil (resposta) {
         </div>
         <div class="boxEngajamento" onclick="event.stopPropagation(); realizarComentario(${item.idPostagem})">
         <img src="./assets/icon/comentario.png" alt="">
-        <span id="qtdComentario-${item.idPostagem}">${item.qtdComentario}</span>
+        <span id="qtdComentario-${item.idPostagem}">0</span>
         </div>
         </div>
         <div class="boxEngajamento" onclick="event.stopPropagation()">
@@ -165,6 +165,7 @@ function plotarPostagemPerfil (resposta) {
         `     
 
         item.idUsuario != sessionStorage.ID_USUARIO? document.getElementById(`aparecerDropDown-${item.idPostagem}`).style.display = 'none': console.log(item.idUsuario, sessionStorage.ID_USUARIO)
+        contarComentarioPost(item.idPostagem)
         verificarLike(item.idPostagem, sessionStorage.ID_USUARIO);  
     })
 }

@@ -29,9 +29,13 @@
     }
 
     function myPerfil(id){
-      sessionStorage.ID_USUARIO == id ?
-      document.getElementById(`getSeguir`).style.display = 'none':
-      document.getElementById(`getAnalytics`).style.display = 'none'
+      if(sessionStorage.ID_USUARIO == id){
+        document.getElementById(`getSeguir`).style.display = 'none'
+      }else {
+
+        document.getElementById(`configPerfil`).style.display = 'none'
+        document.getElementById(`getAnalytics`).style.display = 'none'
+      }
     }
 
     const idUsuario = capturarIdPostagem()
@@ -55,15 +59,29 @@
           <span id="quantidadeSeguindo"></span><span> Seguindo</span>
         </div>
         <div class="sessaoInformacaoUsuario">
-          <img class="imgPerfil" src="./assets/imgs/usuarioTeste.jpg" alt="">
+          <div style="position: relative;">
+            <img class="imgPerfil" src="./assets/imgs/usuarioTeste.jpg" alt="">
+            <div class="containerIconCamera">
+              <label for="input_foto"><img class="" src="./assets/icon/camera.png" alt=""></label>
+              <input id="input_foto" type="file" src="" alt="" style="display: none;">
+            </div>
+          </div>
           <div class="nickname">
-            <span id="nomeUsuario">Gabriel da Silva Sousa</span>
+            <div style="display: flex; gap: 5%; justify-content: center; align-items: center;">
+              <span id="nomeUsuario">Gabriel da Silva Sousa</span>
+              <img id="configPerfil" style="height: 1.2rem;" src="./assets/icon/config.png" alt="">
+            </div>
             <span id="username">@gabrielSousa</span>
           </div>
         </div>
         
             <button id="getSeguir" class="botaoSeguir " onclick="seguirUsuario(idUsuario, sessionStorage.ID_USUARIO)">Seguir</button>
-            <button id="getAnalytics" class="botaoSeguir ">Analytics</button>
+            
+              
+                
+              
+              <button id="getAnalytics" class="botaoSeguir ">Analytics</button>
+            
         
         <div class="containerInformacoesPerfil">
             <span id="quantidadeCurtidas"></span><span> Curtida</span>
