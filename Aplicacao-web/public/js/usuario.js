@@ -5,6 +5,13 @@ function getUsuario (idUsuario) {
             resposta.json().then(function (res){
                 document.getElementById("nomeUsuario").innerText = `${res.nome}`
                 document.getElementById("username").innerText = `${res.username}`
+          
+                if(sessionStorage.ID_USUARIO == idUsuario && res.fotoPerfilUsuario !=null){
+                    sessionStorage.FOTO_USUARIO = res.fotoPerfilUsuario
+                   
+                }else{
+                    document.getElementById('fotoPreview').src = `./assets/imgs/usuario/${res.fotoPerfilUsuario == null ?'usuarioTeste.jpg': res.fotoPerfilUsuario}`
+                }
             })
     }else {
             
@@ -12,4 +19,8 @@ function getUsuario (idUsuario) {
             
         }
     })
+}
+
+function editarUsuario (idUsuario){
+    fetch(``)
 }

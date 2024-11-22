@@ -17,97 +17,65 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body onload="acao()">
+<body onload="renderizarPagina()">
 
-    <header style="z-index: 3;">
-      <div class="container">
-        <img class="logotipo" src="./assets/imgs/logotipo-pl.png" alt="">
-        <div  class="barra-pesquisa">
-            <span>
-                <img src="./assets/icon/lupa.png" alt="">
-            </span>
-            <input type="text" placeholder="Pesquise Aqui...">
+    <header style="z-index: 3;" id="div_navbar_usuario">
+        <div class="container">
+        
+        
+            <div class="boxLogin">
+              <a>Entrar</a>
+              <span>|</span>
+              <a>Cadastre-se</a>
+            </div>
           </div>
-        <div class="boxLogin">
-          <a>Entrar</a>
-          <span>|</span>
-          <a>Cadastre-se</a>
-        </div>
-      </div>
+      
     </header>
     
 
-    <div class="sideBar" style="z-index: 2;">
-        <ul>
-            <div class="topico-pagina">
-                <img src="./assets/icon/home.png" alt="">
-                <span>
-                    <a href="./feed.html">
-                        Página Inicial 
-                    </a>
-                </span>
-                
-            </div>
-            <div class="topico-pagina">
-                <img src="./assets/icon/projeto.png" alt="">
-                <span>
-                    <a href="./index.html">
-                        Projeto
-                    </a>
-                </span>
-            </div>
-            <div class="topico-pagina">
-                <img src="./assets/icon/usuario.png" alt="">
-                <span>
-                    <a href="./perfil.html">
-                        Perfil
-                    </a>
-                </span>
-            </div>
-            
-            
-            <!-- <div class="topico-pagina"> -->
-<!--                 
-                <span id="assunto">
-                    Assunto
-                </span>
-            </div> -->
-
-            <!-- <li>
-                <input type="checkbox">
-                <span>Comédia</span>
-            </li>
-            <li>
-                <input type="checkbox">
-                <span>Distopia</span>
-            </li>
-            <li>
-                <input type="checkbox">
-                <span>Fantasia</span>
-            </li>
-            <li>
-                <input type="checkbox">
-                <span>Poesia</span>
-            </li>
-            <li>
-                <input type="checkbox">
-                <span>Romance</span>
-            </li>
-            <li>
-                <input type="checkbox">
-                <span>Terror</span>
-            </li> -->
-
-            
-            <div class="topico-pagina">
-                <img src="./assets/icon/logout.png" alt="">
-                
-                    <a href="./index.html">
-                        Sair
-                    </a>
-                
-            </div>
-        </ul>
+    <div id="div_sidebar" class="sideBar">
+        <img class="logotipo" src="./assets/imgs/logotipo-pl.png" alt="">
+        <ul class="corpoSidebar">
+          <a href="./feed.html">
+          <div class="topico-pagina">
+          <img src="./assets/icon/home.png" alt="">
+          <span>
+          Página Inicial</span>
+          </span>
+          </a>
+          </div>
+    
+          <a href="./index.html">
+          <div class="topico-pagina">
+          <img src="./assets/icon/projeto.png" alt="">
+          <span>
+          Projeto</span>
+          </span>
+          </div>
+          </a>
+          <div class="topico-pagina" onclick="abrirPerfil(sessionStorage.ID_USUARIO)">
+          <img src="./assets/icon/usuario.png" alt="">
+          <span >Perfil</span>
+          </div>
+          </span>
+          
+          <a href="./dashboard.html">
+          <div class="topico-pagina">
+          <img src="./assets/icon/analytics.png" alt="">
+          <span>
+          Analytics
+          </span>
+          </div>
+          </a>
+          
+          
+          <a onclick="limparSessao()">
+          <div class="topico-pagina">
+          <img src="./assets/icon/logout.png" alt="">
+          <span>Sair</span>
+          </div>
+          </a>
+       </ul>
     </div>
 
     <!-- corpo do feed -->
@@ -166,6 +134,16 @@
         }
     }
 
+    function renderizarPagina(){
+        
+        acao()
+    }
 
+    function components(){
+        sidebar(),
+        navbarUsuario()
+    }
 </script>
+
+<script src="./js/components.js"></script>
 </html>

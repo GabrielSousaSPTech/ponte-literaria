@@ -1,3 +1,5 @@
+const { json } = require("express");
+
 function verificarCampos(listaCampos = []) {
     for(var posicaoCampo = 0; posicaoCampo <listaCampos.length; posicaoCampo++){
         if(listaCampos[posicaoCampo] == ''){
@@ -25,11 +27,13 @@ function entrar (){
             if(resposta.ok) {
                 
                 resposta.json().then(json =>{
+                    
                     sessionStorage.ID_USUARIO = json.id;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.USERNAME_USUARIO = json.username;
                     sessionStorage.EMAIL_USUARIO = json.email;
-                    // sessionStorage.FOTO_USUARIO = json.fotoPerfilUsuario;
+                    sessionStorage.FOTO_USUARIO = json.fotoPerfilUsuario;
+                    
                 });
                 setTimeout(function(){
                     window.location = "../feed.html"

@@ -3,12 +3,15 @@ function validarSessao() {
     var email = sessionStorage.EMAIL_USUARIO;
     var nome = sessionStorage.NOME_USUARIO;
     var username = sessionStorage.USERNAME_USUARIO;
+    var fotoPerfil = sessionStorage.FOTO_USUARIO
     var locNome = document.getElementById("nomeUsuario");
     var locUsername = document.getElementById("username");
+    var locFotoPerfil = document.getElementById("fotoPreview");
 
     if (email != null && nome != null) {
         locNome.innerHTML = nome;
         locUsername.innerHTML = username;
+        locFotoPerfil.src = `./assets/imgs/usuario/${fotoPerfil == ''? 'padrao.jpg': fotoPerfil}`
     } else {
         window.location = "../login.html";
     }

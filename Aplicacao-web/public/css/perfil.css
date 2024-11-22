@@ -136,7 +136,12 @@ header .container span {
 }
 
 .sessaoFeed {
-    padding-top: 0rem !important;
-   
+    padding-top: 0rem !important; 
+}
+
+#fotoPreview{
+    height: 10rem;
+    width: 10rem;
+    object-fit: cover;
     
 }

@@ -1,7 +1,7 @@
 var database = require('../database/config')
 
 function getSearch (pesquisa) {
-    var instrucaoSql = `SELECT idUsuario, nome, username, fotoPerfilUsuario FROM Usuario
+    var instrucaoSql = `SELECT idUsuario, nome, username, fotoPerfilUsuario as fotoUsuario FROM Usuario
     WHERE
       username LIKE '%${pesquisa}%' OR nome LIKE '%${pesquisa}%';`
 

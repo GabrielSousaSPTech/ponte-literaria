@@ -18,70 +18,75 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
+
+
 <body onload="validarSessao()">
     <a href="./criacao-artigo.html" style="position: fixed; right: 0; bottom: 0; padding: 1rem;">
         <img src="./assets/icon/adicionar.png" style="height: 3.5rem;" alt="">
     </a>
-    <header style="z-index: 3;">
-      <div class="container">
-        <img class="logotipo" src="./assets/imgs/logotipo-pl.png" alt="">
-        <div style="display: flex; flex-direction: column;">
-        <div  class="barra-pesquisa">
-            <span>
-                <img src="./assets/icon/lupa.png" alt="">
-            </span>
-
-                <input id="input_pesquisa" type="text" placeholder="Pesquise Aqui..." onkeyup="search()">
+    <header id="div_navbar_pesquisa" style="z-index: 2;">
+        <div class="container">
+            <div style="display: flex; flex-direction: column;">
+            <div  class="barra-pesquisa">
+                <span>
+                    <img src="./assets/icon/lupa.png" alt="">
+                </span>
+    
+                    <input id="input_pesquisa" type="text" placeholder="Pesquise Aqui..." onkeyup="search()">
+                </div>
+                <div id="containerResultadopesquisa"></div>
+              </div>
+            <div class="boxLogin">
+              <a>Entrar</a>
+              <span>|</span>
+              <a>Cadastre-se</a>
             </div>
-            <div id="containerResultadopesquisa"></div>
           </div>
-        <div class="boxLogin">
-          <a>Entrar</a>
-          <span>|</span>
-          <a>Cadastre-se</a>
-        </div>
-      </div>
     </header>
     
-    <div class="sideBar" style="z-index: 2;">
-        <ul>
-            <div class="topico-pagina">
-                <img src="./assets/icon/home.png" alt="">
-                <span>
-                    <a href="./feed.html">
-                        Página Inicial 
-                    </a>
-                </span>
-                
-            </div>
-            <div class="topico-pagina">
-                <img src="./assets/icon/projeto.png" alt="">
-                <span>
-                    <a href="./index.html">
-                        Projeto
-                    </a>
-                </span>
-            </div>
-            <div class="topico-pagina">
-                <img src="./assets/icon/usuario.png" alt="">
-                <span onclick="abrirPerfil(sessionStorage.ID_USUARIO)">
-                    <a>
-                        Perfil
-                    </a>
-                </span>
-            </div>
-            
-            
-            
-            <div class="topico-pagina">
-                <img src="./assets/icon/logout.png" alt="">
-                
-                <a onclick="limparSessao()">
-                    Sair
-                </a>
-                
-            </div>
-        </ul>
+    <div class="sideBar" id="div_sidebar">
+        <img class="logotipo" src="./assets/imgs/logotipo-pl.png" alt="">
+    <ul class="corpoSidebar">
+      <a href="./feed.html">
+      <div class="topico-pagina">
+      <img src="./assets/icon/home.png" alt="">
+      <span>
+      Página Inicial</span>
+      </span>
+      </a>
+      </div>
+
+      <a href="./index.html">
+      <div class="topico-pagina">
+      <img src="./assets/icon/projeto.png" alt="">
+      <span>
+      Projeto</span>
+      </span>
+      </div>
+      </a>
+      <div class="topico-pagina" onclick="abrirPerfil(sessionStorage.ID_USUARIO)">
+      <img src="./assets/icon/usuario.png" alt="">
+      <span >Perfil</span>
+      </div>
+      </span>
+      
+      <a href="./dashboard.html">
+      <div class="topico-pagina">
+      <img src="./assets/icon/analytics.png" alt="">
+      <span>
+      Analytics
+      </span>
+      </div>
+      </a>
+      
+      
+      <a onclick="limparSessao()">
+      <div class="topico-pagina">
+      <img src="./assets/icon/logout.png" alt="">
+      <span>Sair</span>
+      </div>
+      </a>
+   </ul>
     </div>
     
     <!-- corpo do feed -->
@@ -225,5 +230,6 @@
 <script src="./js/search.js"></script>
 <script src="./js/modal.js"></script>
 <script src="./js/navegacaoPagina.js"></script>
+<script src="./js/components.js"></script>i
 
 </html>

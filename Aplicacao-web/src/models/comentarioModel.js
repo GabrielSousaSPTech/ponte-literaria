@@ -7,6 +7,7 @@ function obterComentarioGeral(idPostagem) {
             ConteudoComentario AS comentario,
             Usuario.nome AS Usuario,
             Usuario.idUsuario AS idUsuario,
+            Usuario.fotoPerfilUsuario AS fotoUsuario,
             Usuario.username as username,
             Postagem.idPostagem as idPostagem,
             comentarioEditado

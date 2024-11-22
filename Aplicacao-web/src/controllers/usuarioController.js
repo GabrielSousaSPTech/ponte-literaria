@@ -31,7 +31,8 @@ function checarCredenciais(req, res) {
                 nome: resultado[0].nome,
                 username: resultado[0].username,
                 email: resultado[0].email,
-                senha: resultado[0].senha
+                senha: resultado[0].senha,
+                fotoPerfilUsuario: resultado[0].fotoPerfilUsuario
             });
         }else {
             res.status(403).send("E-mail ou Senha inválido(s)");
@@ -48,6 +49,9 @@ function getUsuario (req, res) {
                 id: resposta[0].idUsuario,
                 nome: resposta[0].nome,
                 username: resposta[0].username,
+                fotoPerfilUsuario: resposta[0].fotoPerfilUsuario,
+                email: resposta[0].email,
+                senha: resposta[0].senha,
             });
         }else {
             res.status(403).send("Usúario não existe");
@@ -55,10 +59,31 @@ function getUsuario (req, res) {
     })
 }
 
+function editarFotoPerfil(req, res){
+    var idUsuario = req.body.idUsuarioServer;
+    var nomeImagem = req.file.filename;
+    
+
+    usuarioModel.editarFotoPerfil(idUsuario, nomeImagem).then(function(resposta){
+        
+        res.status(201).json(resposta);
+    }).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao realizar a edição da foto de perfil! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );       
+}
+
 module.exports = {
     cadastrar,
     checarCredenciais,
-    getUsuario
+    getUsuario,
+    editarFotoPerfil
 }
 
 

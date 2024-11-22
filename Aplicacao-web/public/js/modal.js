@@ -9,7 +9,6 @@ function createModal() {
         </div>
     `
 }
-
 function modalDelete(idDelete, idGerador, tipoDelete) {
     document.querySelector('.espacoModal').innerHTML = `
         <div class="modal-overlay" style="display: flex;">
@@ -52,7 +51,7 @@ function visualizarComentario(resposta) {
     <div class="postagem">
       <div class="cabecalhoPostagem">
         <div class="dadosCabecalhoPostagem">
-          <img src="./assets/imgs/usuarioTeste.jpg" alt="" class="fotoUsuarioResposta">
+          <img src="./assets/imgs/usuario/${item.fotoUsuario == null?'usuarioTeste.jpg': item.fotoUsuario}" alt="" onclick="event.stopPropagation()" class="fotoUsuarioResposta">
           <span>${item.nome}</span>
           <span>-</span>
           <span>${item.dataHoraPostagem}</span>
@@ -103,6 +102,88 @@ function visualizarComentario(resposta) {
   verificarLike(item.idPostagem, sessionStorage.ID_USUARIO);
   item.idUsuario != sessionStorage.ID_USUARIO? document.getElementById(`aparecerDropDownModal-${item.idPostagem}`).style.display = 'none': ''
     });
+}
+
+function modalMudarFoto(){
+  document.querySelector('.espacoModal').innerHTML = `
+        <div class="modal-overlay" style="display: flex;">
+            <div class="modalDelete">
+            <div class="headerModal">
+                <button class="modal-close" onclick="closeModal()">
+                    <img src="./assets/icon/close.png" alt="">
+                </button>
+            </div>
+            <div class = "corpoModal">
+                <h2>Editar foto de perfil</h2>
+                <p>tem certeza que deseja editar sua foto de perfil?</p>
+                <div class = "groupButton">
+                    <button class="btnDelete" onclick="closeModal()">Cancelar</button>
+
+                    <label for = "input_foto" class="btnDelete">Carregar Foto</label>
+                </div>
+            </div> 
+            </div
+        </div>
+    `
+
+}
+
+function modalEditarPerfil(idUsuario){
+
+  fetch(`/usuario/${idUsuario}`, {cache: 'no-store'}).then(function (resposta){
+    if(resposta.ok) {
+        resposta.json().then(function (res){
+          console.log(res)
+          document.querySelector('.espacoModal').innerHTML = `
+          <div class="modal-overlay" style="display: flex;">
+            <div class="modal">
+            <div class="corpoModal" id="corpoModal">
+            <div class="headerModal">
+            <button class="modal-close" onclick="closeModal()">
+            <img src="./assets/icon/close.png" alt="">
+            </button>
+            </div>
+            <div class = "containerModalEditarPerfil">
+                  <div style="position: relative;">
+                    <img src="./assets/imgs/usuario/${res.fotoPerfilUsuario == null?'usuarioTeste.jpg': res.fotoPerfilUsuario}" alt="" onclick="event.stopPropagation()" id="fotoPreview" class="imgPerfil">
+                    <div id="botaoEditarFoto" class="containerIconCamera">
+                      <img  class="" src="./assets/icon/camera.png" alt="" onclick="modalMudarFoto(sessionStorage.ID_USUARIO)">
+                      <input id="input_foto" type="file" src="" alt="" style="display: none;">
+                    </div>
+                  </div>
+
+                  <div class="containerDadosUsuario">
+                    <div class ="boxEditDadoUsuario">
+                      <input type ="text" disabled value='${res.nome}' id="input_nomeEdit"/>
+                      <img src = "./assets/icon/edit.png" class = "iconEdit">
+                </div>
+                    <div class ="boxEditDadoUsuario">
+                      <input type ="text" disabled value='${res.username}' id="input_usernameEdit"/>
+                      <img src = "./assets/icon/edit.png" class = "iconEdit">
+                </div>
+                    <div class ="boxEditDadoUsuario">
+                      <input type ="text" disabled value='${res.email}' id="input_emailEdit"/>
+                      <img src = "./assets/icon/edit.png" class = "iconEdit">
+                </div>
+                    <div class ="boxEditDadoUsuario">
+                      <span>mudar Senha</span>
+                      <img src = "./assets/icon/edit.png" class = "iconEdit">
+                </div>
+              </div>
+  
+      
+            </div>
+          </div>
+  `
+        })
+}else {
+        
+        document.getElementById("corpoModal").innerHTML =`<p style="text-align:center;">Esse perfil não está disponível</p>`
+        
+    }
+})
+        
+
 }
 
 function dropDown(idPostagem, elemento) {

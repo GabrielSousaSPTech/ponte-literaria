@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Ponte Literária | Página Inicial</title>
+    <title>Ponte Literária | Painel de Controle</title>
 
     <script src="./js/sessao.js"></script>
 
@@ -21,104 +21,76 @@
 
 <body onload="renderizarPagina()">
 
-    <header id="div_navbar_pesquisa">
+    <header  id="div_navbar_usuario">
         <div class="container">
         
-            <div style="display: flex; flex-direction: column;">
-            <div  class="barra-pesquisa">
-                <span>
-                    <img src="./assets/icon/lupa.png" alt="">
-                </span>
-    
-                    <input id="input_pesquisa" type="text" placeholder="Pesquise Aqui..." onkeyup="search()">
-                </div>
-                <div id="containerResultadopesquisa"></div>
-              </div>
+        
             <div class="boxLogin">
               <a>Entrar</a>
               <span>|</span>
               <a>Cadastre-se</a>
             </div>
           </div>
+      
     </header>
     
 
     <div id="div_sidebar" class="sideBar">
         <img class="logotipo" src="./assets/imgs/logotipo-pl.png" alt="">
-    <ul class="corpoSidebar">
-      <a href="./feed.html">
-      <div class="topico-pagina">
-      <img src="./assets/icon/home.png" alt="">
-      <span>
-      Página Inicial</span>
-      </span>
-      </a>
-      </div>
-
-      <a href="./index.html">
-      <div class="topico-pagina">
-      <img src="./assets/icon/projeto.png" alt="">
-      <span>
-      Projeto</span>
-      </span>
-      </div>
-      </a>
-      <div class="topico-pagina" onclick="abrirPerfil(sessionStorage.ID_USUARIO)">
-      <img src="./assets/icon/usuario.png" alt="">
-      <span >Perfil</span>
-      </div>
-      </span>
-      
-      <a href="./dashboard.html">
-      <div class="topico-pagina">
-      <img src="./assets/icon/analytics.png" alt="">
-      <span>
-      Analytics
-      </span>
-      </div>
-      </a>
-      
-      
-      <a onclick="limparSessao()">
-      <div class="topico-pagina">
-      <img src="./assets/icon/logout.png" alt="">
-      <span>Sair</span>
-      </div>
-      </a>
-   </ul>
+        <ul class="corpoSidebar">
+          <a href="./feed.html">
+          <div class="topico-pagina">
+          <img src="./assets/icon/home.png" alt="">
+          <span>
+          Página Inicial</span>
+          </span>
+          </a>
+          </div>
+    
+          <a href="./index.html">
+          <div class="topico-pagina">
+          <img src="./assets/icon/projeto.png" alt="">
+          <span>
+          Projeto</span>
+          </span>
+          </div>
+          </a>
+          <div class="topico-pagina" onclick="abrirPerfil(sessionStorage.ID_USUARIO)">
+          <img src="./assets/icon/usuario.png" alt="">
+          <span >Perfil</span>
+          </div>
+          </span>
+          
+          <a href="./dashboard.html">
+          <div class="topico-pagina">
+          <img src="./assets/icon/analytics.png" alt="">
+          <span>
+          Analytics
+          </span>
+          </div>
+          </a>
+          
+          
+          <a onclick="limparSessao()">
+          <div class="topico-pagina">
+          <img src="./assets/icon/logout.png" alt="">
+          <span>Sair</span>
+          </div>
+          </a>
+       </ul>
     </div>
-
-    <!-- corpo do feed -->
-
     <section class="sessaoArtigo">
         <a onclick="voltarPagina()" style="position: fixed; left: 15rem; top: 8rem; padding: 1rem;">
             <img src="./assets/icon/voltar.png" style="height: 2.5rem;" alt="">
         </a>
-        <div class="container" >
-            <div id="visualizacaoArtigo"></div>
-            <form action="" class="boxComentario">
-
-                <textarea name="comentario" id="textarea_comentario" placeholder="Digite um Comentario..." rows="8" cols="5"></textarea>
-                <button type="button" onclick="criarComentario(capturarIdPostagem(), sessionStorage.ID_USUARIO)">
-                    <img src="./assets/icon/enviarMsg.png" alt="">
-                </button>
-            </form>
-
-            <div id="containerComentario">
-
-                
-            </div>
-            </div>
-        </section>
-        <div class="espacoModal">
-
-        </div>
+    </section>
+    
   </body>
 
 <script>
 
     function renderizarPagina(){
-        
+        components(),
         obterPostagem(capturarIdPostagem()), 
         obterComentarioGeral(capturarIdPostagem())
     }
@@ -146,7 +118,10 @@
 
 <script>
 
-
+function components(){
+        sidebar(),
+        navbarUsuario()
+    }
     function capturarIdPostagem(){
         const params = new URLSearchParams(window.location.search);
         

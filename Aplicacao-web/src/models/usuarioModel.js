@@ -15,19 +15,28 @@ function checarCredenciais (email, senha) {
 }
 
 function getUsuario (idUsuario) {
-    var instrucaoSql = `SELECT nome, username FROM Usuario WHERE idUsuario = ${idUsuario}`
+    var instrucaoSql = `SELECT nome, username, fotoPerfilUsuario, email, senha FROM Usuario WHERE idUsuario = ${idUsuario}`
 
     return database.executar (instrucaoSql)
 }
 
-function editarUsuario (idUsuario, nome, username, email, senha, fotoPerfilUsuario){
-    var isntrucaoSql = `
-        UPDATE Usuario SET nome = ${nome}, username = ${username}, email = ${email}, senha = ${senha}, fotoPerfilUsuario = ${fotoPerfilUsuario}
+function editarUsuario (idUsuario, nome, username, email, senha){
+    var instrucaoSql = `
+        UPDATE Usuario SET nome = ${nome}, username = ${username}, email = ${email}, senha = ${senha}
         WHERE idUsuario = ${idUsuario}
 
     `
 
     return database.executar(instrucaoSql)
+}
+
+function editarFotoPerfil(idUsuario, nomeImagem){
+    var instrucaoSql = `
+    UPDATE Usuario SET fotoPerfilUsuario = '${nomeImagem}' WHERE idUsuario = ${idUsuario}
+    `
+
+    return database.executar(instrucaoSql)
+
 }
 
 
@@ -36,6 +45,7 @@ module.exports = {
     cadastrar,
     checarCredenciais,
     getUsuario,
-    editarUsuario
+    editarUsuario,
+    editarFotoPerfil
 
 }

@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="./css/feed.css">
     <link rel="stylesheet" href="./css/postagem.css">
     <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="stylesheet" href="./css/navbar.css">
     <link rel="stylesheet" href="./css/modal.css">
 
     <link rel="icon" href="./assets/icon/favicon2.ico">
@@ -32,105 +31,121 @@
       if(sessionStorage.ID_USUARIO == id){
         document.getElementById(`getSeguir`).style.display = 'none'
       }else {
-
-        document.getElementById(`configPerfil`).style.display = 'none'
         document.getElementById(`getAnalytics`).style.display = 'none'
+        document.getElementById(`botaoEditarFoto`).style.display = 'none'
+
       }
     }
 
     const idUsuario = capturarIdPostagem()
     
+  
+    function renderizarFuncoesNaPagina(){
+      
+      validarSessao(), 
+      getUsuario(sessionStorage.ID_USUARIO == idUsuario ? sessionStorage.ID_USUARIO : idUsuario), 
+      obterPostagemPerfil(sessionStorage.ID_USUARIO == idUsuario ? sessionStorage.ID_USUARIO : idUsuario),
+      obterSeguidores(sessionStorage.ID_USUARIO == idUsuario ? sessionStorage.ID_USUARIO : idUsuario),
+      verificarSeguidor(idUsuario, sessionStorage.ID_USUARIO),
+      myPerfil(idUsuario)
+    }
+
+
 </script>
 
-<body onload="validarSessao(); getUsuario(sessionStorage.ID_USUARIO == idUsuario ? sessionStorage.ID_USUARIO : idUsuario); obterPostagemPerfil(sessionStorage.ID_USUARIO == idUsuario ? sessionStorage.ID_USUARIO : idUsuario);
-      obterSeguidores(sessionStorage.ID_USUARIO == idUsuario ? sessionStorage.ID_USUARIO : idUsuario);
-      verificarSeguidor(idUsuario, sessionStorage.ID_USUARIO);myPerfil(idUsuario)">
+<body onload="renderizarFuncoesNaPagina()">
     <a href="./criacao-artigo.html" style="position: fixed; right: 0; bottom: 0; padding: 1rem;">
       <img src="./assets/icon/adicionar.png" style="height: 3.5rem;" alt="">
   </a>
-    <header style="z-index: 1;">
+    <header style="z-index: 3;" id="div_navbarPerfil">
       <a href="./feed.html">
         <img src="./assets/icon/home.png" style="height: 2.5rem; margin: 2rem;" alt="">
-    </a>
-      <div class="container">
+        </a>
+        <div class="container">
         <div class="containerInformacoesPerfil">
-          
-          <span id="quantidadeSeguidores"></span><span> Seguidor</span>
-          <span id="quantidadeSeguindo"></span><span> Seguindo</span>
+        
+        <span id="quantidadeSeguidores"></span><span> Seguidor</span>
+        <span id="quantidadeSeguindo"></span><span> Seguindo</span>
         </div>
         <div class="sessaoInformacaoUsuario">
-          <div style="position: relative;">
-            <img class="imgPerfil" src="./assets/imgs/usuarioTeste.jpg" alt="">
-            <div class="containerIconCamera">
-              <label for="input_foto"><img class="" src="./assets/icon/camera.png" alt=""></label>
-              <input id="input_foto" type="file" src="" alt="" style="display: none;">
-            </div>
-          </div>
-          <div class="nickname">
-            <div style="display: flex; gap: 5%; justify-content: center; align-items: center;">
-              <span id="nomeUsuario">Gabriel da Silva Sousa</span>
-              <img id="configPerfil" style="height: 1.2rem;" src="./assets/icon/config.png" alt="">
-            </div>
-            <span id="username">@gabrielSousa</span>
-          </div>
+        <div style="position: relative;">
+        <img class="imgPerfil" src="./assets/imgs/usuarioTeste.jpg" alt="" id="fotoPreview">
+        <div id="botaoEditarFoto" class="containerIconCamera">
+        <img  class="" src="./assets/icon/camera.png" alt="" onclick="modalMudarFoto(sessionStorage.ID_USUARIO)">
+        <input id="input_foto" type="file" src="" alt="" style="display: none;">
+        </div>
+        </div>
+        <div class="nickname">
+        <div style="display: flex; gap: 5%; justify-content: center; align-items: center;">
+        <span id="nomeUsuario">Gabriel da Silva Sousa</span>
+        
+        </div>
+        <span id="username">@gabrielSousa</span>
+        </div>
         </div>
         
-            <button id="getSeguir" class="botaoSeguir " onclick="seguirUsuario(idUsuario, sessionStorage.ID_USUARIO)">Seguir</button>
-            
-              
-                
-              
-              <button id="getAnalytics" class="botaoSeguir ">Analytics</button>
-            
+        <button id="getSeguir" class="botaoSeguir " onclick="seguirUsuario(idUsuario, sessionStorage.ID_USUARIO)">Seguir</button>
+        
+        
+        
+        
+        <button id="getAnalytics" class="botaoSeguir" onclick="modalEditarPerfil(sessionStorage.ID_USUARIO)">Editar Perfil </button>
+        
         
         <div class="containerInformacoesPerfil">
-            <span id="quantidadeCurtidas"></span><span> Curtida</span>
-            
-              <span id="quantidadePublicacoes"></span><span> Publicação</span>
-           
-          
-        </div>
-
-      </div>
-    </header>
-    <div class="sideBar" style="z-index: 2;">
-      <img class="logotipo" src="./assets/imgs/logotipo-pl.png" alt="">
-      <ul>
-          <div class="topico-pagina">
-              <img src="./assets/icon/home.png" alt="">
-              <span>
-                  <a href="./feed.html">
-                      Página Inicial 
-                  </a>
-              </span>
-              
-          </div>
-          <div class="topico-pagina">
-              <img src="./assets/icon/projeto.png" alt="">
-              <span>
-                  <a href="./index.html">
-                      Projeto
-                  </a>
-              </span>
-          </div>
-          <div class="topico-pagina">
-              <img src="./assets/icon/usuario.png" alt="">
-              <span>
-                  <a href="./perfil.html">
-                      Perfil
-                  </a>
-              </span>
-          </div>
+        <span id="quantidadeCurtidas"></span><span> Curtida</span>
         
-        <div class="topico-pagina">
-            <img src="./assets/icon/logout.png" alt="">
-            
-            <a onclick="limparSessao()">
-                Sair
-            </a>
-            
+        <span id="quantidadePublicacoes"></span><span> Publicação</span>
+        
+        
         </div>
-    </ul>
+        
+        </div>
+      
+    </header>
+    <div id="div_sidebar" class="sideBar" >
+      <img class="logotipo" src="./assets/imgs/logotipo-pl.png" alt="">
+    <ul class="corpoSidebar">
+      <a href="./feed.html">
+      <div class="topico-pagina">
+      <img src="./assets/icon/home.png" alt="">
+      <span>
+      Página Inicial</span>
+      </span>
+      </a>
+      </div>
+
+      <a href="./index.html">
+      <div class="topico-pagina">
+      <img src="./assets/icon/projeto.png" alt="">
+      <span>
+      Projeto</span>
+      </span>
+      </div>
+      </a>
+      <div class="topico-pagina" onclick="abrirPerfil(sessionStorage.ID_USUARIO)">
+      <img src="./assets/icon/usuario.png" alt="">
+      <span >Perfil</span>
+      </div>
+      </span>
+      
+      <a href="./dashboard.html">
+      <div class="topico-pagina">
+      <img src="./assets/icon/analytics.png" alt="">
+      <span>
+      Analytics
+      </span>
+      </div>
+      </a>
+      
+      
+      <a onclick="limparSessao()">
+      <div class="topico-pagina">
+      <img src="./assets/icon/logout.png" alt="">
+      <span>Sair</span>
+      </div>
+      </a>
+   </ul>
     </div>
     <section class="sessaoFeed" id="sessaoPerfil">
       <div class="container" id="postagemPerfil" >
@@ -156,4 +171,7 @@
 <script src="./js/interacao.js"></script>
 <script src="./js/seguidor.js"></script>
 <script src="./js/usuario.js"></script>
+<script src="./js/foto.js"></script>
+<script src="./js/components.js"></script>
+<script src="./js/navegacaoPagina.js"></script>
 </html>

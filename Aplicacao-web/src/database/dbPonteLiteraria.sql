@@ -10,8 +10,10 @@ CREATE TABLE  Usuario(
     username VARCHAR(20) UNIQUE NOT NULL,
     email VARCHAR(60) UNIQUE NOT NULL,
     senha VARCHAR(80) NOT NULL,
-    fotoPerfilUsuario VARCHAR(80) UNIQUE
+    fotoPerfilUsuario VARCHAR(255) UNIQUE
 );
+
+
 
 CREATE TABLE Seguidores (
 	fkUsuarioSeguido INT,

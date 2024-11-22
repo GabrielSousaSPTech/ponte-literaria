@@ -124,7 +124,7 @@ function plotarPostagemPerfil (resposta) {
             <div class="postagem" onclick="abrirPostagem(${item.idPostagem})" onload="verificarLike(${item.idPostagem}, ${sessionStorage.ID_USUARIO}))">
         <div class="cabecalhoPostagem">
         <div class="dadosCabecalhoPostagem">
-        <img src="./assets/imgs/usuarioTeste.jpg" alt="" onclick="event.stopPropagation()">
+        <img src="./assets/imgs/usuario/${item.fotoUsuario == null?'usuarioTeste.jpg': item.fotoUsuario}" alt="" onclick="event.stopPropagation()">
         <span onclick="event.stopPropagation()">${item.nomeUsuario}</span>
         <span>-</span>
         <span>${item.dataHoraPostagem}</span>

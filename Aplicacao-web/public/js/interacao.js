@@ -87,7 +87,7 @@ function plotarComentarioGeral(res){
         <div class="postagem" >
                     <div class="cabecalhoPostagem">
                         <div class="dadosCabecalhoPostagem">
-                            <img src="./assets/imgs/usuarioTeste.jpg" alt="">
+                            <img src="./assets/imgs/usuario/${item.fotoUsuario == null?'usuarioTeste.jpg': item.fotoUsuario}" alt="" onclick="event.stopPropagation()" class="fotoUsuarioComentario">
                             <span onclick="event.stopPropagation(), abrirPerfil(${item.idUsuario})">${item.Usuario}</span>
                             <span>-</span>
                             <span>Há 12h</span>

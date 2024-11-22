@@ -24,7 +24,7 @@ function search (){
             })
         }).then(function (resposta){
             if(resposta.ok){
-                console.log("MESMO DANDO ERRO")
+                
                 
                 resposta.json().then(function (res){
                     if(res.length>0){
@@ -57,7 +57,7 @@ function plotarResultadoPesquisa(pesquisa){
         containerRespostaPesquisa.innerHTML += `
         <div class="cabecalhoPostagem" onclick="event.stopPropagation(); abrirPerfil(${item.idUsuario})">
                     <div class="dadosCabecalhoPostagem">
-                        <img src="./assets/imgs/usuarioTeste.jpg" alt="">
+                        <img src="./assets/imgs/usuario/${item.fotoUsuario == null?'usuarioTeste.jpg': item.fotoUsuario}" alt="" onclick="event.stopPropagation()">
                         <span id="nomeUsuarioPesquisa-${item.idUsuario}" class = "campoNome" onclick="event.stopPropagation(); abrirPerfil(${item.idUsuario})">${item.nome}</span>
                         <span> - </span>
                         <span id="usernameUsuarioPesquisa-${item.idUsuario}" class = "campoUsername" onclick="event.stopPropagation(); abrirPerfil(${item.idUsuario})">${item.username}</span>
