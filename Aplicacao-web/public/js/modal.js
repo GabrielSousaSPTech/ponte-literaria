@@ -36,6 +36,9 @@ function modalDelete(idDelete, idGerador, tipoDelete) {
 function closeModal() {
     document.querySelector('.modal-overlay').style.display = 'none';
 }
+function closeModalChecagem() {
+    document.querySelector('.modal-overlay-senha').style.display = 'none';
+}
 
 function visualizarComentario(resposta) {
     resposta.forEach(item => {
@@ -154,20 +157,29 @@ function modalEditarPerfil(idUsuario){
 
                   <div class="containerDadosUsuario">
                     <div class ="boxEditDadoUsuario">
-                      <input type ="text" disabled value='${res.nome}' id="input_nomeEdit"/>
-                      <img src = "./assets/icon/edit.png" class = "iconEdit">
+                      <input type ="text" disabled value='${res.nome}' id="input_nomeEdit" class="inputEditarPerfil"/>
+                      <img src = "./assets/icon/edit.png" class = "iconEdit" onclick="habilitarEdicao('editar')">
                 </div>
                     <div class ="boxEditDadoUsuario">
-                      <input type ="text" disabled value='${res.username}' id="input_usernameEdit"/>
-                      <img src = "./assets/icon/edit.png" class = "iconEdit">
+                      <input type ="text" disabled value='${res.username}' id="input_usernameEdit" class="inputEditarPerfil"/>
+                      
                 </div>
                     <div class ="boxEditDadoUsuario">
-                      <input type ="text" disabled value='${res.email}' id="input_emailEdit"/>
-                      <img src = "./assets/icon/edit.png" class = "iconEdit">
+                      <input type ="text" disabled value='${res.email}' id="input_emailEdit" class="inputEditarPerfil"/>
+                      
                 </div>
                     <div class ="boxEditDadoUsuario">
                       <span>mudar Senha</span>
-                      <img src = "./assets/icon/edit.png" class = "iconEdit">
+                      <img src = "./assets/icon/edit.png" class = "iconEdit" onclick="modalChecagemUsuario()">
+                </div>
+
+                  <div id="groupButtonEditar">
+                  <span> Digite sua senha para confirmar a edição</span>
+                  <input type="text" id="input_checagem_senha">
+             <div id="erro"></div>
+                  <button onclick="habilitarEdicao('cancel')">Cancelar</button>
+                  <button onclick = "editarUsuario()">Editar</button>
+
                 </div>
               </div>
   
@@ -183,6 +195,56 @@ function modalEditarPerfil(idUsuario){
     }
 })
         
+
+}
+
+async function habilitarEdicao(acao){
+ const nome = document.getElementById('input_nomeEdit');
+ const username = document.getElementById('input_usernameEdit');
+ const email = document.getElementById('input_emailEdit');
+ const groupButton = document.getElementById('groupButtonEditar');
+
+ if(acao == 'editar'){
+   groupButton.style.display = 'flex'
+   nome.removeAttribute("disabled")
+   username.removeAttribute("disabled")
+   email.removeAttribute("disabled")
+
+  }else {
+    
+    groupButton.style.display = 'none'
+    nome.setAttribute("disabled", true)
+    username.setAttribute("disabled", true)
+    email.setAttribute("disabled", true)
+
+  }
+}
+
+function modalChecagemUsuario(){
+  document.querySelector('.espacoModal').innerHTML = `
+       <div class="modal-overlay-senha" style="display: flex;">
+          <div class="modalDelete">
+            <div class="headerModal">
+                <button class="modal-close" onclick="closeModalChecagem()">
+                    <img src="./assets/icon/close.png" alt="">
+                </button>
+            </div>
+            <div class = "corpoModal containerModalEditarSenha" >
+              <span>Digite sua senha atual</span>
+              <input id="input_senha_atual" type="password" placeholder="******" />
+              <span>Digite sua nova Senha</span>
+              <input id="input_nova_senha" type="password" placeholder="******" />
+              <span>Confirme sua nova Senha</span>
+              <input id="input_confirmacao_senha" type="password" placeholder="******" />
+              <div id="mensagem_usuario"></div>
+              <div class = "groupButton">
+                  <button class="btnDelete" onclick="closeModalChecagem()">Cancelar</button>
+                  <button class="btnDelete" onclick="editarSenhaUsuario()">Concluído</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    `
 
 }
 

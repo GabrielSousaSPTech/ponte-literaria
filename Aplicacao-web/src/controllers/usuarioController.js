@@ -79,11 +79,51 @@ function editarFotoPerfil(req, res){
     );       
 }
 
+function editarUsuario(req, res){   
+    var idUsuario = req.body.idUsuarioServer
+    var nome = req.body.nomeServer
+    var username = req.body.usernameServer
+    var email = req.body.emailServer
+    
+    usuarioModel.editarUsuario(idUsuario, nome, username, email).then(function (resposta){
+        res.status(201).send('Editado com sucesso!')
+    }).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao realizar a edição dos dados! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );   
+}
+function editarSenhaUsuario(req, res){   
+    var idUsuario = req.body.idUsuarioServer
+    var senha = req.body.senhaServer
+
+    
+    usuarioModel.editarSenhaUsuario(idUsuario, senha).then(function (resposta){
+        res.status(201).send('Editado com sucesso!')
+    }).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao realizar a edição dos dados! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );   
+}
+
 module.exports = {
     cadastrar,
     checarCredenciais,
     getUsuario,
-    editarFotoPerfil
+    editarFotoPerfil,
+    editarUsuario,
+    editarSenhaUsuario
 }
 
 

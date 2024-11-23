@@ -32,6 +32,7 @@ function entrar (){
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.USERNAME_USUARIO = json.username;
                     sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.SENHA_USUARIO = json.senha;
                     sessionStorage.FOTO_USUARIO = json.fotoPerfilUsuario;
                     
                 });

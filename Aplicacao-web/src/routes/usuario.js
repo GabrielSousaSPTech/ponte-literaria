@@ -19,4 +19,11 @@ router.post('/editImage', upload.single('input_foto'), function(req, res){
     usuarioController.editarFotoPerfil(req, res);
 })
 
+router.post('/editUsuario', function (req, res){
+    usuarioController.editarUsuario(req, res)
+})
+router.post('/editSenha', function (req, res){
+    usuarioController.editarSenhaUsuario(req, res)
+})
+
 module.exports = router;

@@ -1,5 +1,5 @@
       
-        .modal-overlay {
+        .modal-overlay, .modal-overlay-senha {
             display: flex;
             z-index: 1052; 
             position: fixed;
@@ -70,9 +70,9 @@
             .modal-overlay {
                 align-items: flex-start;
             }
-            .modal {
+            /* .modal {
                 height: 90%;
-            }
+            } */
 
             .fotoUsuarioResposta {
                 width: 3rem !important;
@@ -157,6 +157,10 @@
     gap: 1rem;
 }
 
+.containerModalEditarSenha {
+
+}
+
 .iconEdit {
     height: 1rem;
     width: 1rem;
@@ -166,4 +170,24 @@
     display: flex;
     width: 100%;
     align-self: flex-start;
+}
+#groupButtonEditar{
+    display: none;
+}
+.boxEditDadoUsuario{
+}
+.containerDadosUsuario {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 5vh;
+    border: 1px solid black;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+.inputEditarPerfil[disabled]{
+    border: none;
+    font-weight: 600;
+    color: #000;
+    text-align: center;
 }

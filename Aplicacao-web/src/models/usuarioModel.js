@@ -20,9 +20,18 @@ function getUsuario (idUsuario) {
     return database.executar (instrucaoSql)
 }
 
-function editarUsuario (idUsuario, nome, username, email, senha){
+function editarUsuario (idUsuario, nome, username, email){
     var instrucaoSql = `
-        UPDATE Usuario SET nome = ${nome}, username = ${username}, email = ${email}, senha = ${senha}
+        UPDATE Usuario SET nome = '${nome}', username = '${username}', email = '${email}'
+        WHERE idUsuario = ${idUsuario}
+
+    `
+
+    return database.executar(instrucaoSql)
+}
+function editarSenhaUsuario (idUsuario, senha){
+    var instrucaoSql = `
+        UPDATE Usuario SET senha = '${senha}'
         WHERE idUsuario = ${idUsuario}
 
     `
@@ -46,6 +55,7 @@ module.exports = {
     checarCredenciais,
     getUsuario,
     editarUsuario,
+    editarSenhaUsuario,
     editarFotoPerfil
 
 }
