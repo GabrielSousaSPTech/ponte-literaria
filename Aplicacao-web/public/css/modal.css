@@ -1,4 +1,6 @@
-      
+      @import url('./cores.css');
+
+
         .modal-overlay, .modal-overlay-senha {
             display: flex;
             z-index: 1052; 
@@ -15,14 +17,13 @@
         
         .modal, .modalDelete {
             display: flex;
+            flex-direction: column;
             background: var(--fundoModal);
             padding: 1rem;
-            border-radius: 8px;
-            width: 40vw;
+            border-radius: 8px; 
             min-height:35%;
             max-height:fit-content;
-            max-width: fit-content;
-            
+            width: fit-content;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
@@ -31,13 +32,7 @@
             gap: 4rem !important;
         }
 
-        .modalDelete {
-            align-self: center;
-            width: 30vw;
-            
-            max-height: fit-content;
-            height: 15vh;
-        }
+        
 
         .modalDelete h2 {
             margin: 0;
@@ -46,15 +41,17 @@
 
         .corpoModal {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
             align-items: center;
             flex-direction: column;
-            text-align: center;
             height: 100%;
             width: 100%;
+            gap:2.5rem;
         }
         .groupButton {
             display: flex;
+            align-self: flex-end;
             padding: 5px;
             justify-content: space-evenly;
             /* flex-direction: row; */
@@ -67,9 +64,9 @@
         }
 
         @media (max-width: 1300px){
-            .modal-overlay {
+            /* .modal-overlay {
                 align-items: flex-start;
-            }
+            } */
             /* .modal {
                 height: 90%;
             } */
@@ -166,22 +163,32 @@
     width: 1rem;
 }
 
+.containerBtnEdit {
+    display: flex;
+    
+    align-self: flex-end;
+}
+
 .headerModal {
     display: flex;
     width: 100%;
-    align-self: flex-start;
+    border-bottom:1px solid #000;
 }
 #groupButtonEditar{
     display: none;
 }
 .boxEditDadoUsuario{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 .containerDadosUsuario {
     display: flex;
     width: 100%;
     flex-direction: column;
     gap: 5vh;
-    border: 1px solid black;
+    border-top: 1px solid black;
+    padding: 5px;
     /* justify-content: center; */
     /* align-items: center; */
 }
@@ -189,5 +196,36 @@
     border: none;
     font-weight: 600;
     color: #000;
-    text-align: center;
 }
+
+#groupButtonEditar {
+    display: none;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.modalEdit {
+    display: flex;
+    flex-direction: column;
+}
+
+.btnCancelar {
+    width: 5rem;
+    height: fit-content;
+    padding: 5px;
+    border-radius: 10px;
+    border: 0.5px solid #a6a4a4;
+    color: var(--corBotaoSeguir);
+}
+
+.btnAcao {
+    /* width: 5rem; */
+    height: fit-content;
+    padding: 5px;
+    border-radius: 10px;
+    border: 0.5px solid #a6a4a4;
+    background-color: var(--corBotaoSeguir);
+    color: var(--corPesquisa);
+}
+

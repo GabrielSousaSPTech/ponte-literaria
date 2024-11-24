@@ -20,7 +20,7 @@ function plotarArtigoCompleto(resposta) {
     resposta.forEach(item =>{
         document.getElementById("visualizacaoArtigo").innerHTML += `
         
-                    <h3>${item.tituloPostagem}</h3>
+                    <h3>${item.tituloPostagem} - <span>${item.categoria}</span></h3>
 
             <div class="corpoArtigo">
                 <p>${item.conteudoPostagem}</p>

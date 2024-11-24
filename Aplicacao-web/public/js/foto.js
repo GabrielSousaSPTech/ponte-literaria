@@ -11,6 +11,7 @@ document.getElementById("input_foto").addEventListener("change", readImage, fals
 				file.readAsDataURL(this.files[0]);
                 closeModal();
 				editarFotoPerfil(sessionStorage.ID_USUARIO)
+				window.location.reload()
 			}
 		}
 

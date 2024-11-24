@@ -24,11 +24,20 @@ header {
 }
 
 header .container {
-    justify-content: flex-end;
+    justify-content: space-between;
     align-self: center;
     align-items: center;
     height: 100%;
-    width: 90%;
+    width: 75%;
+  }
+  header .container span {
+    color: var(--corPesquisa);
+  }
+
+  .saudacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   header a, footer a {
@@ -90,7 +99,7 @@ header .container {
     z-index: 3;
     left: 0;
     background-color: var(--azulFundo);
-    width: 9vw;
+    width: fit-content;
     height: 100%;
 }
 .sideBar ul {

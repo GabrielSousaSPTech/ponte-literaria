@@ -106,3 +106,8 @@
     width: 4rem !important;
     object-fit: cover !important;
 }
+
+#categoriaPostagem {
+    color: rgb(196, 201, 205);
+    font-size: 2rem;
+}

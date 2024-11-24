@@ -22,9 +22,9 @@ function modalDelete(idDelete, idGerador, tipoDelete) {
                 <h2>Excluir publicação</h2>
                 <p>tem certeza que deseja excluir essa publicação?</p>
                 <div class = "groupButton">
-                    <button class="btnDelete" onclick="closeModal()">Cancelar</button>
+                    <button class="btnCancelar" onclick="closeModal()">Cancelar</button>
 
-                    <button class="btnDelete" onclick="${tipoDelete == 'Comentario' ? `deletarComentario(${idDelete}, ${idGerador})` : `deletarPost(${idDelete}, ${idGerador})`}, closeModal()">Excluir</button>
+                    <button class="btnAcao" onclick="${tipoDelete == 'Comentario' ? `deletarComentario(${idDelete}, ${idGerador})` : `deletarPost(${idDelete}, ${idGerador})`}, closeModal()">Excluir</button>
                 </div>
             </div> 
             </div
@@ -70,7 +70,7 @@ function visualizarComentario(resposta) {
 
       <div class="corpoPost">
 
-        <h3>${item.tituloPostagem}</h3>
+        <h3>${item.tituloPostagem} - <span id="categoriaPostagem">${item.categoria}</span></h3>
 
         <p>${item.conteudoPostagem}</p>
       </div>
@@ -110,7 +110,7 @@ function visualizarComentario(resposta) {
 function modalMudarFoto(){
   document.querySelector('.espacoModal').innerHTML = `
         <div class="modal-overlay" style="display: flex;">
-            <div class="modalDelete">
+            <div class="modal">
             <div class="headerModal">
                 <button class="modal-close" onclick="closeModal()">
                     <img src="./assets/icon/close.png" alt="">
@@ -120,9 +120,9 @@ function modalMudarFoto(){
                 <h2>Editar foto de perfil</h2>
                 <p>tem certeza que deseja editar sua foto de perfil?</p>
                 <div class = "groupButton">
-                    <button class="btnDelete" onclick="closeModal()">Cancelar</button>
+                    <button class="btnCancelar" onclick="closeModal()">Cancelar</button>
 
-                    <label for = "input_foto" class="btnDelete">Carregar Foto</label>
+                    <label for = "input_foto" class="btnAcao">Carregar Foto</label>
                 </div>
             </div> 
             </div
@@ -143,7 +143,7 @@ function modalEditarPerfil(idUsuario){
             <div class="corpoModal" id="corpoModal">
             <div class="headerModal">
             <button class="modal-close" onclick="closeModal()">
-            <img src="./assets/icon/close.png" alt="">
+            <img src="./assets/icon/close.png" alt="" id="closeEditUsuario">
             </button>
             </div>
             <div class = "containerModalEditarPerfil">
@@ -156,9 +156,11 @@ function modalEditarPerfil(idUsuario){
                   </div>
 
                   <div class="containerDadosUsuario">
+                  <div class = "containerBtnEdit">
+                  <button onclick="habilitarEdicao('editar')">Editar</button>
+                  </div>
                     <div class ="boxEditDadoUsuario">
                       <input type ="text" disabled value='${res.nome}' id="input_nomeEdit" class="inputEditarPerfil"/>
-                      <img src = "./assets/icon/edit.png" class = "iconEdit" onclick="habilitarEdicao('editar')">
                 </div>
                     <div class ="boxEditDadoUsuario">
                       <input type ="text" disabled value='${res.username}' id="input_usernameEdit" class="inputEditarPerfil"/>
@@ -174,12 +176,13 @@ function modalEditarPerfil(idUsuario){
                 </div>
 
                   <div id="groupButtonEditar">
-                  <span> Digite sua senha para confirmar a edição</span>
-                  <input type="text" id="input_checagem_senha">
-             <div id="erro"></div>
-                  <button onclick="habilitarEdicao('cancel')">Cancelar</button>
-                  <button onclick = "editarUsuario()">Editar</button>
-
+                    <span> Digite sua senha para confirmar a edição</span>
+                    <input type="text" id="input_checagem_senha">
+                    <div id="erro"></div>
+                    <div >
+                      <button class ="btnCancelar" onclick="habilitarEdicao('cancel')">Cancelar</button>
+                      <button class = "btnAcao" onclick = "editarUsuario()">Editar</button>
+                    </div>
                 </div>
               </div>
   
@@ -238,8 +241,8 @@ function modalChecagemUsuario(){
               <input id="input_confirmacao_senha" type="password" placeholder="******" />
               <div id="mensagem_usuario"></div>
               <div class = "groupButton">
-                  <button class="btnDelete" onclick="closeModalChecagem()">Cancelar</button>
-                  <button class="btnDelete" onclick="editarSenhaUsuario()">Concluído</button>
+                  <button class="btnCancelar" onclick="closeModalChecagem()">Cancelar</button>
+                  <button class="btnAcao" onclick="editarSenhaUsuario()">Concluído</button>
               </div>
             </div>
           </div>

@@ -50,6 +50,7 @@ function getUsuario (idUsuario) {
                 username.setAttribute("disabled", true)
                 email.setAttribute("disabled", true)
                 closeModal()
+                window.location.reload()
             }
         })
     }else {

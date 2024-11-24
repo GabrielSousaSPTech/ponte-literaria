@@ -139,9 +139,11 @@ function plotarPostagemPerfil (resposta) {
         </div>
 
         <div class="corpoPost">
-        
-            <h3>${item.tituloPostagem}</h3>
-        
+            
+            <div class = "tituloPostagem">
+            <h3>${item.tituloPostagem} - <span id="categoriaPostagem">${item.categoria}</span></h3>
+            
+            </div>
             <p>${item.conteudoPostagem}</p>
         </div>
         

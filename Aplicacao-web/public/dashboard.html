@@ -10,124 +10,184 @@
 
     <script src="./js/sessao.js"></script>
 
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/dashboard.css">
     <link rel="stylesheet" href="./css/modal.css">
-    <link rel="stylesheet" href="./css/postagem.css">
-    <link rel="stylesheet" href="./css/viewArtigo.css">
+
     <link rel="stylesheet" href="./css/navbar.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+
 </head>
 
-<body onload="renderizarPagina()">
 
-    <header  id="div_navbar_usuario">
+<body onload="render(sessionStorage.ID_USUARIO)">
+
+    <header id="div_navbar_usuario">
         <div class="container">
-        
-        
-            <div class="boxLogin">
-              <a>Entrar</a>
-              <span>|</span>
-              <a>Cadastre-se</a>
+            <div class="saudacao">
+                <a onclick="voltarPagina()">
+                    <img src="./assets/icon/voltarBranco.png" style="height: fit-content;" alt="">
+                </a>
+                <span>Bem-vindo <span id="nome_usuario"> Gabriel</span></span>
             </div>
-          </div>
-      
+
+
+            <div class="boxLogin">
+                <a>Entrar</a>
+                <span>|</span>
+                <a>Cadastre-se</a>
+            </div>
+        </div>
+
     </header>
-    
+
 
     <div id="div_sidebar" class="sideBar">
         <img class="logotipo" src="./assets/imgs/logotipo-pl.png" alt="">
         <ul class="corpoSidebar">
-          <a href="./feed.html">
-          <div class="topico-pagina">
-          <img src="./assets/icon/home.png" alt="">
-          <span>
-          Página Inicial</span>
-          </span>
-          </a>
-          </div>
-    
-          <a href="./index.html">
-          <div class="topico-pagina">
-          <img src="./assets/icon/projeto.png" alt="">
-          <span>
-          Projeto</span>
-          </span>
-          </div>
-          </a>
-          <div class="topico-pagina" onclick="abrirPerfil(sessionStorage.ID_USUARIO)">
-          <img src="./assets/icon/usuario.png" alt="">
-          <span >Perfil</span>
-          </div>
-          </span>
-          
-          <a href="./dashboard.html">
-          <div class="topico-pagina">
-          <img src="./assets/icon/analytics.png" alt="">
-          <span>
-          Analytics
-          </span>
-          </div>
-          </a>
-          
-          
-          <a onclick="limparSessao()">
-          <div class="topico-pagina">
-          <img src="./assets/icon/logout.png" alt="">
-          <span>Sair</span>
-          </div>
-          </a>
-       </ul>
+            <a href="./feed.html">
+                <div class="topico-pagina">
+                    <img src="./assets/icon/home.png" alt="">
+                    <span>
+                        Página Inicial</span>
+                    </span>
+            </a>
     </div>
-    <section class="sessaoArtigo">
-        <a onclick="voltarPagina()" style="position: fixed; left: 15rem; top: 8rem; padding: 1rem;">
-            <img src="./assets/icon/voltar.png" style="height: 2.5rem;" alt="">
-        </a>
-    </section>
-    
-  </body>
 
-<script>
+    <a href="./index.html">
+        <div class="topico-pagina">
+            <img src="./assets/icon/projeto.png" alt="">
+            <span>
+                Projeto</span>
+            </span>
+        </div>
+    </a>
+    <div class="topico-pagina" onclick="abrirPerfil(sessionStorage.ID_USUARIO)">
+        <img src="./assets/icon/usuario.png" alt="">
+        <span>Perfil</span>
+    </div>
+    </span>
 
-    function renderizarPagina(){
-        components(),
-        obterPostagem(capturarIdPostagem()), 
-        obterComentarioGeral(capturarIdPostagem())
-    }
-    function abrirResposta(elementoClicado){
-        var elementoPai =  elementoClicado.parentNode
+    <a href="./dashboard.html">
+        <div class="topico-pagina">
+            <img src="./assets/icon/analytics.png" alt="">
+            <span>
+                Analytics
+            </span>
+        </div>
+    </a>
 
-        var container =  elementoPai.querySelector('.containerParaRespnder')
 
-        container.innerHTML = `<div id="respostaComentario">
-                    <input type="text" placeholder="Responda o comentario">
-                    <div>
-                        <button onclick="fecharResposta()" class="btnRespostaComentario">Cancelar</button>
-                        <button>Responder</button>
+    <a onclick="limparSessao()">
+        <div class="topico-pagina">
+            <img src="./assets/icon/logout.png" alt="">
+            <span>Sair</span>
+        </div>
+    </a>
+    </ul>
+    </div>
+    <section class="sessaoDashboard">
+
+        <div class="containerDashboard">
+
+            <div class="corpoDash" id="corpoDash">
+
+                <div class="containerKpi">
+                    <div class="kpiContagem">
+
+
+
+                        <div class="kpiDashboard">
+                            <span>Seguidores</span>
+                            <span id="qtdSeguidor">0</span>
+                        </div>
+                        <div class="kpiDashboard">
+                            <span>Publicações</span>
+                            <span id="qtdPublicacao">0</span>
+                        </div>
+
+
+                        <div class="kpiDashboard">
+                            <span>Curtidas</span>
+                            <span id="qtdCurtida">0</span>
+                        </div>
+                        <div class="kpiDashboard">
+                            <span>Comentários</span>
+                            <span id="qtdComentario">0</span>
+                        </div>
+
                     </div>
-                </div>`
 
-        
-        // respostaComentario.style.display = 'flex'
-    }
-    function fecharResposta() {
-        respostaComentario.style.display = 'none'
+                    <div class="boxKpi">
+                        <h2>Publicações com mais curtidas</h2>
 
-    }
-</script>
+                        <ul id="rankingPostMaisCurtido">
+
+                        </ul>
+
+                    </div>
+                </div>
+                <hr>
+
+                <div style="display: flex; justify-content: center;align-items: center;">
+                    <button onclick="obterDadoGraficoSeguidoresDia(sessionStorage.ID_USUARIO, 11); aparecerSelect()">Dia
+                        da Semana</button>
+
+                    <button onclick="obterDadoGraficoSeguidoresMes(sessionStorage.ID_USUARIO)">Mês</button>
+                </div>
+                <div class="containerGrafico">
+                    <div class="graficoDashboard">
+                        <h3>Categorias que você mais escreve sobre</h3>
+
+                        <!--                         
+    <canvas id="graficoBarraDia"></canvas>
+                        <canvas id="graficoBarraSemana"></canvas>
+                        <canvas id="graficoBarraMes"></canvas> -->
+                    </div>
+                    <div class="graficoDashboard">
+                        <h3></h3>
+                        <div>
+                            <select name="" id="select_mes">
+                                <option value="mesAtual" selected>Mês Atual</option>
+                                <option value="01">Janeiro</option>
+                                <option value="02">Fevereiro</option>
+                                <option value="03">Março</option>
+                                <option value="04">Abril</option>
+                                <option value="05">Maio</option>
+                                <option value="06">Junho</option>
+                                <option value="07">Julho</option>
+                                <option value="08">Agosto</option>
+                                <option value="09">Setembro</option>
+                                <option value="10">Outubro</option>
+                                <option value="11">Novembro</option>
+                                <option value="12">Dezembro</option>
+                            </select>
+                            <canvas id="graficoSeguidorDia"></canvas>
+                        </div>
+                        <!-- 
+                            <canvas id="graficoSeguidorSemana"></canvas> -->
+                        <canvas id="graficoSeguidorMes" style="display: block;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
 
 <script>
+    setInterval(() => {
+        obterDadosKpi(sessionStorage.ID_USUARIO)
+    }, 2000)
 
-function components(){
-        sidebar(),
-        navbarUsuario()
+    function render(idUsuario) {
+        obterDadosKpi(idUsuario),
+            obterRankingPostagem(idUsuario)
+        obterDadoGraficoSeguidoresMes(sessionStorage.ID_USUARIO)
     }
-    function capturarIdPostagem(){
-        const params = new URLSearchParams(window.location.search);
-        
-        return params.get('id')
+    function aparecerSelect() {
+        select_mes.style.display = 'block'
     }
-    console.log(capturarIdPostagem())
+    document.getElementById('nome_usuario').innerHTML = sessionStorage.NOME_USUARIO
+    console.log(sessionStorage.NOME_USUARIO)
 </script>
 <script src="./js/artigo.js"></script>
 <script src="./js/navegacaoPagina.js"></script>
@@ -135,4 +195,8 @@ function components(){
 <script src="./js/navegacaoPagina.js"></script>
 <script src="./js/modal.js"></script>
 <script src="./js/components.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- <script src="./js/graficos.js"></script> -->
+<script src="./js/fetchDashboard.js"></script>
+
 </html>

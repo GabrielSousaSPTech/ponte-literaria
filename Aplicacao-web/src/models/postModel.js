@@ -40,6 +40,7 @@ function getPost(id){
     Postagem.tituloPostagem,
     Postagem.conteudoPostagem,
     Postagem.dataHoraPostagem,
+    Categoria.tituloCategoria as categoria,
     COUNT(Curtida.fkPostagemCurtida) AS qtdCurtida
 FROM 
     Postagem
@@ -47,6 +48,8 @@ RIGHT JOIN
     Usuario ON Postagem.fkUsuario = Usuario.idUsuario
 LEFT JOIN 
     Curtida ON Postagem.idPostagem = Curtida.fkPostagemCurtida
+    JOIN
+    categoriaArtigo AS Categoria ON Postagem.fkCategoriaArtigo = Categoria.idCategoriaArtigo
 WHERE 
     Postagem.fkUsuario = ${id} AND statusPostagem = 'ativo'
 GROUP BY 
@@ -86,6 +89,7 @@ function viewPost (idPostagem) {
     Postagem.tituloPostagem,
     Postagem.conteudoPostagem,
     Postagem.dataHoraPostagem,
+    Categoria.tituloCategoria as categoria,
     COUNT(Curtida.fkPostagemCurtida) AS qtdCurtida,
     (SELECT COUNT(Comentario.idComentario) FROM Comentario WHERE fkPostagemComentada = ${idPostagem} AND statusComentario = 'ativo' AND tipoComentario = 'Geral') as qtdComentario
 FROM 
@@ -94,6 +98,8 @@ LEFT JOIN
     Usuario ON Postagem.fkUsuario = Usuario.idUsuario
 LEFT JOIN 
     Curtida ON Postagem.idPostagem = Curtida.fkPostagemCurtida
+    JOIN
+    categoriaArtigo AS Categoria ON Postagem.fkCategoriaArtigo = Categoria.idCategoriaArtigo
 WHERE 
     Postagem.idPostagem = ${idPostagem}
     AND statusPostagem = 'ativo'
@@ -103,7 +109,8 @@ GROUP BY
     Usuario.nome,
     Postagem.tituloPostagem, 
     Postagem.conteudoPostagem, 
-    Postagem.dataHoraPostagem;
+    Postagem.dataHoraPostagem,
+    Categoria.tituloCategoria;
     `
     return database.executar(instrucaoSql)
 }

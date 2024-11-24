@@ -10,6 +10,7 @@ function validarSessao() {
 
     if (email != null && nome != null) {
         locNome.innerHTML = nome;
+        
         locUsername.innerHTML = username;
         locFotoPerfil.src = `./assets/imgs/usuario/${fotoPerfil == ''? 'padrao.jpg': fotoPerfil}`
     } else {
