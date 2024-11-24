@@ -19,7 +19,8 @@ function executar(instrucao) {
     return new Promise(function (resolve, reject) {
         var conexao = mysql.createConnection(mySqlConfig);
         conexao.connect();
-        conexao.query("SET lc_messages = 'pt_BR'");
+        conexao.query("SET lc_time_names = 'pt_BR'");
+        
         conexao.query(instrucao, function (erro, resultados) {
             conexao.end();
             if (erro) {
@@ -32,6 +33,7 @@ function executar(instrucao) {
         conexao.on('error', function (erro) {
             return ("ERRO NO MySQL SERVER: ", erro.sqlMessage);
         });
+        
     });
 }
 

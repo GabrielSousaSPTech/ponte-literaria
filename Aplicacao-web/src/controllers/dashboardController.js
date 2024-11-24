@@ -30,8 +30,7 @@ function obterPublicacaoMaisCurtida(req, res){
                 erro.sqlMessage
             );
             res.status(500).json(erro.sqlMessage);
-        }
-    );
+        });
 }
 
 function obterSeguidoresMes(req, res){
@@ -71,10 +70,27 @@ dashboardModel.obterSeguidoresDia(idUsuario, mes).then(function (resposta){
 });
 }
 
+function obterCategoriasMaisPostadas(req, res){
+    var idUsuario = req.params.idUsuario
+
+    dashboardModel.obterCategoriasQueMaisPosta(idUsuario).then(function(resposta){
+        res.status(201).json(resposta)
+    }).catch(
+        function (erro) {
+            console.log(erro);
+        console.log(
+            "\nHouve um erro ao obter as categorias mais postadas! Erro: ",
+            erro.sqlMessage
+        );
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 module.exports = {
     obterDadosKpi,
     obterPublicacaoMaisCurtida,
     obterSeguidoresMes,
     obterSeguidoresDia,
+    obterCategoriasMaisPostadas
 }
 

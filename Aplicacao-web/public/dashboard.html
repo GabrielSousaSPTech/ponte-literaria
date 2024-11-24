@@ -135,12 +135,7 @@
                 </div>
                 <div class="containerGrafico">
                     <div class="graficoDashboard">
-                        <h3>Categorias que você mais escreve sobre</h3>
-
-                        <!--                         
-    <canvas id="graficoBarraDia"></canvas>
-                        <canvas id="graficoBarraSemana"></canvas>
-                        <canvas id="graficoBarraMes"></canvas> -->
+                        <canvas id="graficoCategoriaMaisPostada"></canvas> 
                     </div>
                     <div class="graficoDashboard">
                         <h3></h3>
@@ -181,7 +176,8 @@
     function render(idUsuario) {
         obterDadosKpi(idUsuario),
             obterRankingPostagem(idUsuario)
-        obterDadoGraficoSeguidoresMes(sessionStorage.ID_USUARIO)
+        obterDadoGraficoSeguidoresMes(idUsuario)
+        obterDadosCategoriasMaisPostadas(idUsuario)
     }
     function aparecerSelect() {
         select_mes.style.display = 'block'

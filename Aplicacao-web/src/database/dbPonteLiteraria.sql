@@ -101,6 +101,13 @@ CREATE TABLE Comentario (
     CONSTRAINT fkUsuarioComentario FOREIGN KEY (fkUsuarioComentario) REFERENCES Usuario(idUsuario)
 );
 
+SELECT * FROM Postagem;
+
+SELECT Postagem.tituloPostagem , count(categoria.tituloCategoria) 
+FROM Postagem
+JOIN categoriaArtigo as categoria ON fkCategoriaArtigo = idCategoriaArtigo
+WHERE fkusuario = 5
+GROUP BY count(categoria.tituloCategoria);
 
 
         

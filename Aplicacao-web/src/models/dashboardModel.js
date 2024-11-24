@@ -57,9 +57,24 @@ SELECT count(fkUsuarioSeguido) AS qtdSeguidor, DATE_FORMAT(dataFollow, '%W') as 
     return database.executar(instrucaoSql)
 }
 
+function obterCategoriasQueMaisPosta(idUsuario){
+    var instrucaoSql = `
+        SELECT 
+            categoria.tituloCategoria,
+            COUNT(Postagem.idPostagem) AS quantidade
+        FROM Postagem
+        JOIN categoriaArtigo AS categoria ON Postagem.fkCategoriaArtigo = categoria.idCategoriaArtigo
+        WHERE Postagem.fkusuario = ${idUsuario}
+        GROUP BY categoria.tituloCategoria; 
+    `
+
+    return database.executar(instrucaoSql )
+}
+
 module.exports = {
     obterDadosKpi,
     obterPublicacaoMaisCurtida,
     obterSeguidoresMes,
-    obterSeguidoresDia
+    obterSeguidoresDia,
+    obterCategoriasQueMaisPosta
 }

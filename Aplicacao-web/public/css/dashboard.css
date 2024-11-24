@@ -73,9 +73,13 @@
     gap: 10%;
 }
 .graficoDashboard {
+    display: flex;
     width: 45%;
-    height: fit-content;
+    min-height: fit-content;
+    max-height:50vh;
     background-color: #fff;
+    justify-content: center;
+    align-items: center;
 }
 
 #graficoBarraSemana, #graficoBarraMes, #graficoBarraDia, #graficoSeguidorSemana, #graficoSeguidorDia {

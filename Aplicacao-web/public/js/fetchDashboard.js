@@ -1,10 +1,6 @@
 
 
 function obterDadosKpi(idUsuario){
-// const seguidor = document.getElementById('');
-// const publicacao = document.getElementById('');
-// const curtida = document.getElementById('');
-// const comentario = document.getElementById('');
     fetch(`/dashboard/kpi/${idUsuario}`, {cache: 'no-store'}).then(function (resposta){
         if(resposta.ok) {
             resposta.json().then(function (json){
@@ -15,6 +11,16 @@ function obterDadosKpi(idUsuario){
             })
         }else {
             corpoDash.innerHTML = '<p>Você ainda não teve interações :(</p>'
+        }
+    })
+}
+
+function obterDadosCategoriasMaisPostadas(idUsuario){
+    fetch(`/dashboard/categoria/${idUsuario}`, {cache: 'no-store'}).then(function (resposta){
+        if(resposta.ok){
+            resposta.json().then(function (resposta){
+                plotarGraficoCategoriaMaisPostada(idUsuario, resposta)
+            })
         }
     })
 }
@@ -38,14 +44,10 @@ function obterRankingPostagem(idUsuario){
 }
 
 function obterDadoGraficoSeguidoresMes(idUsuario){
-
-
     fetch(`/dashboard/seguidoresMes/${idUsuario}`, {cache: 'no-store'}).then(function(resposta){
         if(resposta.ok){
-            resposta.json().then(function (resposta){
-                
+            resposta.json().then(function (resposta){                
                 plotarGraficoSeguidoresMes(idUsuario, resposta);
-                
             })
         }
     })
@@ -64,6 +66,60 @@ function obterDadoGraficoSeguidoresDia(idUsuario){
             })
         }
     })
+}
+
+function plotarGraficoCategoriaMaisPostada(idUsuario, resposta){
+    var graficoCategoria = document.getElementById('graficoCategoriaMaisPostada')
+
+    var legendaCategoria = []
+
+    dataCategoria = {
+        labels : legendaCategoria,
+        
+        datasets: [{
+            label: 'Categoria',
+            data:[],
+            borderWidth: 1,
+            backgroundColor: [
+                '#FF6A00', 
+                '#00BFFF',
+                '#32CD32', 
+                '#FFD700', 
+                '#8A2BE2', 
+                '#FF4500', 
+                '#2E8B57', 
+            ]
+        }]
+    }
+
+    resposta.forEach(function (item){
+        legendaCategoria.push(item.tituloCategoria)
+        dataCategoria.datasets[0].data.push(item.quantidade)
+    })
+
+    const config = {
+        type : 'pie',
+        data: dataCategoria,
+        
+        options :{
+            plugins :{
+                title: {
+                    display: true,
+                    text: `Categorias que você mais escreve sobre`
+                }
+            }
+        }
+        
+    }
+
+
+    var myChart = new Chart(graficoCategoria, config)
+    return console.log(myChart)
+    setTimeout(()=>{   
+            // atualizarGraficoSeguidoresMes(idUsuario, dataSeguidor, myChart )
+    },
+    2000
+    )
 }
 
 function plotarGraficoSeguidoresMes(idUsuario, resposta){
@@ -251,18 +307,33 @@ function atualizarGraficoSeguidoresDia(idUsuario, dataSeguidorDia, myChart){
                            
                                 atualizarGraficoSeguidoresDia(idUsuario, dataSeguidorDia, myChart)
                             
-                        , 5000)
+                        , 2000)
                     }else{
                         console.log('TUDO ATUALIZADO DIA DA SEMANA')
                     }
-                    proximaAtualizacao = setTimeout(()=> 
-                        {
-                            // if(document.getElementById('graficoSeguidorDia').style.display != 'none'){
-                                atualizarGraficoSeguidoresDia(idUsuario, dataSeguidorDia, myChart)
-                            // }
-                        }, 5000)
-                    }
-                    })
+                     
+                    proximaAtualizacao = setTimeout(() => {
+                        atualizarGraficoSeguidoresDia(idUsuario, dataSeguidorDia, myChart);
+                    }, 2000);
+                } else {
+                    
+                    console.log('Não há dados deste mês');
+                    dataSeguidorDia.labels = ['Não há dados deste mês'];
+                    dataSeguidorDia.datasets[0].data = [];
+
+                    myChart.update();
+
+                    
+                    proximaAtualizacao = setTimeout(() => {
+                        atualizarGraficoSeguidoresDia(idUsuario, dataSeguidorDia, myChart);
+                    }, 2000);
                 }
-            })
+            });
+        } else {
+            console.error('Erro na resposta da API');
         }
+    })
+    .catch(function (erro) {
+        console.error('Erro na requisição:', erro);
+    });
+}
