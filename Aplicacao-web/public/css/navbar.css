@@ -17,6 +17,16 @@ header {
     /* object-fit: cover; */
 }
 
+#fotoUsuarioLogado {
+    display: flex;
+    align-self: flex-end;
+    width: 3vw;
+    height: fit-content;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--corFonte);
+}
+
 .container {
     display: flex;
     width: 80vw;
@@ -185,3 +195,4 @@ header .container {
     cursor:pointer
     
 }
+

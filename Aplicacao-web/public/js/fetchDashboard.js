@@ -15,6 +15,7 @@ function obterDadosKpi(idUsuario){
     })
 }
 
+
 function obterDadosCategoriasMaisPostadas(idUsuario){
     fetch(`/dashboard/categoria/${idUsuario}`, {cache: 'no-store'}).then(function (resposta){
         if(resposta.ok){
@@ -25,44 +26,34 @@ function obterDadosCategoriasMaisPostadas(idUsuario){
     })
 }
 
-function obterRankingPostagem(idUsuario){
-    rankingPostMaisCurtido.innerHTML = ``
-    fetch(`/dashboard/rank/${idUsuario}`, {cache: 'no-store'}).then( function (resposta){
-        if(resposta.ok){
-            resposta.json().then(function (json){
-                json.forEach(item => {
-                    rankingPostMaisCurtido.innerHTML += `
-                        <li>
-                            <span>${item.tituloPostagem} - </span><span>${item.qtdCurtida}</span><span> curtidas</span>
-                        </li>
-                    
-                    `
-                });
-            })
-        }
-    })
-}
-
-function obterDadoGraficoSeguidoresMes(idUsuario){
-    fetch(`/dashboard/seguidoresMes/${idUsuario}`, {cache: 'no-store'}).then(function(resposta){
-        if(resposta.ok){
-            resposta.json().then(function (resposta){                
-                plotarGraficoSeguidoresMes(idUsuario, resposta);
-            })
-        }
-    })
-}
-function obterDadoGraficoSeguidoresDia(idUsuario){
-    var mes = select_mes.value;
-    if(mes == 'mesAtual'){
-        mes = Number(new Date().getMonth() + 1)
-    }
-    fetch(`/dashboard/seguidoresDia/${idUsuario}/${mes}`, {cache: 'no-store'}).then(function(resposta){
+function atualizarCategoriasMaisPostadas(idUsuario, dataCategoria, myChart){
+    fetch(`/dashboard/categoria/${idUsuario}`, {cache: 'no-store'}).then(function(resposta){
         if(resposta.ok){
             resposta.json().then(function (resposta){
                 
-                plotarGraficoSeguidoresDia(idUsuario, mes, resposta);
-                
+                for(var posicaoRespostas = 0; posicaoRespostas <resposta.length; posicaoRespostas++){
+                    
+                    if(resposta[posicaoRespostas].quantidade == dataCategoria.datasets[0].data[posicaoRespostas]
+                        && (resposta[posicaoRespostas].tituloCategoria == dataCategoria.labels[posicaoRespostas])
+                    ){
+                   
+                    }else{
+                        
+                        dataCategoria.labels = [];
+                        dataCategoria.datasets[0].data = [];
+                        resposta.forEach(function(item){
+                            dataCategoria.datasets[0].data.push(item.quantidade)
+                            dataCategoria.labels.push(item.tituloCategoria)
+                        })
+
+                        myChart.update();
+                        break;
+                        
+                    }
+                }
+                proximaAtualizacao = setTimeout(()=>{ 
+                            atualizarCategoriasMaisPostadas(idUsuario, dataCategoria, myChart)    
+                        }, 5000)
             })
         }
     })
@@ -114,13 +105,56 @@ function plotarGraficoCategoriaMaisPostada(idUsuario, resposta){
 
 
     var myChart = new Chart(graficoCategoria, config)
-    return console.log(myChart)
-    setTimeout(()=>{   
-            // atualizarGraficoSeguidoresMes(idUsuario, dataSeguidor, myChart )
-    },
+    setTimeout(()=>
+        atualizarCategoriasMaisPostadas(idUsuario, dataCategoria, myChart ),
     2000
     )
 }
+
+function obterRankingPostagem(idUsuario){
+    rankingPostMaisCurtido.innerHTML = ``
+    fetch(`/dashboard/rank/${idUsuario}`, {cache: 'no-store'}).then( function (resposta){
+        if(resposta.ok){
+            resposta.json().then(function (json){
+                json.forEach(item => {
+                    rankingPostMaisCurtido.innerHTML += `
+                        <li>
+                            <span class = "tituloPostagemRanking">${item.tituloPostagem} - </span><span class="valorRanking">${item.qtdCurtida}</span><span class = "legendaRanking"> curtidas</span>
+                        </li>
+                    
+                    `
+                });
+            })
+        }
+    })
+}
+
+function obterDadoGraficoSeguidoresMes(idUsuario){
+    fetch(`/dashboard/seguidoresMes/${idUsuario}`, {cache: 'no-store'}).then(function(resposta){
+        if(resposta.ok){
+            resposta.json().then(function (resposta){                
+                plotarGraficoSeguidoresMes(idUsuario, resposta);
+            })
+        }
+    })
+}
+function obterDadoGraficoSeguidoresDia(idUsuario){
+    var mes = select_mes.value;
+    if(mes == 'mesAtual'){
+        mes = Number(new Date().getMonth() + 1)
+    }
+    fetch(`/dashboard/seguidoresDia/${idUsuario}/${mes}`, {cache: 'no-store'}).then(function(resposta){
+        if(resposta.ok){
+            resposta.json().then(function (resposta){
+                
+                plotarGraficoSeguidoresDia(idUsuario, mes, resposta);
+                
+            })
+        }
+    })
+}
+
+
 
 function plotarGraficoSeguidoresMes(idUsuario, resposta){
     
@@ -201,8 +235,8 @@ function plotarGraficoSeguidoresDia(idUsuario, mes, resposta){
             label: 'Seguidores',
             data : [],
             borderWidth: 1,
-            borderColor: '#FF6A00',
-            backgroundColor:'#FF6A00'
+            borderColor: '#003366',
+            backgroundColor:'#003366'
         }]
     }
 
@@ -252,7 +286,7 @@ function atualizarGraficoSeguidoresMes(idUsuario, dataSeguidor, myChart){
             resposta.json().then(function (resposta){
                 resposta.reverse()
                 if((resposta[0].qtdSeguidor != dataSeguidor.datasets[0].data[dataSeguidor.labels.length-1] ) && (resposta[0].parametro == dataSeguidor.labels[dataSeguidor.labels.length - 1])){
-                    console.log("quantidade de seguidores atualizados")
+                    
                    
                     dataSeguidor.datasets[0].data[dataSeguidor.labels.length-1] = resposta[0].qtdSeguidor
                     myChart.update();
@@ -268,7 +302,7 @@ function atualizarGraficoSeguidoresMes(idUsuario, dataSeguidor, myChart){
                         atualizarGraficoSeguidoresMes(idUsuario, dataSeguidor, myChart)    
                     }, 2000)
                 } else{
-                    console.log('TUDO ATUALIZADO MÊS')
+                    
                 }
                 proximaAtualizacao = setTimeout(()=>{ 
                     atualizarGraficoSeguidoresMes(idUsuario, dataSeguidor, myChart)    
@@ -309,7 +343,7 @@ function atualizarGraficoSeguidoresDia(idUsuario, dataSeguidorDia, myChart){
                             
                         , 2000)
                     }else{
-                        console.log('TUDO ATUALIZADO DIA DA SEMANA')
+                        
                     }
                      
                     proximaAtualizacao = setTimeout(() => {
@@ -317,7 +351,7 @@ function atualizarGraficoSeguidoresDia(idUsuario, dataSeguidorDia, myChart){
                     }, 2000);
                 } else {
                     
-                    console.log('Não há dados deste mês');
+                    
                     dataSeguidorDia.labels = ['Não há dados deste mês'];
                     dataSeguidorDia.datasets[0].data = [];
 

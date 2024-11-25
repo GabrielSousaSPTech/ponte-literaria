@@ -4,6 +4,28 @@
     padding: 0;
     margin: 0;
 }
+header {
+    background: var(--corPesquisa) !important;
+
+   
+}
+
+  a {
+    color: var(--azulFundo) !important;
+    text-decoration: none;
+    
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  a:hover {
+    color: var(--corHover);
+    text-decoration: underline;
+  }
+
+header .container span {
+    color: var(--azulFundo) !important;
+  }
 
 .sessaoDashboard {
     display: flex;
@@ -13,7 +35,7 @@
 }
 
 .containerDashboard{
-    padding-top: 15vh;
+    padding-top: 07%;
     display: flex;
     flex-direction: column;
     /* justify-content: space-; */
@@ -22,7 +44,11 @@
     height: 100vh;
     
 }
-
+.containerDashboard h1 {
+    margin-bottom: 2%;
+    text-align: center;
+    color: rgb(180, 181, 166);
+}
 .containerKpi{
     display: flex;
     justify-content: space-evenly;
@@ -65,7 +91,19 @@
     align-items: center;
     width: 100%;
     height: 5rem;
-    border: 1px solid black;
+    border: 2px solid var(--azulFundo);
+    border-radius: 15px;
+    /* background-color: var(--azulFundo); */
+}
+
+.legendaKPI {
+    font-weight: 550;
+}
+.valorKPI{
+    color: var(--corBotaoSeguir);
+    font-weight: 700;
+    font-size: 3rem;
+
 }
 
 .kpiContagem {
@@ -74,12 +112,15 @@
 }
 .graficoDashboard {
     display: flex;
+    flex-direction: column;
     width: 45%;
-    min-height: fit-content;
-    max-height:50vh;
-    background-color: #fff;
+    height: fit-content;
     justify-content: center;
     align-items: center;
+}
+
+#gracicoPizza{
+    height: 50vh;
 }
 
 #graficoBarraSemana, #graficoBarraMes, #graficoBarraDia, #graficoSeguidorSemana, #graficoSeguidorDia {
@@ -88,5 +129,49 @@
 
 #select_mes {
     display: none;
+}
+
+.boxKpi {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+    gap: 1rem;
+}
+
+.boxKpi h2 {
+    color: var(--azulFundo) !important;
+}
+
+#rankingPostMaisCurtido {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+#rankingPostMaisCurtido li{
+    text-decoration: none;
+    list-style: none;
+
+}
+.valorRanking{
+    color: var(--corBotaoSeguir);
+    font-weight: 700;
+}
+
+.legendaRanking, .tituloPostagemRanking, .legendaKPI{
+    color: var(--fontePostagem);
+    font-weight: 600;
+}
+
+.tituloPostagemRanking{
+    font-size: 1.3rem;
+
+
+}
+
+#nome_usuario{
+    font-weight: 700;
 }
 

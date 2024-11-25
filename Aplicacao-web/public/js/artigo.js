@@ -1,5 +1,4 @@
 function obterPostagem (idPostagem) {
-
     fetch(`post/view/${idPostagem}`, {cache: 'no-store'}).then(function (resposta) {
         if(resposta.ok) {
             console.log(resposta)
@@ -12,6 +11,21 @@ function obterPostagem (idPostagem) {
         }
     })
     
+}
+
+function obterCategoriaArtigo(){
+    fetch('categoria/getCategoria', {cache: 'no-store'}).then(function (resposta){
+        if(resposta.ok){
+            resposta.json().then(function(res){
+
+                res.forEach(function (item){
+                    select_genero.innerHTML += `
+                    <option value = '${item.idCategoriaArtigo}'>${item.tituloCategoria}</option> 
+                    `
+                })
+            })
+        }
+    })
 }
 
 

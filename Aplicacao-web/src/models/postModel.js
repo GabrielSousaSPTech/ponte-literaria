@@ -1,10 +1,10 @@
 var database = require("../database/config")
 
-function createPublicacao (idUsuario, tituloPublicacao, conteudoPublicacao){
+function createPublicacao (idUsuario, tituloPublicacao, conteudoPublicacao, categoria){
     var  instrucaoSql = `
-        INSERT INTO Postagem (fkusuario, tituloPostagem, conteudoPostagem, statusPostagem) 
+        INSERT INTO Postagem (fkusuario, tituloPostagem, conteudoPostagem, fkCategoriaArtigo, statusPostagem) 
 VALUES 
-	(${idUsuario}, '${tituloPublicacao}', '${conteudoPublicacao}', 'ativo')
+	(${idUsuario}, '${tituloPublicacao}', '${conteudoPublicacao}',${categoria}, 'ativo')
     `
 
     return database.executar(instrucaoSql)
@@ -48,7 +48,7 @@ RIGHT JOIN
     Usuario ON Postagem.fkUsuario = Usuario.idUsuario
 LEFT JOIN 
     Curtida ON Postagem.idPostagem = Curtida.fkPostagemCurtida
-    JOIN
+LEFT JOIN
     categoriaArtigo AS Categoria ON Postagem.fkCategoriaArtigo = Categoria.idCategoriaArtigo
 WHERE 
     Postagem.fkUsuario = ${id} AND statusPostagem = 'ativo'
@@ -98,7 +98,7 @@ LEFT JOIN
     Usuario ON Postagem.fkUsuario = Usuario.idUsuario
 LEFT JOIN 
     Curtida ON Postagem.idPostagem = Curtida.fkPostagemCurtida
-    JOIN
+LEFT JOIN
     categoriaArtigo AS Categoria ON Postagem.fkCategoriaArtigo = Categoria.idCategoriaArtigo
 WHERE 
     Postagem.idPostagem = ${idPostagem}

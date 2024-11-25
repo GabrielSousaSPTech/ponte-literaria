@@ -24,16 +24,16 @@
         <div class="container">
             <div class="saudacao">
                 <a onclick="voltarPagina()">
-                    <img src="./assets/icon/voltarBranco.png" style="height: fit-content;" alt="">
+                    <img src="./assets/icon/voltar.png" style="height: fit-content;" alt="">
                 </a>
-                <span>Bem-vindo <span id="nome_usuario"> Gabriel</span></span>
+                <span>Olá, <span id="nome_usuario"> Gabriel</span>!</span>
             </div>
 
 
             <div class="boxLogin">
-                <a>Entrar</a>
-                <span>|</span>
-                <a>Cadastre-se</a>
+                <img id="fotoUsuarioLogado">
+                <a id="nomeUsuarioLogado"></a>
+                <a id="usernameUsuarioLogado"></a>
             </div>
         </div>
 
@@ -87,7 +87,7 @@
     <section class="sessaoDashboard">
 
         <div class="containerDashboard">
-
+            <h1>Painel de Controle</h1>
             <div class="corpoDash" id="corpoDash">
 
                 <div class="containerKpi">
@@ -96,22 +96,22 @@
 
 
                         <div class="kpiDashboard">
-                            <span>Seguidores</span>
-                            <span id="qtdSeguidor">0</span>
+                            <span class="legendaKPI">Seguidores</span>
+                            <span class="valorKPI" id="qtdSeguidor">0</span>
                         </div>
                         <div class="kpiDashboard">
-                            <span>Publicações</span>
-                            <span id="qtdPublicacao">0</span>
+                            <span class="legendaKPI">Publicações</span>
+                            <span class="valorKPI" id="qtdPublicacao">0</span>
                         </div>
 
 
                         <div class="kpiDashboard">
-                            <span>Curtidas</span>
-                            <span id="qtdCurtida">0</span>
+                            <span class="legendaKPI">Curtidas</span>
+                            <span class="valorKPI" id="qtdCurtida">0</span>
                         </div>
                         <div class="kpiDashboard">
-                            <span>Comentários</span>
-                            <span id="qtdComentario">0</span>
+                            <span class="legendaKPI">Comentários</span>
+                            <span class="valorKPI" id="qtdComentario">0</span>
                         </div>
 
                     </div>
@@ -127,19 +127,21 @@
                 </div>
                 <hr>
 
-                <div style="display: flex; justify-content: center;align-items: center;">
-                    <button onclick="obterDadoGraficoSeguidoresDia(sessionStorage.ID_USUARIO, 11); aparecerSelect()">Dia
-                        da Semana</button>
-
-                    <button onclick="obterDadoGraficoSeguidoresMes(sessionStorage.ID_USUARIO)">Mês</button>
-                </div>
+                
                 <div class="containerGrafico">
-                    <div class="graficoDashboard">
+                    <div class="graficoDashboard" id="gracicoPizza">
                         <canvas id="graficoCategoriaMaisPostada"></canvas> 
                     </div>
                     <div class="graficoDashboard">
-                        <h3></h3>
-                        <div>
+                        <div style="display: flex; justify-content: center;align-items: center;">
+                            <div class="boxLogin">
+                                <a onclick="obterDadoGraficoSeguidoresDia(sessionStorage.ID_USUARIO, 11); aparecerSelect(true)">Dia da Semana</a>
+                                <span>|</span>
+                                <a onclick="obterDadoGraficoSeguidoresMes(sessionStorage.ID_USUARIO); aparecerSelect(false)">Mês</a>
+                            </div>
+
+                        </div>
+                        
                             <select name="" id="select_mes">
                                 <option value="mesAtual" selected>Mês Atual</option>
                                 <option value="01">Janeiro</option>
@@ -156,7 +158,7 @@
                                 <option value="12">Dezembro</option>
                             </select>
                             <canvas id="graficoSeguidorDia"></canvas>
-                        </div>
+                        
                         <!-- 
                             <canvas id="graficoSeguidorSemana"></canvas> -->
                         <canvas id="graficoSeguidorMes" style="display: block;"></canvas>
@@ -179,8 +181,13 @@
         obterDadoGraficoSeguidoresMes(idUsuario)
         obterDadosCategoriasMaisPostadas(idUsuario)
     }
-    function aparecerSelect() {
-        select_mes.style.display = 'block'
+    function aparecerSelect(aparecer) {
+        if(aparecer){
+            select_mes.style.display = 'block'
+        }else{
+            select_mes.style.display = 'none'
+
+        }
     }
     document.getElementById('nome_usuario').innerHTML = sessionStorage.NOME_USUARIO
     console.log(sessionStorage.NOME_USUARIO)
@@ -194,5 +201,5 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- <script src="./js/graficos.js"></script> -->
 <script src="./js/fetchDashboard.js"></script>
-
+<script src="./js/navbar.js"></script>
 </html>

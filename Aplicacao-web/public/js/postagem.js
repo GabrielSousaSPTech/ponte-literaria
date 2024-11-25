@@ -3,7 +3,7 @@ function criarPostagem (idUsuario){
 
     const titulo = tituloCriacaoArtigo.value
     const conteudo = criacaoArtigo.value
-
+    const categoria = select_genero.value
     fetch('/post/create', {
         method: "POST",
         headers: {
@@ -12,7 +12,8 @@ function criarPostagem (idUsuario){
         body: JSON.stringify ({
             idUsuarioServer : idUsuario,
             tituloPublicacaoServer : titulo,
-            conteudoPublicacaoServer : conteudo
+            conteudoPublicacaoServer : conteudo,
+            categoriaArtigoServer : categoria
         })
     }).then(function (resposta){
         if(resposta.ok){
@@ -120,7 +121,7 @@ function plotarPostagemPerfil (resposta) {
 
         resposta.forEach(async item =>{
             console.log(item)
-            document.getElementById("postagemPerfil").innerHTML+= `
+            document.getElementById("postagemPerfil").innerHTML += `
             <div class="postagem" onclick="abrirPostagem(${item.idPostagem})" onload="verificarLike(${item.idPostagem}, ${sessionStorage.ID_USUARIO}))">
         <div class="cabecalhoPostagem">
         <div class="dadosCabecalhoPostagem">

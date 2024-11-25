@@ -51,8 +51,9 @@ function criarPost(req, res){
     var idUsuario = req.body.idUsuarioServer
     var titulo = req.body.tituloPublicacaoServer
     var conteudo = req.body.conteudoPublicacaoServer
+    var categoria = req.body.categoriaArtigoServer
 
-    postModel.createPublicacao(idUsuario, titulo, conteudo).then(function(resultado) {
+    postModel.createPublicacao(idUsuario, titulo, conteudo, categoria).then(function(resultado) {
         res.status(201).json(resultado);       
     }).catch(
         function (erro) {

@@ -24,9 +24,9 @@
         
         
             <div class="boxLogin">
-              <a>Entrar</a>
-              <span>|</span>
-              <a>Cadastre-se</a>
+                <img id="fotoUsuarioLogado">
+                <a id="nomeUsuarioLogado"></a>
+                <a id="usernameUsuarioLogado"></a>
             </div>
           </div>
       
@@ -86,7 +86,12 @@
         </a>
         <div class="container" >
             <form action="" class="formularioCriacaoArtigo">
-                <input type="text" placeholder="Digite um Titulo" id="tituloCriacaoArtigo" required>
+                <div>
+                    <input type="text" placeholder="Digite um Titulo" id="tituloCriacaoArtigo" required>
+                    <select id="select_genero">
+
+                    </select>
+                </div>
                 <textarea name="" id="criacaoArtigo" required></textarea>
                 <button id="botaoArtigo" type="button" onclick="acaoPostagem()">
                     Publicar
@@ -135,7 +140,7 @@
     }
 
     function renderizarPagina(){
-        
+        obterCategoriaArtigo()
         acao()
     }
 
@@ -146,4 +151,6 @@
 </script>
 
 <script src="./js/components.js"></script>
+<script src="./js/navbar.js"></script>
+<script src="./js/artigo.js"></script>
 </html>
