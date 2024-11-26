@@ -1,10 +1,6 @@
 CREATE DATABASE ponteLiteraria;
 
 USE ponteLiteraria;
-
-SET lc_time_names = 'pt_BR';
-	
-
 CREATE TABLE  Usuario(
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
@@ -14,15 +10,7 @@ CREATE TABLE  Usuario(
     fotoPerfilUsuario VARCHAR(255) UNIQUE
 );
 
-INSERT INTO Usuario (nome, username, email, senha, fotoPerfilUsuario) VALUES
-('João Silva', 'joao_silva', 'joao.silva@email.com', 'senha123', NULL),
-('Maria Oliveira', 'maria_oliveira', 'maria.oliveira@email.com', 'senha456', NULL),
-('Carlos Souza', 'carlos_souza', 'carlos.souza@email.com', 'senha789', NULL),
-('Ana Costa', 'ana_costa', 'ana.costa@email.com', 'senha101', NULL),
-('Lucas Pereira', 'lucas_pereira', 'lucas.pereira@email.com', 'senha112', NULL),
-('Beatriz Santos', 'beatriz_santos', 'beatriz.santos@email.com', 'senha131', NULL);
-
-
+-- INSERT INTO Usuario (nome, username, email, senha, fotoPerfilUsuario) VALUES
 
 
 CREATE TABLE Seguidores (
@@ -34,16 +22,8 @@ CREATE TABLE Seguidores (
     dataFollow DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO Seguidores (fkUsuarioSeguido, fkUsuarioSeguidor, dataFollow) VALUES
-(5, 9, '2024-11-01 10:00:00'),
-(5, 10, '2024-11-05 11:15:00'),
-(5, 11, '2024-11-10 12:30:00'),
-(5, 12, '2024-11-15 13:45:00');
+-- INSERT INTO Seguidores (fkUsuarioSeguido, fkUsuarioSeguidor, dataFollow) VALUES
 
-INSERT INTO Seguidores (fkUsuarioSeguido, fkUsuarioSeguidor, dataFollow) VALUES
-(5, 14, '2024-11-01 10:00:00');
-
-UPDATE Seguidores SET dataFollow = '2024-1-06 10:00:00' WHERE fkUsuarioSeguidor = 8;
 
 SELECT * FROM Seguidores;
 
@@ -52,7 +32,7 @@ SELECT * FROM Seguidores;
     fkusuario INT NOT NULL,
     fkCategoriaArtigo INT,
     CONSTRAINT fkCategoriaPostagem FOREIGN KEY (fkCategoriaArtigo) REFERENCES categoriaArtigo(idCategoriaArtigo),
-    CONSTRAINT pkPostagem PRIMARY KEY (idPostagem, fkUsuario),
+    CONSTRAINT pkPostagem PRIMARY KEY (idPostagem, fkusuario),
     CONSTRAINT fkUsuarioPostagem FOREIGN KEY (fkusuario) REFERENCES Usuario(idUsuario),
     tituloPostagem VARCHAR(45) NOT NULL,
     conteudoPostagem VARCHAR(1000) NOT NULL,
@@ -61,14 +41,8 @@ SELECT * FROM Seguidores;
     dataHoraPostagem DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-
-
-INSERT INTO Postagem (fkusuario, tituloPostagem, conteudoPostagem) 
-VALUES 
-	(6, 'Meu Segundo Post', 'Este é o conteúdo da minha segundo postagem.'),
-    (6, 'Meu Terceiro Post', 'Este é o conteúdo da minha terceiro postagem.'),
-    (6, 'Meu Quarto Post', 'Este é o conteúdo da minha quarto postagem.');
-
+-- INSERT INTO Postagem (fkusuario, tituloPostagem, conteudoPostagem) VALUES 
+	
 CREATE TABLE categoriaArtigo(
     idCategoriaArtigo INT PRIMARY KEY AUTO_INCREMENT,
     tituloCategoria VARCHAR(45)
@@ -101,44 +75,7 @@ CREATE TABLE Comentario (
     CONSTRAINT fkUsuarioComentario FOREIGN KEY (fkUsuarioComentario) REFERENCES Usuario(idUsuario)
 );
 
-SELECT * FROM Postagem;
-UPDATE Postagem SET fkCategoriaArtigo = 25 WHERE idPostagem =15;
-USE ponteLiteraria;
-SELECT * FROM categoriaArtigo;
-SELECT categoria.tituloCategoria, COUNT(Postagem.idPostagem) AS quantidade
-FROM Postagem
-JOIN categoriaArtigo AS categoria ON Postagem.fkCategoriaArtigo = categoria.idCategoriaArtigo
-WHERE Postagem.fkusuario = 5
-GROUP BY categoria.tituloCategoria;
 
-        SELECT 
-        Postagem.idPostagem,
-        Usuario.nome AS nomeUsuario,
-        Usuario.username AS usernameUsuario,
-        Usuario.idUsuario AS idUsuario,
-        Usuario.fotoPerfilUsuario AS fotoUsuario,
-        Postagem.tituloPostagem,
-        Postagem.conteudoPostagem,
-        Postagem.dataHoraPostagem,
-        Categoria.tituloCategoria as categoria,
-        COUNT(Curtida.fkPostagemCurtida) AS qtdCurtida
-    FROM 
-        Postagem
-    RIGHT JOIN 
-        Usuario ON Postagem.fkUsuario = Usuario.idUsuario
-    LEFT JOIN 
-        Curtida ON Postagem.idPostagem = Curtida.fkPostagemCurtida
-    LEFT JOIN
-        categoriaArtigo AS Categoria ON Postagem.fkCategoriaArtigo = Categoria.idCategoriaArtigo
-    LEFT JOIN
-        Seguidores AS seguindo ON fkusuario = seguindo.fkUsuarioSeguido
-    WHERE 
-        seguindo.fkUsuarioSeguidor = 5 AND statusPostagem = 'ativo'
-    GROUP BY 
-    COUNT(Curtida.fkPostagemCurtida),
-        Postagem.idPostagem;
-        
-        USE ponteLiteraria;
 
 
 

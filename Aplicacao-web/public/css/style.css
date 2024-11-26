@@ -63,13 +63,16 @@
 
 .social section p {
     display: flex;
-    width: 30vw;
-    font-size: 30px;
-    
+    width: 80vw;
+    font-size: 30px;    
     text-align: justify;
 }
 
-.sobreMim {
+.textoMissao {
+    width: 30vw !important;
+}
+
+.nossaHistoria {
     background: var(--azulFundo);
     background-repeat: no-repeat;
     background-size:contain;
@@ -77,14 +80,14 @@
     background-position-x: center;
     
 }
-.sobreMim section {
+.nossaHistoria section {
     flex-direction: column;
     padding: 3rem;
     justify-content: center;
     align-items: center;
     gap: 3rem;
 }
-.sobreMim section p {
+.nossaHistoria section p {
     width: 100%;
     color: var(--corFonte);
 }
@@ -92,7 +95,7 @@
 footer {
     margin-top: 5rem;
     display: flex;
-    background: var(--marromFundo);
+    background: #000;
     color: var(--corFonte);
     padding-inline: 6rem;
     padding: 1.5rem;

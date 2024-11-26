@@ -175,3 +175,7 @@ header .container span {
     font-weight: 700;
 }
 
+.boxSelecaoGrafico{
+    display: flex;
+    gap: 1rem;
+}

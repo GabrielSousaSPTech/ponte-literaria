@@ -11,7 +11,7 @@ function cadastrar () {
 	formData.append('emailServer', email)
 	formData.append('senhaServer', senha)
 	formData.append('input_foto', input_foto.files[0])
-
+    
     if(!campoPreenchido([nome, username, email, senha, confirmaSenha])){
         modalAviso('erro', 'Preencha todos os Campos')
         return

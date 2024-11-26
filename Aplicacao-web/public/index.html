@@ -16,6 +16,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
+
+
 <body>
   <div class="banner">
     <header>
@@ -32,10 +34,14 @@
             <a href="./feed.html">FÓRUM</a>
           </li>
         </ul>
-        <div class="boxLogin">
+        <div class="boxLogin" onclick="abrirPerfil(sessionStorage.ID_USUARIO)" id="logado">
+          <img id="fotoUsuarioLogado">
+          <a id="usernameUsuarioLogado"></a>
+          
+        <div class="boxRow" id="naoLogado">
           <a href="./login.html">Entrar</a>
           <span>|</span>
-          <a href="./cadastro.html">Cadastre-se</a>
+          <a href="./cadastro.html">Cadastre-se</a>          
         </div>
       </div>
     </header>
@@ -43,7 +49,7 @@
     <div class="slogan">
 
       <div class="container">
-        <img class="logotipo" src="./assets/imgs/logotipo-pl.png" alt="">
+        <img class="logotipoBanner" src="./assets/imgs/logotipo-pl.png" alt="">
         <p>Conectando <span>Mentes</span>, compartilhando <span>Histórias</span>.</p>
       </div>
       </div>
@@ -51,33 +57,33 @@
   
     <div class="social">
       <div class="container">
-        <h1 id="nossaHistoria">NOSSA HISTÓRIA</h1>
-        <section>
-          <div>
-            <p>
-              O projeto, Ponte Literária, foi fundada no dia 01 de Novembro de 2024. Surgiu com o propósito de estimular a sua nossa a expor o seu primeiro contato com a leitura e a evolução que isso trouxe na sua vida, além de realizar artigos críticos sobre livros, afim de estimular a nossa sociedade a pratica da leitura, buscando uma comunidade engajada, para acolher novos leitores.
-            </p>
-          </div>
-          <div>
-            <img src="./assets/imgs/livro-de-leitura-de-criancas-700-102901461 1.png" alt="">
-          </div>
-        </section>
-      </div>
-    </div>
-
-    <div class="social">
-      <h1 id="sobreMim">SOBRE MIM</h1>
+        <h1 id="sobreMim">SOBRE MIM</h1>
       <div class="sobreMim">
-
         <div class="container">
           <section>
             <div>
               <p>
-                Olá. Eu sou o Gabriel!, sou fundador do projeto “Ponte Literária”, Pensei nesse grandioso projeto, com o propósito de estimular e aproximar jovens que estão obtendo seus primeiros contatos com a leitura, e o meu primeiro contato com a leitura veio através da saga “Heróis do Olimpo”, escrita por Rick Riordan, sim... Eu li Heróis do Olimpo antes da saga de Percy Jackson e os Olimpianos. Pois eu obtive acesso á essa sgaa maravilhosa, através de um acaso. E no momento que eu li o primeiro livro da saga, O Herói Perdido, eu me apaixonei subitamente, li os quatro livros que eu tinha disponivel e depois recebi de presente da minha amada namorada o quinto e ultimo livro da saga Heróis do Olimpo. E essa experiencia foi enriquecedora na minha vida, a evolução que eu tive foi notória demais, já que nas aulas de português eu tinha muita dificuldade para dissertar sobre assuntos, realizar um escrita critica, e interpretar textos. E eu sinto que se tivesse tido esse contato mais cedo, eu teria melhorado na escola muito mais cedo. E por isso fundei esse projeto, para incentivar, e contar com vocês para incentivar jovens mentes que ainda não obtiveram o seu primeiro contato com a leitura, ou estão entrando nesse maravilhoso caminho recentemente. e Assim, através de histórias magníficas, contribuir para a evolução da nossa sociedade na educação, até porque livros facilitam a educação, e a educação transforma vidas.              </p>
+                Olá. Eu sou o Gabriel! tenho 20 anos.
+                  E a minha primeira saga de livros, a saga que mudou a minha vida. Foi, 'Heróis do Olimpo' de Rick Riordan. Em um período onde eu não tinha contato com a leitura, essa saga caiu em minhas mãos por um acaso, e mudou a minha vida, eu me apaixonei pelo RiordanVerso, ter esse contato com a leitura, contribuiu muito para a minha evoluao como ser humano, principalmente na vida acadêmica. Pois ler me trouxe uma maior facilidade para escrita, me ajudou na interpretaçao de texto e melhorou a minha forma de falar. E tudo isso por conta de um livro de aventura e fantasia. Para vocês verem, o começo da leitura tem que ser por algo que você se apaixona, que você mergulha no universo.
+               </p>
             </div>
             <div>
-              <!-- <img src="./assets/imgs/bannerHeroisOlimpo.jpg" alt=""> -->
             </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <div class="social">
+      <h1 id="nossaHistoria">NOSSA HISTÓRIA</h1>
+      <div class="nossaHistoria">
+        <div class="container">
+        <section>
+          <div>
+            <p>
+              E a nossa história é sobre isso, sobre um projeto onde busca que pessoas compartilhem a importância de livros na sua vida, que contem suas histórias afim de estimularem a nossa comunidade a contar a suas histórias e ler os livros citados. O projeto "Ponte Literária" foi criado justamente para isso. Para contribuir com a aproximação da leitura na nossa sociedade.
+            </p>
+          </div>
           </section>
         </div>
       </div>
@@ -87,7 +93,7 @@
         <h1 id="missao">MISSÃO</h1>
         <section>
           <div>
-            <p>
+            <p class="textoMissao">
               E com o meu relato, eu os convido a contarem o seu primeiro contato com a leitura e como isso influenciou a vida de vocês, o quanto isso contribuiu para a sua educação. Pois com mais pessoas mostrando e divulgando os benefícios que a leitura traz, acabaremos estimulando pessoas a também embarcarem nesse mundo, onde você pode vivenciar várias realidades, contextos e sociedades utópicas.
             </p>
           </div>
@@ -129,3 +135,17 @@
   </body>
 
 </html>
+
+<script src="./js/navbar.js"></script>
+<script src="./js/navegacaoPagina.js"></script>
+<script>
+  if(sessionStorage.ID_USUARIO == undefined){
+    logado.style.display = 'none'
+    naoLogado.style.display = 'flex'
+  }else{
+    logado.style.display = 'flex'
+    naoLogado.style.display = 'none'
+    
+  }
+
+</script>

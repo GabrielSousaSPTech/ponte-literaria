@@ -7,14 +7,19 @@ header {
     border-bottom-right-radius: 35px;
     position: fixed;
     width: 100%;
-    height: 12vh;
+    height: fit-content;
    
 }
 
 .logotipo{
-    height: 8rem;
-    width: 8rem;
-    /* object-fit: cover; */
+    height: fit-content;
+    width: 5rem;
+    object-fit: cover;
+}
+.logotipoBanner{
+    height: fit-content;
+    width: 15rem;
+    object-fit: cover;
 }
 
 #fotoUsuarioLogado {
@@ -175,11 +180,7 @@ a, a:visited, a:active, a:focus {
 #containerRespostaCategoria {
     top:10.5vh !important; 
 }
-/* #containerResultadopesquisa .dadosCabecalhoPostagem img{
-    height:2rem;
-    border: 2px solid black;
-    border-radius: 50%;
-} */
+
 
 #containerResultadopesquisa .cabecalhoPostagem{
     padding: 20px;
@@ -212,3 +213,8 @@ a, a:visited, a:active, a:focus {
 }
 
 
+.boxRow{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}

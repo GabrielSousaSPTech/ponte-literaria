@@ -6,6 +6,7 @@ function cadastrar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
     var nomeImagem = req.file.filename;
+    
     usuarioModel.cadastrar(nome, username, email, senha, nomeImagem).then((resultado) =>{
         res.status(201).json(resultado);
     }).catch(

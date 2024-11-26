@@ -1,3 +1,5 @@
+console.log('chegando aqui')
+
 const imagemUsuario = document.getElementById('fotoUsuarioLogado')
 
 const username = document.getElementById('usernameUsuarioLogado')
