@@ -24,6 +24,7 @@ var searchRouter = require("./src/routes/search");
 var comentarioRouter = require("./src/routes/comentario");
 var dashboardRouter = require("./src/routes/dashboard");
 var categoriaRouter = require("./src/routes/categoriaArtigo");
+var feedRouter = require('./src/routes/feed.js')
 // var avisosRouter = require("./src/routes/avisos");
 // var medidasRouter = require("./src/routes/medidas");
 // var empresasRouter = require("./src/routes/empresas");
@@ -40,7 +41,8 @@ app.use("/seguidor", seguidorRouter);
 app.use("/search", searchRouter);
 app.use("/comentario", comentarioRouter);
 app.use("/dashboard", dashboardRouter);
-app.use("/categoria", categoriaRouter)
+app.use("/categoria", categoriaRouter);
+app.use("/feed", feedRouter);
 // app.use("/avisos", avisosRouter);
 // app.use("/medidas", medidasRouter);
 // app.use("/empresas", empresasRouter);

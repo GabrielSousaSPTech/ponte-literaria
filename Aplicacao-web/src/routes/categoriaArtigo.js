@@ -7,4 +7,9 @@ router.get('/getCategoria', function(req, res){
     categoriaController.obterCategoriaArtigo(req, res);
 })
 
+router.get('/searchCategoria', function(req, res){
+    categoriaController.obterCategoriaArtigo(req, res);
+})
+
+
 module.exports = router

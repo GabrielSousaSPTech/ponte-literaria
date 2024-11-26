@@ -1,6 +1,63 @@
 const containerRespostaPesquisa = document.getElementById(`containerResultadopesquisa`)
-function search (){
+const containerRespostaCategoria = document.getElementById('containerRespostaCategoria')
 
+
+function searchCategoria(){
+    const input = document.getElementById('input_categoria')
+    const pesquisa = input.value
+    containerRespostaCategoria.addEventListener('mousedown', (event) => {
+        event.preventDefault();
+    });
+
+    input.addEventListener('blur', ()=>{
+        containerRespostaCategoria.style.display = 'none'
+    })
+    if(pesquisa.length>0){
+       
+        fetch("/search/searchCategoria", {
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                pesquisaServer :pesquisa
+            })
+        }).then(function (resposta){
+            if(resposta.ok){  
+                resposta.json().then(function (res){
+                    if(res.length>0){
+                        plotarResultadoPesquisaCategoria(res)
+                    }else{
+                        
+                    }  
+                })
+            }else{
+                containerRespostaPesquisa.innerHTML = '<p>Sem resultados :(</p>'
+            }
+    })
+}
+}
+
+function plotarResultadoPesquisaCategoria(pesquisa){
+    containerRespostaCategoria.innerHTML = ''
+    containerRespostaCategoria.style.display = 'flex'
+    containerRespostaCategoria.style.position = 'absolute'
+     
+    
+    pesquisa.forEach(item => {
+        console.log(item.titu)
+        containerRespostaCategoria.innerHTML += `
+        
+        <div class="cabecalhoPostagem" onclick="event.stopPropagation(); obterFeedCategoria(${item.idCategoriaArtigo})">
+                    <span>${item.tituloCategoria}</span>
+                </div>
+            
+        `
+    });
+}
+
+
+function search (){
     const input = document.getElementById('input_pesquisa');
     const pesquisa = input.value
     
@@ -37,7 +94,7 @@ function search (){
             })
             
         }else{
-            containerRespostaPesquisa.innerHTML = '<p>Sem resultados</p>'
+            containerRespostaPesquisa.innerHTML = '<p>Sem resultados :(</p>'
         }
     })
 }else{

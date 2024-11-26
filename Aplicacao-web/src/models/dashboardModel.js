@@ -64,7 +64,7 @@ function obterCategoriasQueMaisPosta(idUsuario){
             COUNT(Postagem.idPostagem) AS quantidade
         FROM Postagem
         JOIN categoriaArtigo AS categoria ON Postagem.fkCategoriaArtigo = categoria.idCategoriaArtigo
-        WHERE Postagem.fkusuario = ${idUsuario}
+        WHERE Postagem.fkusuario = ${idUsuario} AND statusPostagem = 'ativo'
         GROUP BY categoria.tituloCategoria; 
     `
 

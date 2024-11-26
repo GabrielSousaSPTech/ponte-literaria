@@ -24,13 +24,26 @@ function modalDelete(idDelete, idGerador, tipoDelete) {
                 <div class = "groupButton">
                     <button class="btnCancelar" onclick="closeModal()">Cancelar</button>
 
-                    <button class="btnAcao" onclick="${tipoDelete == 'Comentario' ? `deletarComentario(${idDelete}, ${idGerador})` : `deletarPost(${idDelete}, ${idGerador})`}, closeModal()">Excluir</button>
+                    <button class="btnAcao" onclick="escolhaDelete(${idDelete}, ${idGerador}, '${tipoDelete}'), closeModal()">Excluir</button>
                 </div>
             </div> 
             </div
         </div>
     `
 
+}
+
+function escolhaDelete(idDelete, idUsuario, tipoDelete){
+ if(tipoDelete == 'Comentario' ){
+   deletarComentario(idDelete, idUsuario)
+  
+  }else if(tipoDelete == 'Postagem'){
+
+  deletarPost(idDelete, idUsuario)
+  }else if(tipoDelete == 'artigo'){
+
+    deletarPostPeloArtigo(idDelete)
+  }
 }
 
 function closeModal() {
@@ -57,7 +70,7 @@ function visualizarComentario(resposta) {
           <img src="./assets/imgs/usuario/${item.fotoUsuario == null?'usuarioTeste.jpg': item.fotoUsuario}" alt="" onclick="event.stopPropagation()" class="fotoUsuarioResposta">
           <span>${item.nome}</span>
           <span>-</span>
-          <span>${item.dataHoraPostagem}</span>
+          <span>${formatarData(item.dataHoraPostagem)}</span>
         </div>
         <div class = "containerDropDown" id="aparecerDropDownModal-${item.idPostagem}">
             <img style="display:'flex';" src = "./assets/icon/more.png" onclick="event.stopPropagation(), dropDown(${item.idPostagem}, 'Modal')">
@@ -270,4 +283,25 @@ function dropDownComentario(idComentario) {
     } else {
         dropdown.style.display = 'flex'
     }
+}
+
+function modalAviso(tipoAviso, mensagem){
+    const espacoModal = document.querySelector('.modalAviso')
+    espacoModal.style.display = 'flex'
+  if(tipoAviso == 'erro'){
+    espacoModal.style.backgroundColor = 'rgba(255, 0, 0, 0.446)'
+    }else if(tipoAviso == 'sucesso'){
+      espacoModal.style.backgroundColor = 'rgba(3, 145, 3, 0.407)'
+    }
+    espacoModal.innerHTML = `
+    <div class="modalAviso">
+    <h2>${mensagem}</h2>
+    </div>
+    `
+
+    setTimeout(()=> closeModalAviso(), 3000)
+}
+
+function closeModalAviso() {
+  document.querySelector('.modalAviso').style.display = 'none';
 }

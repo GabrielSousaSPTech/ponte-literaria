@@ -10,6 +10,8 @@ function obterCategoriaArtigo(req, res){
     })
 }
 
+
+
 module.exports = {
     obterCategoriaArtigo
 }

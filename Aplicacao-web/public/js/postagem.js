@@ -18,6 +18,9 @@ function criarPostagem (idUsuario){
     }).then(function (resposta){
         if(resposta.ok){
             window.location = `./perfil.html?id=${idUsuario}`
+            
+        }else{
+            modalAviso('erro', 'Erro ao publicar artigo.<br> Tente novamente mais tarde')
         }
     })
 
@@ -43,6 +46,9 @@ function editarPostagem (idUsuario, idPostagem){
     }).then(function (resposta){
         if(resposta.ok){
             window.location = `./perfil.html?id=${idUsuario}`
+            
+        }else {
+            modalAviso('erro', 'Erro ao editar artigo!')
         }
     })
 
@@ -62,8 +68,27 @@ function deletarPost(idPostagem, idUsuario){
         })
     }).then(function (resposta){
         if(resposta.ok){
+            modalAviso('sucesso', 'Artigo excluído com sucesso!')
             document.getElementById("postagemPerfil").innerHTML = ''
             obterPostagemPerfil(idUsuario)
+        }
+
+        
+    })
+}
+
+function deletarPostPeloArtigo(idPostagem){
+    fetch(`/post/delete`,{
+        method: "POST",
+        headers:{
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify({
+            idPostagemServer : idPostagem
+        })
+    }).then(function (resposta){
+        if(resposta.ok){
+            window.history.back();
         }
 
         
@@ -85,8 +110,12 @@ function obterPostagemPerfil (idUsuario) {
                 // document.getElementById("username").innerText = `${res[0].usernameUsuario}`
             })
     }else {
-            
-            document.getElementById("postagemPerfil").innerHTML =`<p style="text-align:center;">Esse perfil ainda não realizou uma postagem</p>`
+            if(sessionStorage.ID_USUARIO == idUsuario){
+                document.getElementById("postagemPerfil").innerHTML =`<p class="mensagemPerfilVazio">Vamos lá! Publique o seu primeiro artigo para pessoas conhecerem suas opiniões e histórias.<br>Eu sugiro a você que conte de uma saga de livros muito marcante na sua vida. Assim como eu fiz!</p>`
+
+            }else{
+                document.getElementById("postagemPerfil").innerHTML =`<p class="mensagemPerfilVazio">Esse perfil ainda não realizou uma postagem</p>`
+            }
             
         }
     })
@@ -128,7 +157,7 @@ function plotarPostagemPerfil (resposta) {
         <img src="./assets/imgs/usuario/${item.fotoUsuario == null?'usuarioTeste.jpg': item.fotoUsuario}" alt="" onclick="event.stopPropagation()">
         <span onclick="event.stopPropagation()">${item.nomeUsuario}</span>
         <span>-</span>
-        <span>${item.dataHoraPostagem}</span>
+        <span>${formatarData(item.dataHoraPostagem)}</span>
         </div>
         <div class = "containerDropDown" id="aparecerDropDown-${item.idPostagem}">
         <img src = "./assets/icon/more.png" onclick="event.stopPropagation(), dropDown(${item.idPostagem},'Post')">
@@ -142,7 +171,7 @@ function plotarPostagemPerfil (resposta) {
         <div class="corpoPost">
             
             <div class = "tituloPostagem">
-            <h3>${item.tituloPostagem} - <span id="categoriaPostagem">${item.categoria}</span></h3>
+            <h3 class = 'tituloArtigo'>${item.tituloPostagem} - <span id="categoriaPostagem">${item.categoria}</span></h3>
             
             </div>
             <p>${item.conteudoPostagem}</p>
@@ -158,10 +187,6 @@ function plotarPostagemPerfil (resposta) {
         <img src="./assets/icon/comentario.png" alt="">
         <span id="qtdComentario-${item.idPostagem}">0</span>
         </div>
-        </div>
-        <div class="boxEngajamento" onclick="event.stopPropagation()">
-        <img src="./assets/icon/compartilhar.png" alt="">
-        <span>Compartilhar</span>
         </div>
         </div> 
         </div>

@@ -8,6 +8,8 @@ function getCategoria(){
     return database.executar(instrucaoSql)
 }
 
+
+
 module.exports = {
-    getCategoria
+    getCategoria,
 }

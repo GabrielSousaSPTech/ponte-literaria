@@ -229,3 +229,32 @@
     color: var(--corPesquisa);
 }
 
+.modalAviso {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width:25vw;
+    min-height: 5%;
+    max-height: fit-content;
+    padding: 1rem;
+    border-bottom-left-radius: 30px;
+    
+    z-index: 9000;
+    right: 0;
+    top: 0rem;
+    transition: 0.8s ease-in-out;
+    text-align: start;
+}
+
+.modalAviso h2 {
+    font-size: 1.3rem;
+    color: var(--corModalAviso);
+    font-weight: 500;
+}
+
+
+
+.dropDownPost {
+    background-color: red;
+}

@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/feed.css">
+    <link rel="stylesheet" href="./css/modal.css">
     <link rel="stylesheet" href="./css/navbar.css">
     <link rel="stylesheet" href="./css/postagem.css">
     <link rel="icon" href="./assets/icon/favicon2.ico">
@@ -20,25 +21,23 @@
 
 
 
-<body onload="validarSessao()">
+<body onload="obterFeedSeguindo(sessionStorage.ID_USUARIO), validarSessao()">
     <a href="./criacao-artigo.html" style="position: fixed; right: 0; bottom: 0; padding: 1rem;">
         <img src="./assets/icon/adicionar.png" style="height: 3.5rem;" alt="">
     </a>
     <header id="div_navbar_pesquisa" style="z-index: 2;">
         <div class="container">
             <div style="display: flex; flex-direction: column;">
-            <div  class="barra-pesquisa">
-                <span>
-                    <img src="./assets/icon/lupa.png" alt="">
-                </span>
-    
-                    <input id="input_pesquisa" type="text" placeholder="Pesquise Aqui..." onkeyup="search()">
+                <div  class="barra-pesquisa">
+                    <span>
+                        <img src="./assets/icon/lupa.png" alt="">
+                    </span>
+                    <input id="input_pesquisa" type="text" placeholder="Conecte-se com leitores incríveis." onkeyup="search()">
                 </div>
                 <div id="containerResultadopesquisa"></div>
-              </div>
-              <div class="boxLogin">
+            </div>
+              <div class="boxLogin" onclick="abrirPerfil(sessionStorage.ID_USUARIO)">
                 <img id="fotoUsuarioLogado">
-                <a id="nomeUsuarioLogado"></a>
                 <a id="usernameUsuarioLogado"></a>
             </div>
           </div>
@@ -94,142 +93,60 @@
     
     <section class="sessaoFeed">
         <div class="container" >
-            <div class="postagem" onclick="abrirPostagem()">
-                <div class="cabecalhoPostagem">
-                    <div class="dadosCabecalhoPostagem">
-                        <img src="./assets/imgs/usuarioTeste.jpg" alt="">
-                        <span onclick="event.stopPropagation(); abrirPerfil(6)">Gabriel Sousa</span>
-                        <span>-</span>
-                        <span>Há 12h</span>
-                    </div>
-                    <button>Seguir</button>
+            <div class="groupFeed">
+                <div class="groupButton">
+                    <button id="btnSeguindo" class="buttonFeed buttonFeedClicado"  onclick="obterFeedSeguindo(sessionStorage.ID_USUARIO), aparecerCategoria(false), selecionarFeed('seguindo')">Seguindo</button>
+                    <button id="btnCategoria" class="buttonFeed" onclick="aparecerCategoria(true), selecionarFeed('categoria')">Categorias</button>
                 </div>
-
-                <div class="corpoPost">
-
-                    <h3>Minha Primeira Postagem</h3>
-                    
-                    <p>
-                        Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evoluçãoNeste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução
-
-                    </p>
+                <div style="position: relative;">
+                    <input type="text" placeholder="Qual categoria você quer ver?" id="input_categoria" style="display: none;"  onkeyup="searchCategoria()">
+                    <div id="containerRespostaCategoria"></div>
                 </div>
-
-                <div class="interacaoPost">
-                    <div class="engajamento">
-                        <div class="boxEngajamento">
-                            <img src="./assets/icon/like.png" alt="">
-                            <span>01</span>
-                        </div>
-                        <div class="boxEngajamento">
-                            <img src="./assets/icon/comentario.png" alt="">
-                            <span>01</span>
-                        </div>
-                    </div>
-                    <div class="boxEngajamento">
-                        <img src="./assets/icon/compartilhar.png" alt="">
-                        <span>Compartilhar</span>
-                    </div>
-                </div>
-
-                
             </div>
-            <div class="postagem">
-                <div class="cabecalhoPostagem">
-                    <div class="dadosCabecalhoPostagem">
-                        <img src="./assets/imgs/usuarioTeste.jpg" alt="">
-                        <span>Gabriel Sousa</span>
-                        <span>-</span>
-                        <span>Há 12h</span>
-                    </div>
-                    <button>Seguir</button>
-                </div>
+            <div id="postagemFeed">
 
-                <div class="corpoPost">
-
-                    <h3>Minha Primeira Postagem</h3>
-                    
-                    <p>
-                        Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evoluçãoNeste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução
-
-                    </p>
-                </div>
-
-                <div class="interacaoPost">
-                    <div class="engajamento">
-                        <div class="boxEngajamento">
-                            <img src="./assets/icon/like.png" alt="">
-                            <span>01</span>
-                        </div>
-                        <div class="boxEngajamento">
-                            <img src="./assets/icon/comentario.png" alt="">
-                            <span>01</span>
-                        </div>
-                    </div>
-                    <div class="boxEngajamento">
-                        <img src="./assets/icon/compartilhar.png" alt="">
-                        <span>Compartilhar</span>
-                    </div>
-                </div>
-
-                
-            </div>
-            <div class="postagem">
-                <div class="cabecalhoPostagem">
-                    <div class="dadosCabecalhoPostagem">
-                        <img src="./assets/imgs/usuarioTeste.jpg" alt="">
-                        <span>Gabriel Sousa</span>
-                        <span>-</span>
-                        <span>Há 12h</span>
-                    </div>
-                    <button>Seguir</button>
-                </div>
-
-                <div class="corpoPost">
-
-                    <h3>Minha Primeira Postagem</h3>
-                    
-                    <p>
-                        Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evoluçãoNeste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução Neste artigo irei expor o meu primeiro contato com a leitura e como isso contribuiu para a minha evolução
-
-                    </p>
-                </div>
-
-                <div class="interacaoPost">
-                    <div class="engajamento">
-                        <div class="boxEngajamento">
-                            <img src="./assets/icon/like.png" alt="">
-                            <span>01</span>
-                        </div>
-                        <div class="boxEngajamento">
-                            <img src="./assets/icon/comentario.png" alt="">
-                            <span>01</span>
-                        </div>
-                    </div>
-                    <div class="boxEngajamento">
-                        <img src="./assets/icon/compartilhar.png" alt="">
-                        <span>Compartilhar</span>
-                    </div>
-                </div>
-
-                
             </div>
         </div>
     </section>
+
+    <div class="espacoModal"></div>
+    <div class="modalAviso">
+    </div>
     
   </body>
-<script>
-    console.log(sessionStorage.ID_USUARIO)
-    function abrirPostagem (){
-        window.location = './view-artigo.html'
+  <script src="./js/sessao.js"></script>
+  <script src="./js/feed.js"></script>
+  <script src="./js/postagem.js"></script>
+  <script src="./js/interacao.js"></script>
+  <script src="./js/search.js"></script>
+  <script src="./js/modal.js"></script>
+  <script src="./js/navegacaoPagina.js"></script>
+  <script src="./js/components.js"></script>i
+  <script src="./js/navbar.js"></script>
+  <script src="./js/search.js"></script>
+  <script src="./js/formataData.js"></script>
+
+  <script>
+    function aparecerCategoria(categoriaVisivel){
+        if(categoriaVisivel){
+            input_categoria.style.display = 'block'
+        }else{
+            input_categoria.style.display = 'none'
+
+        }
     }
 
-    
-</script>
-<script src="./js/sessao.js"></script>
-<script src="./js/search.js"></script>
-<script src="./js/modal.js"></script>
-<script src="./js/navegacaoPagina.js"></script>
-<script src="./js/components.js"></script>i
-<script src="./js/navbar.js"></script>
+    function selecionarFeed(feedSelecionado){
+        const btnSeguindo = document.getElementById('btnSeguindo')
+        const btnCategoria = document.getElementById('btnCategoria')
+        if(feedSelecionado == 'seguindo'){
+            btnSeguindo.classList.add('buttonFeedClicado')
+            btnCategoria.classList.remove('buttonFeedClicado')
+        }else{
+            btnSeguindo.classList.remove('buttonFeedClicado')
+            btnCategoria.classList.add('buttonFeedClicado')
+        }
+
+    }
+  </script>
 </html>

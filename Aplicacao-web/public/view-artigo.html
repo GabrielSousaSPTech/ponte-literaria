@@ -24,16 +24,9 @@
     <header id="div_navbar_pesquisa">
         <div class="container">
         
-            <div style="display: flex; flex-direction: column;">
-            <div  class="barra-pesquisa">
-                <span>
-                    <img src="./assets/icon/lupa.png" alt="">
-                </span>
-    
-                    <input id="input_pesquisa" type="text" placeholder="Pesquise Aqui..." onkeyup="search()">
-                </div>
-                <div id="containerResultadopesquisa"></div>
-              </div>
+            <a onclick="voltarPagina()">
+                <img src="./assets/icon/voltarBranco.png" class="iconBack" alt="">
+            </a>
               <div class="boxLogin">
                 <img id="fotoUsuarioLogado">
                 <a id="nomeUsuarioLogado"></a>
@@ -91,9 +84,7 @@
     <!-- corpo do feed -->
 
     <section class="sessaoArtigo">
-        <a onclick="voltarPagina()" style="position: fixed; left: 15rem; top: 8rem; padding: 1rem;">
-            <img src="./assets/icon/voltar.png" style="height: 2.5rem;" alt="">
-        </a>
+        
         <div class="container" >
             <div id="visualizacaoArtigo"></div>
             <form action="" class="boxComentario">
@@ -113,38 +104,18 @@
         <div class="espacoModal">
 
         </div>
-        
+        <div class="modalAviso">
+
+        </div>
       
   </body>
 
 
 
 <script>
-
-    function renderizarPagina(){
-        
+    function renderizarPagina(){        
         obterPostagem(capturarIdPostagem()), 
         obterComentarioGeral(capturarIdPostagem())
-    }
-    function abrirResposta(elementoClicado){
-        var elementoPai =  elementoClicado.parentNode
-
-        var container =  elementoPai.querySelector('.containerParaRespnder')
-
-        container.innerHTML = `<div id="respostaComentario">
-                    <input type="text" placeholder="Responda o comentario">
-                    <div>
-                        <button onclick="fecharResposta()" class="btnRespostaComentario">Cancelar</button>
-                        <button>Responder</button>
-                    </div>
-                </div>`
-
-        
-        // respostaComentario.style.display = 'flex'
-    }
-    function fecharResposta() {
-        respostaComentario.style.display = 'none'
-
     }
 </script>
 
@@ -165,5 +136,6 @@
 <script src="./js/modal.js"></script>
 <script src="./js/components.js"></script>
 <script src="./js/navbar.js"></script>
-
+<script src="./js/postagem.js"></script>
+<script src="./js/formataData.js"></script>
 </html>

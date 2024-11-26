@@ -8,8 +8,17 @@ function getSearch (pesquisa) {
     return database.executar(instrucaoSql)
 }
 
+function searchCategoria(pesquisa){
+  var instrucaoSql = `
+      SELECT * FROM categoriaArtigo WHERE tituloCategoria LIKE '%${pesquisa}%' LIMIT 1
+  `
+
+  return database.executar(instrucaoSql)
+}
+
 module.exports = {
-    getSearch 
+    getSearch,
+    searchCategoria
 }
 
 // var instrucaoSql = `SELECT idUsuario FROM Usuario

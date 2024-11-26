@@ -10,91 +10,84 @@
 
   <script src="./js/sessao.js"></script>
 
+  <link rel="stylesheet" href="./css/perfil.css">
   <link rel="stylesheet" href="./css/estilo.css" />
+  <link rel="stylesheet" href="./css/navbar.css">
+  <link rel="stylesheet" href="./css/modal.css">
   <link rel="icon" href="./assets/icon/favicon2.ico" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
 </head>
 
 <body>
-  <!--header inicio-->
-  <div class="header">
-    <div class="container">
-      <h1 class="titulo">AquaTech</h1>
-      <ul class="navbar">
-        <li>
-          <a href="index.html">Inicial</a>
-        </li>
-        <li>
-          <a href="simulador.html">Simulador</a>
-        </li>
-        <li>|</li>
-        <li>
-          <a href="login.html">Login</a>
-        </li>
-        <li class="agora">
-          <a href="#">Cadastro</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <!--header fim-->
 
   <div class="login">
-    <div class="alerta_erro">
-      <div class="card_erro" id="cardErro">
-        <span id="mensagem_erro"></span>
-      </div>
+    <div class="particaoLogin">
+      <img src="./assets/imgs/logotipo-plAzul.png" alt="">
     </div>
-    <div class="container">
-      <div class="card card-cadastro">
-        <h2>Bem-vindo!</h2>
-        <div class="formulario">
-          <!--
-                         Para inserir mais um campo, copie uma das inputs abaixo.
-                         Assim que inserir vá para o script abaixo.
-                     -->
-
-          <div class="campo">
-            <span>Nome:</span>
-            <input id="input_nome" type="text" placeholder="Seu nome" />
-          </div>
-          <div class="campo">
-            <span>Username:</span>
-            <input id="input_username" type="text" placeholder="Username" />
-          </div>
-          <div class="campo">
-            <span>E-mail:</span>
-            <input id="input_email" type="text" placeholder="meuemail@provedor.com" />
-          </div>
-          <div class="campo">
-            <span>Senha:</span>
-            <input id="input_senha" type="password" placeholder="******" />
-          </div>
-          <div class="campo">
-            <span>Confirmação da Senha:</span>
-            <input id="input_confirmacao_senha" type="password" placeholder="******" />
-          </div>
-          <button class="botao" onclick="cadastrar()">Cadastrar</button>
+    <div class="particaoLogin">
+      <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+          <span id="mensagem_erro"></span>
         </div>
-        <div id="div_aguardar" class="loading-div">
-          <img src="./assets/circle-loading.gif" id="loading-gif" />
-        </div>
+      </div>
+      <div class="container">
+        <div class="card card-cadastro">
+          <h2>Bem-vindo!</h2>
+          <div class="formulario">
+              <div style="position: relative; width: fit-content; overflow: hidden; align-self: center;">
+                <img class="imgPerfil" src="./assets/imgs/usuario/usuarioTeste.jpg" alt="" id="fotoPreview">
+                <div id="botaoEditarFoto" class="containerIconCamera">
+                  <label for = "input_foto"><img class="iconCamera" src="./assets/icon/camera.png" alt=""></label>
+                  <input id="input_foto" type="file" src="" alt="" style="display: none;">
+                </div>
+              </div>
+            
+            <div class="campoJunto">
+              <div class="campo">
+                <span>Nome:</span>
+                <input id="input_nome" type="text" placeholder="Seu nome" />
+              </div>
+              <div class="campo">
+                <span>Username:</span>
+                <input id="input_username" type="text" placeholder="Username" />
+              </div>
+            </div>
+            
+            <div class="campo">
+              <span>E-mail:</span>
+              <input id="input_email" type="text" placeholder="meuemail@provedor.com" />
+            </div>
+            <div class="campoJunto">
 
-        <div id="div_erros_login"></div>
+              <div class="campo">
+                <span>Senha:</span>
+                <input id="input_senha" type="password" placeholder="******" />
+              </div>
+              <div class="campo">
+                <span>Confirmação da Senha:</span>
+                <input id="input_confirmacao_senha" type="password" placeholder="******" />
+              </div>
+            </div>
+            <button class="botao" onclick="cadastrar()">Cadastrar</button>
+            <a id="linkCadastrar" href="./login.html">
+              <span id="fraseCadastrar">Já tem uma conta? <span id="focoCadastro">Entre</span></span>
+          </a>
+          </div>
+          
+
       </div>
     </div>
   </div>
+</div>
+<div class="modalAviso"></div>
+  
 
-  <!--footer inicio-->
-  <div class="footer">
-    <div class="container">
-      <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
-      <span class="version">v1.0.0</span>
-    </div>
-  </div>
-  <!--footer fim-->
 </body>
 
 </html>
 
 <script src="./js/cadastro.js"></script>
+<script src="./js/usuario.js"></script>
+<script src="./js/foto.js"></script>
+<script src="./js/verificarCampos.js"></script>
+<script src="./js/modal.js"></script>

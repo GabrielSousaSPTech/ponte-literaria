@@ -107,12 +107,7 @@ function plotarComentarioGeral(res){
                     </div>
                     
                     <div class="interacaoPost">
-                        <div class="engajamento">
-                            <div class="boxEngajamento">
-                                <img src="./assets/icon/like.png" alt="">
-                                <span>01</span>
-                            </div>
-                        </div>
+                        
                         <div class="engajamento">
                             ${item.comentarioEditado == 1? '<p>Editado</p>': ''}
                         </div>
@@ -166,13 +161,6 @@ function editarComentario(idComentario, acao, instrucaoSql, comentarioOriginal){
         document.getElementById(`containerEditar-${idComentario}`).style.display = 'none'
 
     }
-
-    
-
-
-
-
-
 }
 
 function criarComentario (idPostagem, idUsuario) {
@@ -190,6 +178,7 @@ function criarComentario (idPostagem, idUsuario) {
     }).then(function (resposta){
         if(resposta.ok){
             textarea_comentario.value = ''
+            modalAviso('sucesso', 'Comentario publicado com sucesso!')
             if(document.getElementById('containerComentario')){
                 document.getElementById('containerComentario').innerHTML = ''
             }
@@ -199,7 +188,7 @@ function criarComentario (idPostagem, idUsuario) {
                     qtdComentario.innerText = Number(qtdComentario.innerText)+1
 
         } else {
-            console.log('Erro ao comentar')
+            modalAviso('Erro', 'Houve um erro ao comentar.')
         }
     })
 }
@@ -207,10 +196,11 @@ function criarComentario (idPostagem, idUsuario) {
 function deletarComentario(idComentario, idPostagem){
     fetch(`/comentario/deletar/${idComentario}`, {cache: 'no-store'}).then(function(resposta){
         if(resposta.ok){
+            modalAviso('sucesso', 'Comentário excluído com sucesso!')
             document.getElementById("containerComentario").innerHTML = ''
             obterComentarioGeral(idPostagem)
         }else {
-            console.log('Erro ao deletar o usuário')
+            modalAviso('erro', 'houve um erro ao excluir o seu comentário')
         }
         
     })

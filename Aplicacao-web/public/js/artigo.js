@@ -32,11 +32,27 @@ function obterCategoriaArtigo(){
 function plotarArtigoCompleto(resposta) {
 
     resposta.forEach(item =>{
+        console.log(item)
         document.getElementById("visualizacaoArtigo").innerHTML += `
-        
-                    <h3>${item.tituloPostagem} - <span>${item.categoria}</span></h3>
-
+                
+                    
+                    <div class="cabecalhoPostagem">
+                        <div class="dadosCabecalhoPostagem">
+                            <img src="./assets/imgs/usuario/${item.fotoUsuario == null?'usuarioTeste.jpg': item.fotoUsuario}" alt="" onclick="event.stopPropagation(), abrirPerfil(${item.idUsuario})">
+                            <span onclick="event.stopPropagation(), abrirPerfil(${item.idUsuario})">${item.nome}</span>
+                            <span>-</span>
+                            <span>${formatarData(item.dataHoraPostagem)}</span>
+                        </div>
+                        <div class = "containerDropDown" id="aparecerDropDown-${item.idPostagem}">
+                            <img src = "./assets/icon/more.png" onclick="event.stopPropagation(), dropDown(${item.idPostagem},'Post')">
+                            <div class="dropDownPost" id="dropDownPost-${item.idPostagem}">
+                                <a href = "./criacao-artigo.html?acao=edit&id=${item.idPostagem}">Editar</a>
+                                <span onclick=" event.stopPropagation(), modalDelete(${item.idPostagem}, ${item.idUsuario}, 'artigo')">Excluir</span>
+                            </div>
+                        </div>
+                    </div>
             <div class="corpoArtigo">
+            <h3 class = "tituloArtigo">${item.tituloPostagem} - <span class = "categoriaArtigo">${item.categoria}</span></h3>
                 <p>${item.conteudoPostagem}</p>
             </div>
             <div class="interacaoPost">
@@ -47,10 +63,7 @@ function plotarArtigoCompleto(resposta) {
         </div>
                     
                 </div>
-                <div class="boxEngajamento">
-                    <img src="./assets/icon/compartilhar.png" alt="">
-                    <span>Compartilhar</span>
-                </div>
+               
             </div>
         `
 

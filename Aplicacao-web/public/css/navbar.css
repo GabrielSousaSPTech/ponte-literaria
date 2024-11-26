@@ -18,13 +18,11 @@ header {
 }
 
 #fotoUsuarioLogado {
-    display: flex;
-    align-self: flex-end;
-    width: 3vw;
-    height: fit-content;
-    object-fit: cover;
+    height: 3em;
+    width: 3em;
+    border: 2px solid #fff;
     border-radius: 50%;
-    border: 2px solid var(--corFonte);
+    object-fit: cover;
 }
 
 .container {
@@ -34,11 +32,11 @@ header {
 }
 
 header .container {
-    justify-content: space-between;
-    align-self: center;
+    display: flex;
+    justify-content: space-around;
     align-items: center;
     height: 100%;
-    width: 75%;
+    width: 100%;
   }
   header .container span {
     color: var(--corPesquisa);
@@ -75,10 +73,8 @@ header .container {
 .barra-pesquisa {
     display: flex;
     width: 30vw;
-    height: 3.5vh;
+    height: 5vh;
     background-color: var(--corPesquisa);
-    align-self: flex-start;
-    margin-right: 25rem;
     justify-content: center;
     align-items: center;
     border: 1px solid #727272;
@@ -127,6 +123,7 @@ header .container {
 .sideBar ul li span {
     color: white;
     font-weight: 600;
+    
 }
 
 .sideBar ul .topico-pagina {
@@ -146,15 +143,22 @@ header .container {
 }
 
 .sideBar ul .topico-pagina span {
+    font-size: 0.8rem;
     color: var(--corFonte);
 }
 
 .sideBar ul .topico-pagina  a{
+    font-size: 0.8rem;
     color: var(--corFonte);
     text-decoration: none;
 }
 
-#containerResultadopesquisa {
+a, a:visited, a:active, a:focus {
+    text-decoration: none;            
+}
+
+
+#containerResultadopesquisa, #containerRespostaCategoria {
     z-index: 5000;
     position: absolute;
     display: none; 
@@ -168,7 +172,9 @@ header .container {
     border-radius: 10px;
     box-shadow: 0px 15px 15px rgba(0,0,0,0.300);
 }
-
+#containerRespostaCategoria {
+    top:10.5vh !important; 
+}
 /* #containerResultadopesquisa .dadosCabecalhoPostagem img{
     height:2rem;
     border: 2px solid black;
@@ -182,17 +188,27 @@ header .container {
 
  .campoUsername {
     font-size: 1rem !important; 
-    color: #b6b6b6 !important;
+    color: #8f8f8f !important;
 
 }
  .campoNome {
     font-size: 1.5rem !important; 
+    color: var(--azulFundo) !important;
 
 }
 
-#containerResultadopesquisa .cabecalhoPostagem:hover{
+#containerResultadopesquisa .cabecalhoPostagem:hover, #containerRespostaCategoria .cabecalhoPostagem:hover{
     background-color: #c6c6c6;
     cursor:pointer
-    
 }
+.boxLogin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#usernameUsuarioLogado{
+    font-size: 0.7rem !important;
+}
+
 

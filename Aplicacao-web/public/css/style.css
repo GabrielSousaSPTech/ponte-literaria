@@ -116,3 +116,36 @@ footer .container {
 .icon {
     height: 4rem;
 }
+
+.iconBack{
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+}
+
+select {
+    border: none;
+    border-bottom: 1px solid var(--azulFundo);
+}
+
+select:focus{
+    outline: none;
+}
+
+select option {
+    color: var(--azulFundo);
+    font-weight: 700;
+}
+
+select::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f0f0f0; 
+}
+
+
+select::-webkit-scrollbar-thumb {
+    background-color: var(--corBotaoSeguir); 
+    border-radius: 5px; 
+    border: 2px solid #ffffff; 
+}
+

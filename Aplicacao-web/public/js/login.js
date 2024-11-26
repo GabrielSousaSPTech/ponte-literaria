@@ -1,4 +1,4 @@
-const { json } = require("express");
+
 
 function verificarCampos(listaCampos = []) {
     for(var posicaoCampo = 0; posicaoCampo <listaCampos.length; posicaoCampo++){
@@ -40,10 +40,10 @@ function entrar (){
                     window.location = "../feed.html"
                 })
             }else {
-                resposta.text().then(texto => {
-                    div_erros_login.innerHTML = `${texto}`;
+                
+                    modalAviso('erro', 'usuário ou senha inválido(s)')
                     
-                });
+                
             }
         }).catch(
             function (erro) {
@@ -52,6 +52,8 @@ function entrar (){
                 res.status(500).json(erro.sqlMessage);
             }
         );
+    }else {
+        modalAviso('erro', 'Preencha todos os Campos')
     }
 
 }

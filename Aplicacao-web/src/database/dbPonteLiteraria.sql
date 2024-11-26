@@ -102,12 +102,44 @@ CREATE TABLE Comentario (
 );
 
 SELECT * FROM Postagem;
-
-SELECT Postagem.tituloPostagem , count(categoria.tituloCategoria) 
+UPDATE Postagem SET fkCategoriaArtigo = 25 WHERE idPostagem =15;
+USE ponteLiteraria;
+SELECT * FROM categoriaArtigo;
+SELECT categoria.tituloCategoria, COUNT(Postagem.idPostagem) AS quantidade
 FROM Postagem
-JOIN categoriaArtigo as categoria ON fkCategoriaArtigo = idCategoriaArtigo
-WHERE fkusuario = 5
-GROUP BY count(categoria.tituloCategoria);
+JOIN categoriaArtigo AS categoria ON Postagem.fkCategoriaArtigo = categoria.idCategoriaArtigo
+WHERE Postagem.fkusuario = 5
+GROUP BY categoria.tituloCategoria;
+
+        SELECT 
+        Postagem.idPostagem,
+        Usuario.nome AS nomeUsuario,
+        Usuario.username AS usernameUsuario,
+        Usuario.idUsuario AS idUsuario,
+        Usuario.fotoPerfilUsuario AS fotoUsuario,
+        Postagem.tituloPostagem,
+        Postagem.conteudoPostagem,
+        Postagem.dataHoraPostagem,
+        Categoria.tituloCategoria as categoria,
+        COUNT(Curtida.fkPostagemCurtida) AS qtdCurtida
+    FROM 
+        Postagem
+    RIGHT JOIN 
+        Usuario ON Postagem.fkUsuario = Usuario.idUsuario
+    LEFT JOIN 
+        Curtida ON Postagem.idPostagem = Curtida.fkPostagemCurtida
+    LEFT JOIN
+        categoriaArtigo AS Categoria ON Postagem.fkCategoriaArtigo = Categoria.idCategoriaArtigo
+    LEFT JOIN
+        Seguidores AS seguindo ON fkusuario = seguindo.fkUsuarioSeguido
+    WHERE 
+        seguindo.fkUsuarioSeguidor = 5 AND statusPostagem = 'ativo'
+    GROUP BY 
+    COUNT(Curtida.fkPostagemCurtida),
+        Postagem.idPostagem;
+        
+        USE ponteLiteraria;
+
 
 
         
