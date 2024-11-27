@@ -48,6 +48,21 @@ function editarFotoPerfil(idUsuario, nomeImagem){
 
 }
 
+function verificarUsername(username){
+    console.log(username)
+    var instrucaoSql = `
+    SELECT username FROM Usuario WHERE username = '${username}'
+    `
+    return database.executar(instrucaoSql)
+}
+
+function verificarEmail(email){
+    var instrucaoSql = `
+    SELECT email FROM Usuario WHERE email = '${email}'
+    `
+    return database.executar(instrucaoSql)
+}
+
 
 
 module.exports = {
@@ -56,6 +71,7 @@ module.exports = {
     getUsuario,
     editarUsuario,
     editarSenhaUsuario,
-    editarFotoPerfil
-
+    editarFotoPerfil,
+    verificarUsername,
+    verificarEmail
 }

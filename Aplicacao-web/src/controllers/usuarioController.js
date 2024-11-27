@@ -118,13 +118,29 @@ function editarSenhaUsuario(req, res){
     );   
 }
 
+function verificarUsername(req, res){
+    var username = req.body.username
+    usuarioModel.verificarUsername(username).then(function (resposta){
+        res.status(201).json(resposta)
+    })
+}
+
+function verificarEmail(req, res){
+    var email = req.body.email
+    usuarioModel.verificarEmail(email).then(function (resposta){
+        res.status(201).json(resposta)
+    })
+}
+
 module.exports = {
     cadastrar,
     checarCredenciais,
     getUsuario,
     editarFotoPerfil,
     editarUsuario,
-    editarSenhaUsuario
+    editarSenhaUsuario,
+    verificarUsername,
+    verificarEmail
 }
 
 

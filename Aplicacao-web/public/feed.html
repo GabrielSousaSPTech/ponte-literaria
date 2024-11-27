@@ -21,7 +21,7 @@
 
 
 
-<body onload="obterFeedSeguindo(sessionStorage.ID_USUARIO), validarSessao()">
+<body onload="validarSessao()">
     <a href="./criacao-artigo.html" style="position: fixed; right: 0; bottom: 0; padding: 1rem;">
         <img src="./assets/icon/adicionar.png" style="height: 3.5rem;" alt="">
     </a>
@@ -148,5 +148,9 @@
         }
 
     }
+
+    setTimeout(function (){
+        obterFeedSeguindo(sessionStorage.ID_USUARIO)
+    }, 500)
   </script>
 </html>

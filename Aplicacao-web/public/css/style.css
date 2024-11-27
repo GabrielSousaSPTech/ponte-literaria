@@ -81,15 +81,22 @@
     
 }
 .nossaHistoria section {
-    flex-direction: column;
+    flex-direction: row;
     padding: 3rem;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
+    /* gap: 3rem; */
 }
 .nossaHistoria section p {
-    width: 100%;
+    width: 40%;
     color: var(--corFonte);
+}
+
+.particaoNossaHistoria{
+    display: flex;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
 }
 
 footer {
@@ -150,5 +157,13 @@ select::-webkit-scrollbar-thumb {
     background-color: var(--corBotaoSeguir); 
     border-radius: 5px; 
     border: 2px solid #ffffff; 
+}
+
+.boxSobreMim{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: fit-content;
 }
 

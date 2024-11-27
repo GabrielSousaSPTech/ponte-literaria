@@ -1,3 +1,4 @@
+
 function cadastrar () {
     const nome = input_nome.value;
     const username = input_username.value;
@@ -16,6 +17,18 @@ function cadastrar () {
         modalAviso('erro', 'Preencha todos os Campos')
         return
     }
+
+    // if(!usernameDisponivel(username)){
+    //     console.log(!usernameDisponivel(username))
+    //     modalAviso('erro', 'Nome de usuário já está em uso')
+    //     return
+    // }
+    
+    // if(!emailDisponivel(email)){
+    //     modalAviso('erro', 'Este E-mail já está em uso')
+    //     return
+
+    // }
     if(senha == confirmaSenha){
         fetch("/usuario/cadastrar", {
             method: "POST",

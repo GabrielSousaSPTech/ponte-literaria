@@ -26,4 +26,11 @@ router.post('/editSenha', function (req, res){
     usuarioController.editarSenhaUsuario(req, res)
 })
 
+router.post('/verificacaoUsername', function(req,res){
+    usuarioController.verificarUsername(req, res)
+});
+router.post('/verificacaoEmail', function(req,res){
+    usuarioController.verificarEmail(req, res)
+});
+
 module.exports = router;

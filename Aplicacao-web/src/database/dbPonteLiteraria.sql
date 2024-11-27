@@ -1,6 +1,7 @@
 CREATE DATABASE ponteLiteraria;
 
 USE ponteLiteraria;
+
 CREATE TABLE  Usuario(
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45) NOT NULL,
@@ -10,7 +11,11 @@ CREATE TABLE  Usuario(
     fotoPerfilUsuario VARCHAR(255) UNIQUE
 );
 
--- INSERT INTO Usuario (nome, username, email, senha, fotoPerfilUsuario) VALUES
+INSERT INTO Usuario(nome, username, email, senha, fotoPerfilUsuario) VALUES
+	('Gabriel da Silva Sousa', '@GabSouz__', 'gabriel.sousa@sptech.school', '123'),
+    ('Annabeth Chase', '@annaChase', 'annabeth.chase@gmail.com', '123', ''),
+    ('Jason Grace', '@JasonZeus', 'jason,grace@gmail.com', '123', 'jason.jpg'),
+    ('Percy Jackson', '@percy__', 'percy.jackson@gmail.com', '123', '');
 
 
 CREATE TABLE Seguidores (
@@ -22,17 +27,13 @@ CREATE TABLE Seguidores (
     dataFollow DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- INSERT INTO Seguidores (fkUsuarioSeguido, fkUsuarioSeguidor, dataFollow) VALUES
-
-
-SELECT * FROM Seguidores;
 
  CREATE TABLE Postagem (
 	idPostagem INT AUTO_INCREMENT,
     fkusuario INT NOT NULL,
     fkCategoriaArtigo INT,
     CONSTRAINT fkCategoriaPostagem FOREIGN KEY (fkCategoriaArtigo) REFERENCES categoriaArtigo(idCategoriaArtigo),
-    CONSTRAINT pkPostagem PRIMARY KEY (idPostagem, fkusuario),
+    CONSTRAINT pkPostagem PRIMARY KEY (idPostagem, fkUsuario),
     CONSTRAINT fkUsuarioPostagem FOREIGN KEY (fkusuario) REFERENCES Usuario(idUsuario),
     tituloPostagem VARCHAR(45) NOT NULL,
     conteudoPostagem VARCHAR(1000) NOT NULL,
@@ -41,8 +42,7 @@ SELECT * FROM Seguidores;
     dataHoraPostagem DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- INSERT INTO Postagem (fkusuario, tituloPostagem, conteudoPostagem) VALUES 
-	
+
 CREATE TABLE categoriaArtigo(
     idCategoriaArtigo INT PRIMARY KEY AUTO_INCREMENT,
     tituloCategoria VARCHAR(45)
@@ -74,7 +74,6 @@ CREATE TABLE Comentario (
     CONSTRAINT fkPostagemComentada FOREIGN KEY (fkPostagemComentada) REFERENCES Postagem (idPostagem),
     CONSTRAINT fkUsuarioComentario FOREIGN KEY (fkUsuarioComentario) REFERENCES Usuario(idUsuario)
 );
-
 
 
 
