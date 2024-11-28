@@ -90,7 +90,7 @@ function plotarComentarioGeral(res){
                             <img src="./assets/imgs/usuario/${item.fotoUsuario == null?'usuarioTeste.jpg': item.fotoUsuario}" alt="" onclick="event.stopPropagation()" class="fotoUsuarioComentario">
                             <span onclick="event.stopPropagation(), abrirPerfil(${item.idUsuario})">${item.Usuario}</span>
                             <span>-</span>
-                            <span>Há 12h</span>
+                            <span>${formatarData(item.dataHoraComentario)}</span>
                         </div>
                         <div  class = "containerDropDown" id="aparecerDropDownComentario-${item.idComentario}">
                             <img src = "./assets/icon/more.png" onclick="event.stopPropagation(), dropDownComentario(${item.idComentario})">

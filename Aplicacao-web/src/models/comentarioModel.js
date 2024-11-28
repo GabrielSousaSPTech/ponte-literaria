@@ -10,7 +10,8 @@ function obterComentarioGeral(idPostagem) {
             Usuario.fotoPerfilUsuario AS fotoUsuario,
             Usuario.username as username,
             Postagem.idPostagem as idPostagem,
-            comentarioEditado
+            comentarioEditado,
+            dataHoraComentario
         FROM Comentario
         JOIN Usuario ON fkusuarioComentario = idUsuario
         JOIN Postagem ON fkPostagemComentada = idPostagem

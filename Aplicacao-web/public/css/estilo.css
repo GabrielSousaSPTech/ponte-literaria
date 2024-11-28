@@ -1,8 +1,10 @@
 @import url('./cores.css');
+@import url('./fonte.css');
 *{
   padding: 0;
   margin: 0;
   overflow: hidden;
+  
 }
 
 .login {
@@ -34,21 +36,20 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 3rem;
   align-items: center;
   width: 100%;
   height: 100vh;
   border-top-left-radius: 5rem;
   border-bottom-left-radius: 5rem;
-  background-color: 
-  var(--azulFundo);
+  background-color: var(--azulFundo);
   padding: 20px 0;
 }
 
 .formulario {
   display: flex;
   height: fit-content;
-  width: 60%;
+  min-width: 30vw;
+  max-width: fit-content;
   padding: 1rem;
   justify-content: space-around;
   flex-direction: column;
@@ -62,11 +63,20 @@
   color: var(--fontePostagem);
 }
 
-.formulario input {
+.formulario input, .formulario .inputCadastro {
   border: 2px solid var(--azulFundo);
   padding: 0.5rem;
   border-radius: 15px;
   margin: 0;
+}
+
+.formulario .inputCadastro {
+  width: 23vw;
+  align-self: center;
+}
+
+.labelCadastro{
+  margin-left: 10%;
 }
 
 
@@ -81,10 +91,10 @@
 .campoJunto {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  gap: 08px;
+  justify-content: space-evenly;
   padding: 5px 0;
 }
+
 
 .botao {
   cursor: pointer;

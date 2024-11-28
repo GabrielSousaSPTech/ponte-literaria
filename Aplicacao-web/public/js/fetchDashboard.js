@@ -281,30 +281,37 @@ function plotarGraficoSeguidoresDia(idUsuario, mes, resposta){
 var proximaAtualizacao = null
 
 function atualizarGraficoSeguidoresMes(idUsuario, dataSeguidor, myChart){
+
     fetch(`/dashboard/seguidoresMes/${idUsuario}`, {cache: 'no-store'}).then(function(resposta){
         if(resposta.ok){
             resposta.json().then(function (resposta){
                 resposta.reverse()
-                if((resposta[0].qtdSeguidor != dataSeguidor.datasets[0].data[dataSeguidor.labels.length-1] ) && (resposta[0].parametro == dataSeguidor.labels[dataSeguidor.labels.length - 1])){
-                    
-                   
-                    dataSeguidor.datasets[0].data[dataSeguidor.labels.length-1] = resposta[0].qtdSeguidor
+                if(resposta[0] != undefined){
+
+                    if((resposta[0].qtdSeguidor != dataSeguidor.datasets[0].data[dataSeguidor.labels.length-1] ) && (resposta[0].parametro == dataSeguidor.labels[dataSeguidor.labels.length - 1])){
+                        dataSeguidor.datasets[0].data[dataSeguidor.labels.length-1] = resposta[0].qtdSeguidor
+                        myChart.update();
+                        proximaAtualizacao = setTimeout(()=>{ 
+                            atualizarGraficoSeguidoresMes(idUsuario, dataSeguidor, myChart)    
+                        }, 2000)
+                    }
+                    else if((resposta[0].qtdSeguidor != dataSeguidor.datasets[0].data[dataSeguidor.labels.length-1] ) && (resposta[0].parametro != dataSeguidor.labels[dataSeguidor.labels.length-1])){
+                        console.log("Meses atualizados")
+                        dataSeguidor.labels.push(resposta[0].parametro)
+                        myChart.update();
+                        proximaAtualizacao = setTimeout(()=>{ 
+                            atualizarGraficoSeguidoresMes(idUsuario, dataSeguidor, myChart)    
+                        }, 2000)
+                    } else{
+                        console.log('Meczada')
+                    }
+                }else{
+                    dataSeguidor.labels = ['Não há dados deste mês'];
+                    dataSeguidor.datasets[0].data = [];
                     myChart.update();
-                    proximaAtualizacao = setTimeout(()=>{ 
-                        atualizarGraficoSeguidoresMes(idUsuario, dataSeguidor, myChart)    
-                    }, 2000)
+                    dataSeguidor.labels = [];
                 }
-                else if((resposta[0].qtdSeguidor != dataSeguidor.datasets[0].data[dataSeguidor.labels.length-1] ) && (resposta[0].parametro != dataSeguidor.labels[dataSeguidor.labels.length-1])){
-                    console.log("Meses atualizados")
-                    dataSeguidor.labels.push(resposta[0].parametro)
-                    myChart.update();
                     proximaAtualizacao = setTimeout(()=>{ 
-                        atualizarGraficoSeguidoresMes(idUsuario, dataSeguidor, myChart)    
-                    }, 2000)
-                } else{
-                    
-                }
-                proximaAtualizacao = setTimeout(()=>{ 
                     atualizarGraficoSeguidoresMes(idUsuario, dataSeguidor, myChart)    
                 }, 2000)
             })
@@ -322,13 +329,10 @@ function atualizarGraficoSeguidoresDia(idUsuario, dataSeguidorDia, myChart){
     fetch(`/dashboard/seguidoresDia/${idUsuario}/${mes}`, {cache: 'no-store'}).then(function(resposta){
         if(resposta.ok){
             resposta.json().then(function (resposta){
+                console.log(resposta.length)
                 if(resposta.length>0){
                     resposta.reverse()
-                    
-                    if(mesSelecionado != mes){
-                        mesSelecionado = mes
-                        
-                        
+
                         dataSeguidorDia.labels = []
                         dataSeguidorDia.datasets[0].data = []
                         resposta.forEach(function(item){
@@ -342,22 +346,13 @@ function atualizarGraficoSeguidoresDia(idUsuario, dataSeguidorDia, myChart){
                                 atualizarGraficoSeguidoresDia(idUsuario, dataSeguidorDia, myChart)
                             
                         , 2000)
-                    }else{
-                        
-                    }
-                     
-                    proximaAtualizacao = setTimeout(() => {
-                        atualizarGraficoSeguidoresDia(idUsuario, dataSeguidorDia, myChart);
-                    }, 2000);
+                    
                 } else {
-                    
-                    
                     dataSeguidorDia.labels = ['Não há dados deste mês'];
                     dataSeguidorDia.datasets[0].data = [];
-
                     myChart.update();
+                    dataSeguidorDia.labels = [];
 
-                    
                     proximaAtualizacao = setTimeout(() => {
                         atualizarGraficoSeguidoresDia(idUsuario, dataSeguidorDia, myChart);
                     }, 2000);

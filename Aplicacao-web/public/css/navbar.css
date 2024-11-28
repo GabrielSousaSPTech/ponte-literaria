@@ -1,5 +1,5 @@
 @import url('./cores.css');
-
+@import url('./fonte.css');
 
 header {
     background: var(--azulFundo);
@@ -14,6 +14,13 @@ header {
 .logotipo{
     height: fit-content;
     width: 5rem;
+    object-fit: cover;
+}
+
+.logotipoSidebar {
+    height: fit-content;
+    width: 6.5rem;
+    align-self: center;
     object-fit: cover;
 }
 .logotipoBanner{

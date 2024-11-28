@@ -1,4 +1,5 @@
 @import url('./cores.css');
+@import url('./fonte.css');
 .sessaoArtigo, .sessaoCriacaoArtigo {
     height: 100%;
     padding-top: 10%;

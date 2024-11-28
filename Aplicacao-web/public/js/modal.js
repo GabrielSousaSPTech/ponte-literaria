@@ -105,8 +105,8 @@ function visualizarComentario(resposta) {
         </div>
       </div>
       <form action="" class="boxComentario">
-        <textarea name="comentario" id="textarea_comentario" placeholder="Digite um Comentario..." rows="8"
-          cols="5"></textarea>
+        <textarea name="comentario" id="textarea_comentario" placeholder="Digite um Comentario..." rows="2"
+          cols="2"></textarea>
         <button type="button" onclick="criarComentario(${item.idPostagem}, ${sessionStorage.ID_USUARIO}), closeModal()">
           <img src="./assets/icon/enviarMsg.png" alt="">
         </button>

@@ -1,5 +1,5 @@
       @import url('./cores.css');
-
+      @import url('./fonte.css');
 
         .modal-overlay, .modal-overlay-senha {
             display: flex;
@@ -127,7 +127,7 @@
 }
 
 .boxComentario textarea{
-    height: 40%;
+    height: 10% !important;
     border: none;
     resize: none;
 }
